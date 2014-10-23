@@ -1,0 +1,4 @@
+/node_modules
+/nbproject/
+/cliente/bower_components
+npm-debug.log
