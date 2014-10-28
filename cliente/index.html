@@ -1,96 +1,130 @@
-<html>
-<head>
-	<style>
-	
-		body {
-			background-color: #41B3FF;
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-tabs/paper-tabs.html">
+<link rel="import" href="../paper-tabs/paper-tab.html">
 
-			font-family: 'helvetica', 'verdana', sans-serif;
-			font-size: 16px;
-			padding-top: 40px;
-		}
-		h1, p {
-		  text-align: center;
-		  color: #fff;
-		  margin: 0 auto;
-		  max-width: 700px;
-		}
+<polymer-element name="my-element">
 
-		/* ----------- Relevant Code Below ----- */
-
-		div#container {
-		  display: table;
-		  width: 400px;
-		  margin: 50px auto 0;
-		}
-
-		div#container div.cell {
-		  display: table-cell;
-		}
-
-		div#container div.cell:last-child {
-		  width: 1px;
-		}
-
-		input[type=search], div.button {  
-		  width: 100%;
-		  height: 35px;
-		  -moz-box-sizing: border-box;
-		  box-sizing: border-box;
-		  font-family: inherit;
-		  font-size: inherit;
-		}
-
-		input[type=search] {
-		  margin: 0;
-		  padding: 0 10px;
-		  background-color: #f8f8f8;
-		  border: 0;
-		  border-top-left-radius: 5px;
-		  border-bottom-left-radius: 5px;
-		}
-
-		div.button {
-		  line-height: 35px;
-		  margin: 0;
-		  padding: 0 20px;
-		  color: #fff;
-		  background-color: #FF1717;
-		  font-weight: bold;
-		  border-top-right-radius: 5px;
-		  border-bottom-right-radius: 5px;
-		  white-space: nowrap;
-		}
-
-	</style>
-
-</head>
-<body>
-
-	<h1>Ikarus</h1>
-	<p>You buy, you decide</p>
-
-	<div id='container'>  
-	  <div class='cell'><input type='search' id="text" placeholder='Buscar...'></div>
-	  <div class='cell'><div class='button'onclick="Buscar();">Ir</div></div>
-	</div>
-	<script type="text/javascript">
-	  function Buscar(){
-        
-        var a =document.getElementById("text").value;
-        
-       
-        b= Math.floor((Math.random() * 10) + 1);
-        
-        if(b>0 && b<3){
-          alert(a+" Esta en amazon");
-        }else if(b>3&&b<7){
-          alert(a+" Esta en walmart");
-        }else{
-         alert(a+" Esta en ebay"); 
-        }
+  <template>
+    <style>    
+      :host {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
       }
-	</script>  
+      #core_card {
+        position: absolute;
+        width: 340px;
+        height: 500px;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+        left: 40px;
+        top: 50px;
+        background-image: url(http://www.sitelicon.com/blog/wp-content/uploads/2013/07/amazon-logo.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+      #paper_tabs {
+        width: 100%;
+        color: rgb(255, 255, 255);
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 2px;
+        background-color: rgb(122, 179, 234);
+      }
+      #core_card1 {
+        width: 70%;
+        height: 60%;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+        opacity: 0.4;
+        padding: 20px;
+        margin: 50px 30px;
+        background-color: rgb(122, 179, 234);
+      }
+      #paper_input {
+        margin-bottom: 30px;
+        opacity: 1;
+        background-color: rgb(249, 246, 246);
+      }
+      #paper_input1 {
+        margin-bottom: 30px;
+        background-color: rgb(249, 246, 246);
+      }
+      #paper_radio_button1 {
+        left: 1250px;
+        top: 490px;
+      }
+      #core_card2 {
+        width: 280px;
+        height: 340px;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+        opacity: 0.5;
+        left: 430px;
+        top: 110px;
+        position: absolute;
+        background-color: rgb(246, 255, 34);
+      }
+      #paper_input2 {
+        margin: 20px;
+        background-color: rgb(252, 246, 246);
+      }
+      #paper_input3 {
+        background-color: rgb(255, 248, 248);
+      }
+      #paper_input4 {
+        margin: 20px;
+        background-color: rgb(253, 247, 247);
+      }
+      #paper_input5 {
+        background-color: rgb(252, 250, 250);
+      }
+      #paper_button1 {
+        margin: 20px;
+        width: 70px;
+        height: 30px;
+      }
+    </style>
+    <core-card id="core_card2" layout vertical center>
+      <paper-input label="User..." willvalidate validationmessage="Completa este campo" required invalid id="paper_input2" layout vertical class="invalid"></paper-input>
+      <paper-input label="Password..." willvalidate validationmessage="Completa este campo" required invalid id="paper_input3" layout vertical class="invalid"></paper-input>
+      <paper-input label="Email..." willvalidate validationmessage="Completa este campo" required invalid id="paper_input4" layout vertical class="invalid"></paper-input>
+      <paper-input label="Repeat Email..." willvalidate validationmessage="Completa este campo" required invalid id="paper_input5" layout vertical class="invalid"></paper-input>
+      <paper-button label="Send" id="paper_button1" center center-justified></paper-button>
+    </core-card>
+    <core-card id="core_card" layout vertical end-justified wrap start>
+      <core-card id="core_card1" layout vertical center>
+        <paper-input label="User..." willvalidate id="paper_input" layout vertical></paper-input>
+        <paper-input label="Password..." willvalidate id="paper_input1" layout vertical></paper-input>
+        <paper-button label="Entry" id="paper_button"></paper-button>
+      </core-card>
+      <paper-tabs selected="1" selectedindex="1" id="paper_tabs">
+        <paper-tab id="paper_tab" on-click="{{ show }}">Login</paper-tab>
+        <paper-tab id="paper_tab1" active>Sing in</paper-tab>
+      </paper-tabs>
+    </core-card>
+  </template>
 
-</body>
-</html>
+  <script>
+
+    Polymer({
+      show: function mostrar(){
+        //var corecard= document.getElementById('core_card1');
+        
+       this.$.core_card1.hidden=!this.$.core_card1.hidden;
+        
+      }
+    });
+
+  </script>
+
+</polymer-element>

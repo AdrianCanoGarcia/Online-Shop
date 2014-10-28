@@ -1,0 +1,96 @@
+<html>
+<head>
+	<style>
+	
+		body {
+			background-color: #41B3FF;
+
+			font-family: 'helvetica', 'verdana', sans-serif;
+			font-size: 16px;
+			padding-top: 40px;
+		}
+		h1, p {
+		  text-align: center;
+		  color: #fff;
+		  margin: 0 auto;
+		  max-width: 700px;
+		}
+
+		/* ----------- Relevant Code Below ----- */
+
+		div#container {
+		  display: table;
+		  width: 400px;
+		  margin: 50px auto 0;
+		}
+
+		div#container div.cell {
+		  display: table-cell;
+		}
+
+		div#container div.cell:last-child {
+		  width: 1px;
+		}
+
+		input[type=search], div.button {  
+		  width: 100%;
+		  height: 35px;
+		  -moz-box-sizing: border-box;
+		  box-sizing: border-box;
+		  font-family: inherit;
+		  font-size: inherit;
+		}
+
+		input[type=search] {
+		  margin: 0;
+		  padding: 0 10px;
+		  background-color: #f8f8f8;
+		  border: 0;
+		  border-top-left-radius: 5px;
+		  border-bottom-left-radius: 5px;
+		}
+
+		div.button {
+		  line-height: 35px;
+		  margin: 0;
+		  padding: 0 20px;
+		  color: #fff;
+		  background-color: #FF1717;
+		  font-weight: bold;
+		  border-top-right-radius: 5px;
+		  border-bottom-right-radius: 5px;
+		  white-space: nowrap;
+		}
+
+	</style>
+
+</head>
+<body>
+
+	<h1>Ikarus</h1>
+	<p>You buy, you decide</p>
+
+	<div id='container'>  
+	  <div class='cell'><input type='search' id="text" placeholder='Buscar...'></div>
+	  <div class='cell'><div class='button'onclick="Buscar();">Ir</div></div>
+	</div>
+	<script type="text/javascript">
+	  function Buscar(){
+        
+        var a =document.getElementById("text").value;
+        
+       
+        b= Math.floor((Math.random() * 10) + 1);
+        
+        if(b>0 && b<3){
+          alert(a+" Esta en amazon");
+        }else if(b>3&&b<7){
+          alert(a+" Esta en walmart");
+        }else{
+         alert(a+" Esta en ebay"); 
+        }
+      }
+	</script>  
+
+</body>
+</html>
