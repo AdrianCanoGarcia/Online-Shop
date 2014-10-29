@@ -1,0 +1,71 @@
+<html>
+<head>
+	<script src="bower_components/platform/platform.js">
+	</script>
+
+	<link rel="import" href="bower_components/polymer/polymer.html">
+	<link rel="import" href="bower_components/core-scaffold/core-scaffold.html">	
+	<link rel="import" href="bower_components/core-toolbar/core-toolbar.html">	
+	<link rel="import" href="bower_components/core-menu/core-menu.html">	
+	<link rel="import" href="bower_components/paper-item/paper-item.html">	
+	<link rel="import" href="bower_components/core-icon-button/core-icon-button.html">	
+	<link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">	
+	<link rel="import" href="bower_components/core-animated-pages/transitions/slide-from-right.html">	
+	
+	<style>
+		core-animated-pages {
+  			width: 85%;
+  			height: 85%;  
+		}
+	</style>
+
+</head>
+<body unresolved fullbleed>
+	<template is="auto-binding">
+
+
+  	  <!-- Route controller. -->
+  <!--	  <flatiron-director route="{{route}}" autoHash></flatiron-director>-->
+
+	  <core-scaffold id="scaffold">
+	    <nav>
+		  <core-toolbar><span>Single Page Polymer</span></core-toolbar>
+		  <core-menu selected="{{route}}">			  
+			    <paper-item label="Single">
+			      <a href="#one"></a>
+			    </paper-item>
+			  	<paper-item label="page">
+			      <a href="#two"></a>
+			    </paper-item>
+		  </core-menu>
+		</nav>
+	    <!-- flex makes the bar span across the top of the main content area -->
+		<core-toolbar tool flex>
+		  <!-- flex spaces this element and jusifies the icons to the right-side -->
+		  <div flex>Application</div>
+		  <core-icon-button icon="refresh"></core-icon-button>
+		  <core-icon-button icon="add"></core-icon-button>
+		</core-toolbar>
+	    <div layout horizontal center-center fit>
+		  <core-animated-pages selected="{{route}}" transitions="slide-from-right">
+			  <section layout vertical center-center>
+			   	<div>Single {{route}}</div>
+			  </section>
+			  <section layout vertical center-center>
+			   	<div>page {{route}}</div>
+			  </section>
+		  </core-animated-pages>
+		</div>
+	  </core-scaffold>
+</template>
+<script>
+  
+  /*
+  template.addEventListener('template-bound', function(e) {
+  	// Use URL hash for initial route. Otherwise, use the first page.
+  	this.route = this.route || 'one';
+  });
+*/
+</script>
+</body>
+</html>
