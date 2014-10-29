@@ -1,11 +1,11 @@
-<link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="../paper-button/paper-button.html">
-<link rel="import" href="../paper-tabs/paper-tabs.html">
-<link rel="import" href="../paper-tabs/paper-tab.html">
+<html>
+<head>
 
-<polymer-element name="my-element">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="bower_components/paper-tabs/paper-tab.html">
 
-  <template>
     <style>    
       :host {
         position: absolute;
@@ -94,6 +94,10 @@
         height: 30px;
       }
     </style>
+
+</head>
+<body>
+
     <core-card id="core_card2" layout vertical center>
       <paper-input label="User..." willvalidate validationmessage="Completa este campo" required invalid id="paper_input2" layout vertical class="invalid"></paper-input>
       <paper-input label="Password..." willvalidate validationmessage="Completa este campo" required invalid id="paper_input3" layout vertical class="invalid"></paper-input>
@@ -112,7 +116,7 @@
         <paper-tab id="paper_tab1" active>Sing in</paper-tab>
       </paper-tabs>
     </core-card>
-  </template>
+  
 
   <script>
 
@@ -127,4 +131,5 @@
 
   </script>
 
-</polymer-element>
+</body>
+</html>
