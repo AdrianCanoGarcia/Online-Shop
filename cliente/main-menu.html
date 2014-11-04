@@ -1,58 +1,80 @@
 <polymer-element name="main-menu">
-    <template>
-        <style>    
-            :host {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                box-sizing: border-box;
-            }
-            #core_card {
-                position: absolute;
-                width: 340px;
-                height: 500px;
-                border-top-left-radius: 2px;
-                border-top-right-radius: 2px;
-                border-bottom-right-radius: 2px;
-                border-bottom-left-radius: 2px;
-                box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
-                left: 40px;
-                top: 50px;
-                background-image: url(http://www.sitelicon.com/blog/wp-content/uploads/2013/07/amazon-logo.png);
-                background-size: 100% 100%;
-                background-repeat: no-repeat;
-            }
-            #paper_tabs {
-                width: 100%;
-                color: rgb(255, 255, 255);
-                box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 2px;
-                background-color: rgb(122, 179, 234);
-            }
-            
-            #paper_radio_button1 {
-                left: 1250px;
-                top: 490px;
-            }
-           
-        </style>
+  <template>
+    <style>    
+      :host {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      #core_card {
+        width: 100%;
+        height: 95%;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+        background-image: url(http://www.sitelicon.com/blog/wp-content/uploads/2013/07/amazon-logo.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+      #paper_tabs {
+        width: 100%;
+        height: 5%;
+        color: rgb(255, 255, 255);
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 2px;
+        background-color: rgb(122, 179, 234);
+      }
 
-        
-        <core-card id="core_card" layout vertical end-justified wrap start>
-            <SignIn></SignIn>
-            <Login></Login>
-            <paper-tabs id="paper_tabs" valueattr="hash" selected="{{route}}" selectedModel="{{selectedPage}}"
-                   on-core-select="{{menuItemSelected}}">
-                <paper-tab id="paper_tab" label="Login" onclick="parent.location='#LogIn'">Login </paper-tab>
-                <paper-tab id="paper_tab1" onclick="parent.location='#SingIn'">Sing In</paper-tab>
-            </paper-tabs>
+      #paper_radio_button1 {
+        left: 1250px;
+        top: 490px;
+      }
+
+      template {
+        display: none !important;
+      }
+
+    </style>
+    
+    <flatiron-director route="{{route}}" autoHash></flatiron-director>
+
+    <core-animated-pages id="core_card" valueattr="hash" selected="{{route}}" layout vertical end-justified center transitions="slide-from-right">
+
+      <section>
+      </section>
+      <section hash="SignIn" layout vertical center-center>
+        <signin-page></signin-page>
+      </section>
+      <section hash="LogIn" layout vertical center-center>
+        <core-card vertical layout  center-justified>
+          <login-page></login-page>
         </core-card>
-    </template>  
+      </section>
+    </core-animated-pages>  
 
-    <script>
+    <paper-tabs selected="{{route}}" selectedindex="one" valueattr="hash" id="paper_tabs" end-justified vertical layout wrap end>
+      <template repeat="{{page in pages}}" >
+        <paper-tab id = "{{page.id}}" hash = "{{page.hash}}">
+          {{page.name}} <a href='#{{page.hash}}'></a>
+        </paper-tab>
+      </template>
+    </paper-tabs>
 
-        Polymer({
-            
-        });
+  </template>  
 
-    </script>
-</polymer-element>   
+  <script>
+
+    Polymer({
+      ready: function () {
+        this.pages = [
+          {name: 'Sign In', id: 'paper_tab', hash: 'SignIn'},
+          {name: 'Log In', id: 'paper_tab1', hash: 'LogIn'}
+        ];
+      }
+    });
+
+  </script>
+</polymer-element>

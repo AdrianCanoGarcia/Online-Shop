@@ -1,0 +1,67 @@
+<polymer-element name="signin-page">
+  <template>
+    <style>
+      :host {
+      }
+      #paper_input {
+        margin-bottom: 30px;
+        background-color: rgb(249, 246, 246);
+      }
+      #paper_input1 {
+        margin-bottom: 30px;
+        background-color: rgb(249, 246, 246);
+      }
+      #core_card1 {
+        width: 70%;
+        height: 60%;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+        padding: 20px;
+        margin: 50px 30px;
+        background-color: rgb(122, 179, 234);
+      }
+      core-animated-pages {
+        margin: 20px;
+        width: 350px;
+        height: 500px;
+        background-size: 100% 100%;
+      }
+
+      @media all and (max-width: 420px) {
+        #core_card1 {
+          width: 100%;
+        }
+      }
+
+      @media all and (min-width: 421px) {
+        #core_card1 {
+          width: 420px;
+        }
+      }
+      @media all and (max-height: 520px) {
+        #core_card1 {
+          height: 100%;
+        }
+      }
+
+      @media all and (min-height: 521px) {
+        #core_card1 {
+          height: 520px;
+        }
+      }
+
+    </style>
+    <core-card id="core_card1" layout vertical center>
+      <paper-input label="User..." willvalidate id="paper_input" layout vertical></paper-input>
+      <paper-input label="Password..." willvalidate id="paper_input1" layout vertical></paper-input>
+      <paper-button label="Entry" id="paper_button"></paper-button>
+    </core-card>
+  </template>
+  <script>
+    Polymer({
+    });
+  </script>
+</polymer-element>

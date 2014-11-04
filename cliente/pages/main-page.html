@@ -1,24 +1,18 @@
-<link rel="import" href="../bower_components/core-toolbar/core-card.html">  
-<link rel="import" href="../bower_components/core-toolbar/paper-button.html">  
-<link rel="import" href="../bower_components/core-toolbar/paper-input.html">  
-<polymer-element name="login">
-
-    <template>
-        <style>
-            :host {
+<polymer-element name="login-page">
+  <template>
+    <style>
+       :host {
             }
             #core_card2 {
-                width: 280px;
-                height: 340px;
+                width: 70%;
+                height: 60%;
                 border-top-left-radius: 2px;
                 border-top-right-radius: 2px;
                 border-bottom-right-radius: 2px;
                 border-bottom-left-radius: 2px;
                 box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
-                opacity: 0.5;
-                left: 430px;
-                top: 110px;
-                position: absolute;
+                padding: 20px;
+                margin: 50px 30px;
                 background-color: rgb(246, 255, 34);
             }
             #paper_input2 {
@@ -50,7 +44,8 @@
             <paper-button label="Send" id="paper_button1" center center-justified></paper-button>
         </core-card>
     </template>
-    <script>
-
-    </script>
+  <script>
+    Polymer({
+    });
+  </script>
 </polymer-element>
