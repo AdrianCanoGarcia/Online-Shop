@@ -1,76 +1,84 @@
 <polymer-element name="signin-page">
-  <template>
-    <style>
-      :host {
-      }
-      #user {
-        margin-bottom: 30px;
-        width: 95%;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 5px;
-        font-size: 15px;
-        background-color: rgb(249, 246, 246);
-      }
-      #password {
-        margin-bottom: 30px;
-        width: 95%;
-        padding-left: 10px;
-        padding-top: 5px;
-        padding-right: 10px;
-        font-size: 15px;
-        background-color: rgb(249, 246, 246);
-      }
-      #core_card1 {
-        width: 300px;
-        height: 200px;
-        border-top-left-radius: 2px;
-        border-top-right-radius: 2px;
-        border-bottom-right-radius: 2px;
-        border-bottom-left-radius: 2px;
-        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
-        padding: 20px;
-        margin: 50px 50px;
-        background-color: rgb(122, 179, 234);
-      }
-      core-animated-pages {
-        margin: 20px;
-        width: 350px;
-        height: 500px;
-        background-size: 100% 100%;
-      }
+    <template>
+        <style>
+            :host {
+            }
+            #user {
+                margin-bottom: 30px;
+                width: 95%;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-top: 5px;
+                font-size: 15px;
+                background-color: rgb(249, 246, 246);
+            }
+            #password {
+                margin-bottom: 30px;
+                width: 95%;
+                padding-left: 10px;
+                padding-top: 5px;
+                padding-right: 10px;
+                font-size: 15px;
+                background-color: rgb(249, 246, 246);
+            }
+            #core_card1 {
+                width: 300px;
+                height: 200px;
+                border-top-left-radius: 2px;
+                border-top-right-radius: 2px;
+                border-bottom-right-radius: 2px;
+                border-bottom-left-radius: 2px;
+                box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+                padding: 20px;
+                margin: 50px 50px;
+                background-color: rgb(122, 179, 234);
+            }
+            core-animated-pages {
+                margin: 20px;
+                width: 350px;
+                height: 500px;
+                background-size: 100% 100%;
+            }
 
 
 
 
-    </style>
+        </style>
 
 
-    <core-card id="core_card1" layout vertical center>
-      <paper-input label="User..." willvalidate id="user" value="{{ user }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
-      <paper-input label="Password..." willvalidate id="password" value="{{ password }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
-      <paper-button label="Entry" id="paper_button"></paper-button>
-    </core-card>
-  </template>
-  <script>
-    Polymer({
-      keypressHandler: function (event, detail, sender) {
-        var code = event.keyCode;
-        valor = sender.value;
-        if (code == 13){
-          if (valor == null || valor.length == 0 || /^\s+$/.test(valor)) {
-            console.log("campo vacio");
-          }else{
-            console.log(valor);
-          }
-        }
-      },
-      validateField: function (text) {
+        <core-card id="core_card1" layout vertical center>
+            <paper-input label="User..." willvalidate id="user" value="{{ user }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
+            <paper-input type="password" label="Password..." willvalidate id="password" value="{{ password }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
+            <paper-button label="Entry" value ="enter" onclick="{{ keypressHandler }}"></paper-button>
+        </core-card>
+    </template>
+    <script>
+        Polymer({
+            keypressHandler: function (event, detail, sender) {
+                var code = event.keyCode;
+                var user = this.$.user.value;
+                if(code == 13 || sender.value === "enter") {
+                    alert("Mis pelotas");
+                    //if(this.validateUser() && this.validatePass()){
+                    //}
+                    
+                }
+            },
+            validateUser: function () {
+                var user = this.$.user.value;
+                return (this.validateField(string, /^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ_/-]*$/i) && string.length >= 4 && string.length <= 30);
 
-        string(text)
+            },
+            validatePass: function () {
+                var password = this.$.password.value;
+                return this.validateField(string, /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/);
+            },
+            validateField: function (string, pattern) {
 
-      }
+                return string.match(pattern) !== null;
 
-    });
-  </script>
+
+            },
+        });
+    </script>
 </polymer-element>
