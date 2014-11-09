@@ -39,6 +39,27 @@
                 height: 500px;
                 background-size: 100% 100%;
             }
+            #core_input {
+                visibility:hidden;
+                color: rgb(255, 0, 0);
+                padding: 15px;
+                left: 520px;
+                top: 260px;
+                position: absolute;
+                width: 380px;
+                height: 30px;
+                margin-top: 70px;
+                margin-left: 230px;
+            }
+            #core_icon {
+                visibility:hidden;
+                color: rgb(255, 0, 0);
+                left: 500px;
+                top: 270px;
+                position: absolute;
+                margin-top: 70px;
+                margin-left: 230px;
+            }
 
 
 
@@ -49,7 +70,9 @@
         <core-card id="core_card1" layout vertical center>
             <paper-input label="User..." willvalidate id="user" value="{{ user }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
             <paper-input type="password" label="Password..." willvalidate id="password" value="{{ password }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
-            <paper-button label="Entry" value ="enter" onclick="{{ keypressHandler }}"></paper-button>
+            <paper-button id ="enter" on-click="{{ keypressHandler }}">Entry</paper-button>
+            <core-input readonly inputvalue="Invalid user or password" value="Invalid user or password" id="core_input"></core-input>
+            <core-icon icon="lock" id="core_icon"></core-icon>
         </core-card>
     </template>
     <script>
@@ -57,21 +80,42 @@
             keypressHandler: function (event, detail, sender) {
                 var code = event.keyCode;
                 var user = this.$.user.value;
-                if(code == 13 || sender.value === "enter") {
-                    alert("Mis pelotas");
-                    //if(this.validateUser() && this.validatePass()){
-                    //}
-                    
+
+                if (code == 13 || sender.id == "enter") {
+                    if (this.validateUser() && this.validatePass()) {
+
+                        this.comprobateUser();
+
+
+                    }else{
+                        this.$.core_input.style.visibility="visible";
+                        this.$.core_icon.style.visibility="visible";
+                        
+                    }
+
                 }
+            },
+            comprobateUser: function () {
+                var usuario = "antonia";
+                var pass = "empresas69";
+
+                if (usuario === this.$.user.value && pass === this.$.password.value) {
+                    console.log("Usuario y contraseña correcto");
+                    location.href = "www.google.es";
+                }else{
+                    this.$.core_input.style.visibility="visible";
+                    this.$.core_icon.style.visibility="visible";
+                }
+
             },
             validateUser: function () {
                 var user = this.$.user.value;
-                return (this.validateField(string, /^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ_/-]*$/i) && string.length >= 4 && string.length <= 30);
+                return (this.validateField(user, /^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ_/-]*$/i) && user.length >= 4 && user.length <= 30);
 
             },
             validatePass: function () {
                 var password = this.$.password.value;
-                return this.validateField(string, /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/);
+                return this.validateField(password, /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/);
             },
             validateField: function (string, pattern) {
 

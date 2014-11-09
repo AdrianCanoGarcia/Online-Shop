@@ -1,80 +1,78 @@
 <polymer-element name="main-menu">
-  <template>
-    <style>    
-      :host {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-        overflow: hidden;
-      }
-      #core_card {
-        width: 100%;
-        height: 95%;
-        border-top-left-radius: 2px;
-        border-top-right-radius: 2px;
-        border-bottom-right-radius: 2px;
-        border-bottom-left-radius: 2px;
-        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
-        background-image: url(http://www.sitelicon.com/blog/wp-content/uploads/2013/07/amazon-logo.png);
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-      }
-      #paper_tabs {
-        width: 100%;
-        height: 5%;
-        color: rgb(255, 255, 255);
-        box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 2px;
-        background-color: rgb(122, 179, 234);
-      }
+    <template>
+        <style>    
+            :host {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                overflow: hidden;
+            }
+            #core_card {
+                width: 100%;
+                height: 95%;
+                border-top-left-radius: 2px;
+                border-top-right-radius: 2px;
+                border-bottom-right-radius: 2px;
+                border-bottom-left-radius: 2px;
+                box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+                background-image: url(http://www.sitelicon.com/blog/wp-content/uploads/2013/07/amazon-logo.png);
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+            }
+            #paper_tabs {
+                width: 100%;
+                height: 5%;
+                color: rgb(255, 255, 255);
+                box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 2px;
+                background-color: rgb(122, 179, 234);
+            }
 
-      #paper_radio_button1 {
-        left: 1250px;
-        top: 490px;
-      }
+            #paper_radio_button1 {
+                left: 1250px;
+                top: 490px;
+            }
 
-      template {
-        display: none !important;
-      }
+            template {
+                display: none !important;
+            }
 
-    </style>
-    
-    <flatiron-director route="{{route}}" autoHash></flatiron-director>
+        </style>
 
-    <core-animated-pages id="core_card" valueattr="hash" selected="{{route}}" layout vertical end-justified center transitions="slide-from-right">
+        <flatiron-director route="{{route}}" autoHash></flatiron-director>
 
-      <section>
-      </section>
-      <section hash="SignIn" layout vertical center-center>
-        <signin-page></signin-page>
-      </section>
-      <section hash="LogIn" layout vertical center-center>
-        <core-card vertical layout  center-justified>
-          <login-page></login-page>
-        </core-card>
-      </section>
-    </core-animated-pages>  
+        <core-animated-pages id="core_card" valueattr="hash" selected="{{route}}" layout vertical end-justified center transitions="slide-from-right">
 
-    <paper-tabs selected="{{route}}" selectedindex="one" valueattr="hash" id="paper_tabs" end-justified vertical layout wrap end>
-      <template repeat="{{page in pages}}" >
-        <paper-tab id = "{{page.id}}" hash = "{{page.hash}}">
-          {{page.name}} <a href='#{{page.hash}}'></a>
-        </paper-tab>
-      </template>
-    </paper-tabs>
+            <section>
+            </section>
+            <section hash="SignIn" layout vertical center-center>
+                <signin-page></signin-page>
+            </section>
+            <section hash="LogIn" layout vertical center-center>
+                    <principal-page></principal-page>
+                    </section>
+        </core-animated-pages>  
 
-  </template>  
+        <paper-tabs selected="{{route}}" selectedindex="one" valueattr="hash" id="paper_tabs" end-justified vertical layout wrap end>
+            <template repeat="{{page in pages}}" >
+                <paper-tab id = "{{page.id}}" hash = "{{page.hash}}">
+                    {{page.name}} <a href='#{{page.hash}}'></a>
+                </paper-tab>
+            </template>
+        </paper-tabs>
 
-  <script>
+    </template>  
 
-    Polymer({
-      ready: function () {
-        this.pages = [
-          {name: 'Sign In', id: 'paper_tab', hash: 'SignIn'},
-          {name: 'Log In', id: 'paper_tab1', hash: 'LogIn'}
-        ];
-      },
-    });
+    <script>
 
-  </script>
+        Polymer({
+            ready: function () {
+                this.pages = [
+                    {name: 'Sign In', id: 'paper_tab', hash: 'SignIn'},
+                    {name: 'Log In', id: 'paper_tab1', hash: 'LogIn'}
+                ];
+            },
+        });
+
+    </script>
 </polymer-element>
