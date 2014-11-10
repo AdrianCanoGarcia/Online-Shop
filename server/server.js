@@ -1,3 +1,4 @@
+
 var debug = require('debug')('Online-Shop');
 var express = require('express');
 var path = require('path');
@@ -15,8 +16,6 @@ app.use(express.static(path.join(__dirname, '/../cliente')));
 
 
 // Routes
-
-
 var basePath = path.join(__dirname, '/routes/');
 fs.readdirSync(basePath).forEach(function(filename) {
 	var basePathService = '/' + filename.replace(/\.js$/, '');
