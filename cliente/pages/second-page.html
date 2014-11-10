@@ -1,7 +1,7 @@
 <polymer-element name="signin-page">
     <template>
         <style>
-            :host {
+            :host{
             }
             #user {
                 margin-bottom: 30px;
@@ -23,7 +23,7 @@
             }
             #core_card1 {
                 width: 300px;
-                height: 200px;
+                height: 230px;
                 border-top-left-radius: 2px;
                 border-top-right-radius: 2px;
                 border-bottom-right-radius: 2px;
@@ -33,46 +33,27 @@
                 margin: 50px 50px;
                 background-color: rgb(122, 179, 234);
             }
-            core-animated-pages {
-                margin: 20px;
-                width: 350px;
-                height: 500px;
-                background-size: 100% 100%;
-            }
             #core_input {
                 visibility:hidden;
                 color: rgb(255, 0, 0);
-                padding: 15px;
-                left: 520px;
-                top: 260px;
-                position: absolute;
-                width: 380px;
-                height: 30px;
-                margin-top: 70px;
-                margin-left: 230px;
+                margin-left: 50%;
+                margin-bottom: 10px;
             }
             #core_icon {
                 visibility:hidden;
                 color: rgb(255, 0, 0);
-                left: 500px;
-                top: 270px;
-                position: absolute;
-                margin-top: 70px;
-                margin-left: 230px;
+                width:15px;
+                height:15px;
             }
 
-
-
-
         </style>
-
-
+        
         <core-card id="core_card1" layout vertical center>
             <paper-input label="User..." willvalidate id="user" value="{{ user }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
             <paper-input type="password" label="Password..." willvalidate id="password" value="{{ password }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
-            <paper-button id ="enter" on-click="{{ keypressHandler }}">Entry</paper-button>
-            <core-input readonly inputvalue="Invalid user or password" value="Invalid user or password" id="core_input"></core-input>
             <core-icon icon="lock" id="core_icon"></core-icon>
+            <core-input readonly inputvalue="Invalid user or password" value="Invalid user or password" id="core_input"></core-input>
+            <paper-button id ="enter" on-click="{{ keypressHandler }}">Entry</paper-button>
         </core-card>
     </template>
     <script>
@@ -87,10 +68,10 @@
                         this.comprobateUser();
 
 
-                    }else{
-                        this.$.core_input.style.visibility="visible";
-                        this.$.core_icon.style.visibility="visible";
-                        
+                    } else {
+                        this.$.core_input.style.visibility = "visible";
+                        this.$.core_icon.style.visibility = "visible";
+
                     }
 
                 }
@@ -102,9 +83,9 @@
                 if (usuario === this.$.user.value && pass === this.$.password.value) {
                     console.log("Usuario y contraseña correcto");
                     location.href = "www.google.es";
-                }else{
-                    this.$.core_input.style.visibility="visible";
-                    this.$.core_icon.style.visibility="visible";
+                } else {
+                    this.$.core_input.style.visibility = "visible";
+                    this.$.core_icon.style.visibility = "visible";
                 }
 
             },
