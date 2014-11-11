@@ -13,14 +13,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, '/../cliente')));
 
-
-
+ 
 // Routes
 var basePath = path.join(__dirname, '/routes/');
 fs.readdirSync(basePath).forEach(function(filename) {
 	var basePathService = '/' + filename.replace(/\.js$/, '');
 	var serviceDefinition = basePath + filename;
-	app.use(basePathService, require(serviceDefinition)(io));
+	app.use(basePathService, require(serviceDefinition));
 });
 
 var ip = process.env.OPENSHIFT_NODEJS_IP||process.env.IP||'0.0.0.0';

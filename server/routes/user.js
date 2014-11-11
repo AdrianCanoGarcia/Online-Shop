@@ -3,28 +3,32 @@ var router = express.Router();
 
 var users = {};
 var numUser = 0;
+
 /* ROUTES */
 router.post('/', createUser);
 router.put('/:userId/set/:name', setUser);
 router.get('/:userId', getUser);
+router.get('/', getAll);
 router.delete('/:userId', delUser);
+
+router.param('userId', checkUserExists);
+
 
 function createUser(req, res) {
     var user = {
         _id: String(numUser),
         name: " "
     };
-    user[user._id] = user;
+    users[user._id] = user;
     numUser++;
 
     res.json(user);
 }
 function setUser(req, res) {
-    var user = {
-        _id: String(numUser),
+    var newUser = {
         name: req.params.name,
     };
-    user[req.params._id] = user;
+    users[req.params._id] = user;
     numUser++;
 
     res.json(user);
@@ -33,8 +37,22 @@ function setUser(req, res) {
 function delUser(req, res) {
     delete users[req.params.userId];
 
-    res.send('scored ' + req.params.userId + ' removed.');
+    res.send('user ' + req.params.userId + ' removed.');
 }
 function getUser(req, res) {
-    res.json(req.User);
+    res.json(req.user);
 }
+function getAll(req, res) {
+    res.json(users);
+}
+
+function checkUserExists (req, res, next, userId) {
+	if (users[userId]) {
+		req.user = users[userId];
+		next();
+	} else {
+		next(new Error(userId + ' not exists'));
+	}
+}
+
+module.exports = router;
