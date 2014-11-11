@@ -1,41 +1,43 @@
-<polymer-element name="principal-page">
-    <template>
-        <style>
-            :host {
-            }
-            #core_card2 {
-                height: 100%;
-                width: 100%;
-                background-color: white;
+<polymer-element name="search-page">
+  <template>
+    <style>
+      :host {
+      }
+      #core_card2 {
+        height: 100%;
+        width: 100%;
+        background-color: white;
+        /*background-image: url(../Icarus.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;*/
+      }
+      #img{
+        height: 50%;
+        width: 50%;
+        border-bottom: 800px;
+      }
+      #core_icon{
+        height: 50px;
+        width: 50px;
+        margin-left: 30
+      }
+      #core_field{
+        height: 50px;
+        width: 300px;
+        margin-top:20px;
+      }
+    </style>
 
-            }
-            #img{
-                height: 50%;
-                width: 50%;
-                border-bottom: 800px;
-            }
-            #core_icon{
-                height: 50px;
-                width: 50px;
-                margin-left: 30
-            }
-            #core_field{
-                height: 50px;
-                width: 300px;
-                margin-top:20px;
-            }
-        </style>
-
-        <core-card id="core_card2" layout vertical center fit>
-            <img id="img" src="../Icarus.png">
-            <core-field id="core_field" icon="search" theme="core-light-theme" center horizontal layout>
-                <core-icon icon="search" id="core_icon"></core-icon>
-                <core-input willvalidate placeholder="Ejemplo: Samsung Galaxy s5...." id="core_input" flex></core-input>
-            </core-field>
-        </core-card>
-    </template>
-    <script>
-        Polymer({
-        });
-    </script>
+    <core-card id="core_card2" layout vertical center fit>
+      
+      <core-field id="core_field" icon="search" theme="core-light-theme" center horizontal layout>
+        <core-icon icon="search" id="core_icon"></core-icon>
+        <core-input willvalidate placeholder="Ejemplo: Samsung Galaxy s5...." id="core_input" flex></core-input>
+      </core-field>
+    </core-card>
+  </template>
+  <script>
+    Polymer({
+    });
+  </script>
 </polymer-element>

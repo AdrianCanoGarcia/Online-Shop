@@ -1,52 +1,109 @@
-<polymer-element name="login-page">
-  <template>
-    <style>
-       :host {
+<polymer-element name="signin-page">
+    <template>
+        <style>
+            :host{
             }
-            #core_card2 {
-                width: 70%;
-                height: 60%;
+            #user {
+                margin-bottom: 30px;
+                width: 95%;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-top: 5px;
+                font-size: 15px;
+                background-color: rgb(249, 246, 246);
+            }
+            #password {
+                margin-bottom: 30px;
+                width: 95%;
+                padding-left: 10px;
+                padding-top: 5px;
+                padding-right: 10px;
+                font-size: 15px;
+                background-color: rgb(249, 246, 246);
+            }
+            #core_card1 {
+                width: 300px;
+                height: 230px;
                 border-top-left-radius: 2px;
                 border-top-right-radius: 2px;
                 border-bottom-right-radius: 2px;
                 border-bottom-left-radius: 2px;
                 box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
                 padding: 20px;
-                margin: 50px 30px;
-                background-color: rgb(246, 255, 34);
+                margin: 50px 50px;
+                background-color: rgb(122, 179, 234);
             }
-            #paper_input2 {
-                margin: 20px;
-                background-color: rgb(252, 246, 246);
+            #core_input {
+                visibility:hidden;
+                color: rgb(255, 0, 0);
+                margin-left: 50%;
+                margin-bottom: 10px;
             }
-            #paper_input3 {
-                background-color: rgb(255, 248, 248);
-            }
-            #paper_input4 {
-                margin: 20px;
-                background-color: rgb(253, 247, 247);
-            }
-            #paper_input5 {
-                background-color: rgb(252, 250, 250);
-            }
-            #paper_button1 {
-                margin: 20px;
-                width: 70px;
-                height: 30px;
+            #core_icon {
+                visibility:hidden;
+                color: rgb(255, 0, 0);
+                width:15px;
+                height:15px;
             }
 
         </style>
         
-        <core-card id="core_card2" layout vertical center>
-            <paper-input label="User..." willvalidate validationmessage="Completa este campo" required invalid id="paper_input2" layout vertical class="invalid"></paper-input>
-            <paper-input label="Password..." willvalidate validationmessage="Completa este campo" required invalid id="paper_input3" layout vertical class="invalid"></paper-input>
-            <paper-input label="Email..." willvalidate validationmessage="Completa este campo" required invalid id="paper_input4" layout vertical class="invalid"></paper-input>
-            <paper-input label="Repeat Email..." willvalidate validationmessage="Completa este campo" required invalid id="paper_input5" layout vertical class="invalid"></paper-input>
-            <paper-button label="Send" id="paper_button1" center center-justified></paper-button>
+        <core-card id="core_card1" layout vertical center>
+            <paper-input label="User..." willvalidate id="user" value="{{ user }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
+            <paper-input type="password" label="Password..." willvalidate id="password" value="{{ password }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
+            <core-icon icon="lock" id="core_icon"></core-icon>
+            <core-input readonly inputvalue="Invalid user or password" value="Invalid user or password" id="core_input"></core-input>
+            <paper-button id ="enter" on-click="{{ keypressHandler }}">Entry</paper-button>
         </core-card>
     </template>
-  <script>
-    Polymer({
-    });
-  </script>
+    <script>
+        Polymer({
+            keypressHandler: function (event, detail, sender) {
+                var code = event.keyCode;
+                var user = this.$.user.value;
+
+                if (code == 13 || sender.id == "enter") {
+                    if (this.validateUser() && this.validatePass()) {
+
+                        this.comprobateUser();
+
+
+                    } else {
+                        this.$.core_input.style.visibility = "visible";
+                        this.$.core_icon.style.visibility = "visible";
+
+                    }
+
+                }
+            },
+            comprobateUser: function () {
+                var usuario = "antonia";
+                var pass = "empresas69";
+
+                if (usuario === this.$.user.value && pass === this.$.password.value) {
+                    
+                    location.href = "www.google.es";
+                } else {
+                    this.$.core_input.style.visibility = "visible";
+                    this.$.core_icon.style.visibility = "visible";
+                }
+
+            },
+            validateUser: function () {
+                var user = this.$.user.value;
+                return (this.validateField(user, /^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ_/-]*$/i) && user.length >= 4 && user.length <= 30);
+
+            },
+            validatePass: function () {
+                var password = this.$.password.value;
+                return this.validateField(password, /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/);
+            },
+            validateField: function (string, pattern) {
+
+                return string.match(pattern) !== null;
+
+
+            },
+        });
+    </script>
 </polymer-element>
