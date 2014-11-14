@@ -10,12 +10,6 @@
         height: 100%;
         box-sizing: border-box;
       }
-      #core_card {
-        margin-top: 50px;
-        height: 80%;
-        width: 100%;
-        
-      }
       #core_header_panel {
         width: 100%;
         height: 100%;
@@ -37,64 +31,80 @@
         font-size: 120%;
         line-height: normal;
         font-family: sans-serif;
+        margin-left: 45%;
       }
-       #div3 {
+      #div3 {
         visibility: hidden;
-        margin-left: 400px;
-        width: 30%;
-        height: 30px;
-        border-style: solid;
-        border-radius: 17px 17px;
-        opacity: 0.8;
-      }
-      
-      #core-dropdown {
-        position: absolute;
-        top: 38px;
-        left: 0px;
       }
       #input{
-          
-          width: 90%;
-          background-color: transparent;
-          border-style: none;
-          color:white;
+        width: 90%;
+        background-color: transparent;
+        border-style: none;
+        color:white;
+        height: 34px;
       }
       input::-webkit-input-placeholder {
         color: white;
         font-weight: bold;
-    }
-      
+      }
+      #core_icon_button{
+        visibility: visible;
+      }
+      @media (max-width:600px){
+        #core_icon_button1 {
+          float:left;
+        }
+        #div3{
+          margin-left: -10%;
+        }
+        #input {
+          margin-top: 0.5%;
+          height: 34px;
+        }
+      }
+      @media (max-width:480px){
+        #core_icon_button1 {
+          float:left;
+        }
+        #div3{
+          margin-left: -15%;
+        }
+        #input {
+          margin-top: 0.5%;
+          height: 34px;
+        }
+      } 
+      @media (max-width:360px){
+        #core_icon_button1 {
+          float:left;
+        }
+        #div3{
+          margin-left: -20%;
+        }
+        #input {
+          width: 80%;
+          margin-top: 0.5%;
+          height: 34px;
+        }
+      } 
+
     </style>
     <core-card id="core_card" layout vertical center fit>
       <core-header-panel mode="waterfall-tall" id="core_header_panel" headermargin="128" condenses headerheight="192">
-          
-        <core-toolbar id="core_toolbar" class="animate tall">
-            
-          <core-icon-button icon="arrow-back" id="core_icon_button"></core-icon-button>
-          <div id="div3">
-              <core-icon icon="search" id="core_icon_button1"></core-icon>
-              <input id="input" placeholder="Ejemplo: Samsung Galaxy s5..." is="core-input">
-          </div>
-                <paper-button id="paper_button" style="visibility:hidden">Buscar</paper-button>
 
-          <div id="div" flex></div>
-          
-          <core-icon-button icon="search" id="search_icon" style="visibility:visible" on-tap="{{loadSearcher}}"></core-icon-button>
-          <template is="auto-binding">
-          <div id="div2" relative>
-            <core-icon-button icon="menu" id="trigger" theme="core-light-theme"></core-icon-button>
-            <core-dropdown id="core_dropdown" relatedTarget="{{$.trigger}}">
-              <core-menu>
-                <core-item id="core_item" horizontal center layout active>Cut</core-item>
-                <core-item id="core_item1" horizontal center layout>Copy</core-item>
-                <core-item id="core_item2" horizontal center layout>Paste</core-item>
-              </core-menu>
-            </core-dropdown>
-          </div>
-          </template>    
+        <core-toolbar id="core_toolbar" class="animate tall">
+
+
+          <core-icon-button icon="arrow-back" id="core_icon_button"></core-icon-button>
+          <core-icon-button icon="search" id="search_icon" style="visibility:visible" on-tap="{{loadSearcher}}" ></core-icon-button>    
           <div id="div1" class="bottom indent">Ikarus</div>
-         
+          <div id="div3">
+            <core-icon-button icon="search" id="core_icon_button1"></core-icon-button>
+
+            <input id="input" placeholder="Producto..." is="core-input">
+          </div>
+
+
         </core-toolbar>
         <section id="section" content></section>
       </core-header-panel>
@@ -104,14 +114,18 @@
   <script>
 
     Polymer({
-        
-        loadSearcher: function(){
-            this.$.div3.style.visibility= "visible";
-            this.$.search_icon.style.visibility= "hidden";
-            this.$.paper_button.style.visibility= "visible";
-            
-        }
-      
+      loadSearcher: function () {
+        this.$.div3.style.visibility = "visible";
+        this.$.search_icon.style.visibility = "hidden";
+        this.$.div3.style.width = "100%";
+        this.$.div3.style.backgroundColor = "rgb(66, 133, 244)";
+        this.$.div3.style.fill = "rgb(241, 241, 241)";
+        this.$.div3.style.color = "rgb(241, 241, 241)";
+        this.$.core_icon_button.style.visibility = "hidden";
+        this.$.core_icon_button.style.marginLeft = "-5%";
+
+      }
+
     });
 
   </script>
