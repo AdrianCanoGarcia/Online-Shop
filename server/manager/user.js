@@ -1,14 +1,16 @@
 var daoUser = require('../Dao/user');
 
-
+var num=1;
 function create(callback){
     var user = {
         name : "",
-        passwd:""
+        passwd:"",
+        ide:num++
     }
     daoUser.create(user,callback);
+    
 }
-function setUSer(userId, name, password,callback){
+function setUser(userId, name, password,callback){
     var update = {
 		$set: {}
 	};
@@ -16,7 +18,7 @@ function setUSer(userId, name, password,callback){
     daoUser.setUser(scoreId,update,callback);
 }
 function delUser(userId, callback) {
-	daoScore.delUser(userId, callback);
+	daoUser.delUser(userId, callback);
 }
 
 function getUser (userId,callback){

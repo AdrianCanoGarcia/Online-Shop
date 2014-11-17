@@ -7,10 +7,8 @@ var userManager = require('../manager/user');
 router.post('/', create);
 router.put('/:userId/set/:name/set/:password/', setUser);
 router.get('/:userId', getUser);
-router.get('/', getAll);
 router.delete('/:userId', delUser);
 
-router.param('userId', checkUserExists);
 
 
 function create(req, res) {
@@ -31,7 +29,7 @@ function setUser(req, res) {
     });
 }
 
-function delUser(req, res) {
+function delUser(req, res, next) {
     var userId = req.params.userId;
     userManager.delUser(userId, function (err, result) {
         if (result === 0) {
@@ -55,13 +53,13 @@ function getUser(req, res, next) {
 
 }
 
-function checkUserExists(req, res, next, userId) {
+/*function checkUserExists(req, res, next, userId) {
     if (users[userId]) {
         req.user = users[userId];
         next();
     } else {
         next(new Error(userId + ' not exists'));
     }
-}
+}*/
 
 module.exports = router;

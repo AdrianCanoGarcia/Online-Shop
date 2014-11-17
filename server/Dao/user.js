@@ -3,10 +3,10 @@ var toObjectID = require('../util/mongodb').toObjectID;
 var col = db.bind('Usuario');
 
 function create(user, callback){
-    this.insert({name:"Antonia",password:"empresas69"}, callback);
+    this.insert(user, callback);
     
 }
-function setUSer(userId,update,callback){
+function setUser(userId,update,callback){
     var query = {
         _id: toObjectId(userId)
     };
@@ -15,7 +15,7 @@ function setUSer(userId,update,callback){
     col.findAndModify(query,sort,update,{new:true},callback);
 }
 function delUser(userId,callback){
-    this.removeById(scoreId,callback);
+    this.removeById(userId,callback);
 }
 function getUser(userId,callback){
     this.findById(scoreId,callback);
