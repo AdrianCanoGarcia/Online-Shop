@@ -6,8 +6,8 @@ var userManager = require('../manager/user');
 /* ROUTES */
 router.post('/', create);
 router.put('/:userId/set/:name/set/:password/', setUser);
-router.get('/:userId', getUser);
-router.delete('/:userId', delUser);
+router.get('/:userName', getUser);
+router.delete('/:userName', delUser);
 
 
 
@@ -19,7 +19,7 @@ function create(req, res) {
 function setUser(req, res) {
     var userId = req.params.userId;
     var name = req.params.name;
-    var password = req.params.name;
+    var password = req.params.password;
     userManager.setUser(userId, name, password, function (err, newUser) {
         if (newUser === null) {
             next(new Error(new Error(userId + ' not exists')));
@@ -30,23 +30,23 @@ function setUser(req, res) {
 }
 
 function delUser(req, res, next) {
-    var userId = req.params.userId;
-    userManager.delUser(userId, function (err, result) {
+    var userName = req.params.userName;
+    userManager.delUser(userName, function (err, result) {
         if (result === 0) {
-            next(new Error(userId + ' not exists'));
+            next(new Error(userName + ' not exists'));
         } else {
-            res.send('User[' + userId + ' deleted');
+            res.send('User[' + userName + ' deleted');
         }
     });
 
 }
 function getUser(req, res, next) {
-    var userId = req.params.userId;
-    userManager.getUser(userId, function (err, user) {
+    var userName = req.params.userName;
+    userManager.getUser(userName, function (err, user) {
         if (user) {
             res.json(user);
         } else {
-            next(new Error(new Error(userId + ' not exists')));
+            next(new Error(new Error(userName + ' not exists')));
         }
     });
 

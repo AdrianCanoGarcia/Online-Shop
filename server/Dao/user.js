@@ -6,19 +6,19 @@ function create(user, callback){
     this.insert(user, callback);
     
 }
-function setUser(userId,update,callback){
+function setUser(userId, update, callback){
     var query = {
-        _id: toObjectId(userId)
+        _id: toObjectID(userId)
     };
     var sort =[ ['_id',1] ];
     
     col.findAndModify(query,sort,update,{new:true},callback);
 }
-function delUser(userId,callback){
-    this.removeById(userId,callback);
+function delUser(userName,callback){
+    this.remove({name:userName},callback);
 }
-function getUser(userId,callback){
-    this.findById(scoreId,callback);
+function getUser(userName,callback){
+    this.findOne({name:userName},callback);
 }
 
 col.bind({
