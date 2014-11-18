@@ -108,15 +108,13 @@
 
 
                 </core-toolbar>
-                <section id="section" content>
-                    <core-icon-button icon="menu" id="core_icon_button" theme="core-light-theme"></core-icon-button>
-                    <core-dropdown class="dropdown">
-                        <core-menu>
-                            <core-item>Should not see this</core-item>
-                            <core-item>Manolo</core-item>
-                        </core-menu>
-                    </core-dropdown>
-                    </core-dropdown-menu>
+                <section id="section" content >
+                    <core-icon-button icon="menu" id="core_icon_button" theme="core-light-theme"on-tap="{{show}}"></core-icon-button>
+                <div id="options" hidden vertical layout center>    
+                <paper-dropdown-menu label="Categories">
+                <paper-item label="Primaria"></paper-item>
+                <paper-item label="Segundaria"></paper-item>
+            </paper-dropdown-menu>
                 </section>
             </core-header-panel>
         </core-card>
@@ -135,7 +133,11 @@
                 this.$.core_icon_button.style.visibility = "hidden";
                 this.$.core_icon_button.style.marginLeft = "-5%";
         },
-                /*scope = document.querySelector('template[is=auto-binding]');
+            show: function() {
+                var options = this.$.options;
+                options.hidden =!options.hidden;
+            }    
+            /*scope = document.querySelector('template[is=auto-binding]');
                 scope.pastries = [
                         'Apple fritter',
                         'Croissant',
