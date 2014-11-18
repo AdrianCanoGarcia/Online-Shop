@@ -2,134 +2,153 @@
 
 <polymer-element name="prueba-search">
 
-  <template>
-    <style>    
-      :host {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-      }
-      #core_header_panel {
-        width: 100%;
-        height: 100%;
-        
-        
-      }
-      #core_toolbar {
-        color: rgb(241, 241, 241);
-        fill: rgb(241, 241, 241);
-        background-color: rgb(66, 133, 244);
-      }
-      #section {
-        height: 5000px;
-        background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
-      }
-      #div1 {
-        font-style: normal;
-        font-variant: normal;
-        font-weight: normal;
-        font-stretch: normal;
-        font-size: 120%;
-        line-height: normal;
-        font-family: sans-serif;
-        margin-left: 45%;
-      }
-      #div3 {
-        visibility: hidden;
-      }
-      #input{
-        width: 90%;
-        background-color: transparent;
-        border-style: none;
-        color:white;
-        height: 34px;
-      }
-      input::-webkit-input-placeholder {
-        color: white;
-        font-weight: bold;
-      }
-      #core_icon_button{
-        visibility: visible;
-      }
-      @media (max-width:600px){
-        #core_icon_button1 {
-          float:left;
-        }
-        #div3{
-          margin-left: -10%;
-        }
-        #input {
-          margin-top: 0.5%;
-          height: 34px;
-        }
-      }
-      @media (max-width:480px){
-        #core_icon_button1 {
-          float:left;
-        }
-        #div3{
-          margin-left: -15%;
-        }
-        #input {
-          margin-top: 0.5%;
-          height: 34px;
-        }
-      } 
-      @media (max-width:360px){
-        #core_icon_button1 {
-          float:left;
-        }
-        #div3{
-          margin-left: -20%;
-        }
-        #input {
-          width: 80%;
-          margin-top: 0.5%;
-          height: 34px;
-        }
-      } 
-
-    </style>
-    <core-card id="core_card" layout vertical center fit>
-      <core-header-panel mode="waterfall-tall" id="core_header_panel" headermargin="128" condenses headerheight="192">
-
-        <core-toolbar id="core_toolbar" class="animate tall">
+    <template>
+        <style>    
+            :host {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+            }
+            #core_header_panel {
+                width: 100%;
+                height: 100%;
 
 
-          <core-icon-button icon="arrow-back" id="core_icon_button"></core-icon-button>
-          <core-icon-button icon="search" id="search_icon" style="visibility:visible" on-tap="{{loadSearcher}}" ></core-icon-button>    
-          <div id="div1" class="bottom indent">Ikarus</div>
-          <div id="div3">
-            <core-icon-button icon="search" id="core_icon_button1"></core-icon-button>
+            }
+            #core_toolbar {
+                color: rgb(241, 241, 241);
+                fill: rgb(241, 241, 241);
+                background-color: rgb(66, 133, 244);
+            }
+            #section {
+                height: 5000px;
+                background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
+            }
+            #div1 {
+                font-style: normal;
+                font-variant: normal;
+                font-weight: normal;
+                font-stretch: normal;
+                font-size: 120%;
+                line-height: normal;
+                font-family: sans-serif;
+                margin-left: 45%;
+            }
+            #div3 {
+                visibility: hidden;
+            }
+            #input{
+                width: 90%;
+                background-color: transparent;
+                border-style: none;
+                color:white;
+                height: 34px;
+            }
+            input::-webkit-input-placeholder {
+                color: white;
+                font-weight: bold;
+            }
+            #core_icon_button{
+                visibility: visible;
+            }
+            @media (max-width:600px){
+                #core_icon_button1 {
+                    float:left;
+                }
+                #div3{
+                    margin-left: -10%;
+                }
+                #input {
+                    margin-top: 0.5%;
+                    height: 34px;
+                }
+            }
+            @media (max-width:480px){
+                #core_icon_button1 {
+                    float:left;
+                }
+                #div3{
+                    margin-left: -15%;
+                }
+                #input {
+                    margin-top: 0.5%;
+                    height: 34px;
+                }
+            } 
+            @media (max-width:360px){
+                #core_icon_button1 {
+                    float:left;
+                }
+                #div3{
+                    margin-left: -20%;
+                }
+                #input {
+                    width: 80%;
+                    margin-top: 0.5%;
+                    height: 34px;
+                }
+            } 
 
-            <input id="input" placeholder="Producto..." is="core-input">
-          </div>
+        </style>
+        <core-card id="core_card" layout vertical center fit>
+            <core-header-panel mode="waterfall-tall" id="core_header_panel" headermargin="128" condenses headerheight="192">
+
+                <core-toolbar id="core_toolbar" class="animate tall">
 
 
-        </core-toolbar>
-        <section id="section" content></section>
-      </core-header-panel>
-    </core-card>
-  </template>
+                    <core-icon-button icon="arrow-back" id="core_icon_button"></core-icon-button>
+                    <core-icon-button icon="search" id="search_icon" style="visibility:visible" on-tap="{{loadSearcher}}" ></core-icon-button>    
+                    <div id="div1" class="bottom indent">Ikarus</div>
+                    <div id="div3">
+                        <core-icon-button icon="search" id="core_icon_button1"></core-icon-button>
 
-  <script>
+                        <input id="input" placeholder="Producto..." is="core-input">
+                    </div>
 
-    Polymer({
-      loadSearcher: function () {
+
+                </core-toolbar>
+                <section id="section" content>
+                    <core-icon-button icon="menu" id="core_icon_button" theme="core-light-theme"></core-icon-button>
+                    <core-dropdown class="dropdown">
+                        <core-menu>
+                            <core-item>Should not see this</core-item>
+                            <core-item>Manolo</core-item>
+                        </core-menu>
+                    </core-dropdown>
+                    </core-dropdown-menu>
+                </section>
+            </core-header-panel>
+        </core-card>
+    </template>
+
+    <script>
+
+        Polymer({
+        loadSearcher: function () {
         this.$.div3.style.visibility = "visible";
-        this.$.search_icon.style.visibility = "hidden";
-        this.$.div3.style.width = "100%";
-        this.$.div3.style.backgroundColor = "rgb(66, 133, 244)";
-        this.$.div3.style.fill = "rgb(241, 241, 241)";
-        this.$.div3.style.color = "rgb(241, 241, 241)";
-        this.$.core_icon_button.style.visibility = "hidden";
-        this.$.core_icon_button.style.marginLeft = "-5%";
+                this.$.search_icon.style.visibility = "hidden";
+                this.$.div3.style.width = "100%";
+                this.$.div3.style.backgroundColor = "rgb(66, 133, 244)";
+                this.$.div3.style.fill = "rgb(241, 241, 241)";
+                this.$.div3.style.color = "rgb(241, 241, 241)";
+                this.$.core_icon_button.style.visibility = "hidden";
+                this.$.core_icon_button.style.marginLeft = "-5%";
+        },
+                /*scope = document.querySelector('template[is=auto-binding]');
+                scope.pastries = [
+                        'Apple fritter',
+                        'Croissant',
+                        'Donut',
+                        'Financier',
+                        'Jello',
+                        'Madeleine',
+                        'Pound cake',
+                        'Pretzel',
+                        'Sfogliatelle'
+                ];*/
+        });
 
-      }
-
-    });
-
-  </script>
+    </script>
 
 </polymer-element>
