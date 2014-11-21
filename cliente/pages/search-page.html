@@ -2,234 +2,260 @@
 
 <polymer-element name="prueba-search">
 
-    <template>
-        <style>    
-            :host {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                box-sizing: border-box;
-            }
-            #core_header_panel {
-                width: 100%;
-                height: 100%;
-            }
-            #core_toolbar {
-                color: rgb(241, 241, 241);
-                fill: rgb(241, 241, 241);
-                background-image: url("../textura.jpg");
-                background-repeat: none;
-                background-size: 100%;
-            }
-            #section {
-                height: 5000px;
-                background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
-            }
-            #div1 {
-                font-style: normal;
-                font-variant: normal;
-                font-weight: normal;
-                font-stretch: normal;
-                font-size: 120%;
-                line-height: normal;
-                font-family: sans-serif;
-                margin-left: 45%;
-            }
-            #div3 {
-                visibility: hidden;
-                width: 90%;
-                border-radius: 5px;
-                box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
-            }
-            #input{
-                width: 90%;
-                background-color: transparent;
-                border-style: none;
-                color:white;
-                height: 34px;
-            }
-            input::-webkit-input-placeholder {
-                color: white;
-                font-weight: bold;
-            }
-            #core_icon_button{
-                visibility: visible;
-            }
-            #menu{
-                visibility: visible; 
-            }
-            #options{
-                left: 88%;
-                top: 7%;
-                width: 10%;
-                height: 40%;
-                position: fixed;
-                -moz-transition: all 0.5s;
-                -webkit-transition: opacity 0.5s;
-                -o-transition: opacity 0.5s,visibility 0.5s;
-                transition: opacity 0.5s;
-                z-index: 2;
-                background-color: #3f7eaa;
-                border-radius: 0 4px 4px 4px;
-                box-shadow: 2px 4px 0 rgba(0, 0, 0, 0.1);
-                padding: 0 5px 5px;
-            }
-            #paper_item{
-                width: 100%;
-                padding: 5px 15px;
-                box-shadow: none;
-                margin-top: 4px;
-                background-color: #3f7eaa;
-                border-width: 1px;
-                border-style: solid;
-                border-color: transparent;
-                border-radius: 2px;
-                font-family: Open Sans,Helvetica,Arial,sans-serif;
-                font-size: 15px;
-                color: #FFFFFF;
-                text-decoration: none;
-            }
-            #paper_item:hover {
-                width: 100%;
-                z-index: 999;
-                position: relative;
-                padding: 5px 15px;
-                border-radius: 5px;
-                box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
-                font-family: Open Sans,Helvetica,Arial,sans-serif;
-                font-size: 16px;
-                font-weight: normal;
-                background-color: #488cbb;
-            }
-            #avatar{
-                border-radius: 5px;
-                height: 60px;
-                width: 80px;
-                box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
-                border-width: 1px;
-                border-style: solid;
-                border-color: transparent;
-                margin-top: 10px;      
-                margin-bottom: 10px;
-                padding: 20px 15px;
-                border: 2px;
-                margin-left: 15px;
-                background-color: white;
-            }
-            img{
-                width: 35px;
-                height: 25px;
-            }
-            #profile{
-                width: 25px;
-                height: 22px;
-                margin-left: 7px;
-            }
-            @media (max-width:600px){
-                #core_icon_button1 {
-                    float:left;
-                }
-                #div3{
-                    margin-left: -10%;
-                }
-                #input {
-                    margin-top: 0.5%;
-                    height: 34px;
-                }
-            }
-            @media (max-width:480px){
-                #core_icon_button1 {
-                    float:left;
-                }
-                #div3{
-                    margin-left: -15%;
-                }
-                #input {
-                    margin-top: 0.5%;
-                    height: 34px;
-                }
-            } 
-            @media (max-width:360px){
-                #core_icon_button1 {
-                    float:left;
-                }
-                #div3{
-                    margin-left: -20%;
-                }
-                #input {
-                    width: 80%;
-                    margin-top: 0.5%;
-                    height: 34px;
-                }
-            }
-            #movideta{
-                width: 70%;
-                height:30%;
-                left:15%;
-            }
-            #core_card1{
-                height:100%;
-                width: 100%;
-            }
+  <template>
+    <style>    
+      :host {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+      }
+      #core_header_panel {
+        width: 100%;
+        height: 100%;
+      }
+      #core_toolbar {
+        color: rgb(241, 241, 241);
+        fill: rgb(241, 241, 241);
+        background-image: url("../img/textura.jpg");
+        background-repeat: none;
+        background-size: 100%;
+      }
+      #section {
+        height: 5000px;
+        background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
+      }
+      #div1 {
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        font-stretch: normal;
+        font-size: 120%;
+        line-height: normal;
+        font-family: sans-serif;
+        margin-left: 45%;
+      }
+      #div3 {
+        visibility: hidden;
+        width: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
+      }
+      #input{
+        width: 90%;
+        background-color: transparent;
+        border-style: none;
+        color:white;
+        height: 34px;
+      }
+      input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+      }
+      #core_icon_button{
+        visibility: visible;
+      }
+      #menu{
+        visibility: visible; 
+      }
+      #options{
+        left: 88%;
+        top: 7%;
+        width: 9%;
+        height: 40%;
+        position: fixed;
+        -moz-transition: all 0.5s;
+        -webkit-transition: opacity 0.5s;
+        -o-transition: opacity 0.5s,visibility 0.5s;
+        transition: opacity 0.5s;
+        z-index: 2;
+        background-color: #3f7eaa;
+        border-radius: 0 4px 4px 4px;
+        box-shadow: 2px 4px 0 rgba(0, 0, 0, 0.1);
+        padding: 0 10px 5px;
+      }
+      #paper_item{
+        width: 100%;
+        padding: 5px 15px;
+        box-shadow: none;
+        margin-top: 4px;
+        background-color: #3f7eaa;
+        border-width: 1px;
+        border-style: solid;
+        border-color: transparent;
+        border-radius: 2px;
+        font-family: Open Sans,Helvetica,Arial,sans-serif;
+        font-size: 15px;
+        color: #FFFFFF;
+        text-decoration: none;
+      }
+      #paper_item:hover {
+        width: 100%;
+        z-index: 999;
+        position: relative;
+        padding: 5px 15px;
+        border-radius: 5px;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
+        font-family: Open Sans,Helvetica,Arial,sans-serif;
+        font-size: 16px;
+        font-weight: normal;
+        background-color: #488cbb;
+      }
+      #avatar{
+        border-radius: 5px;
+        height: 60px;
+        width: 80px;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
+        border-width: 1px;
+        border-style: solid;
+        border-color: transparent;
+        margin-top: 10px;      
+        margin-bottom: 10px;
+        padding: 20px 15px;
+        border: 2px;
+        margin-left: 15px;
+        background-color: white;
+      }
+      img{
+        width: 35px;
+        height: 25px;
+      }
+      #profile{
+        width: 25px;
+        height: 22px;
+        margin-left: 7px;
+      }
+      @media (max-width:600px){
+        #core_icon_button1 {
+          float:left;
+        }
+        #div3{
+          margin-left: -10%;
+        }
+        #input {
+          margin-top: 0.5%;
+          height: 34px;
+        }
+      }
+      @media (max-width:480px){
+        #core_icon_button1 {
+          float:left;
+        }
+        #div3{
+          margin-left: -15%;
+        }
+        #input {
+          margin-top: 0.5%;
+          height: 34px;
+        }
+      } 
+      @media (max-width:360px){
+        #core_icon_button1 {
+          float:left;
+        }
+        #div3{
+          margin-left: -20%;
+        }
+        #input {
+          width: 80%;
+          margin-top: 0.5%;
+          height: 34px;
+        }
+      }
+      #profilePage{
+        width: 70%;
+        height:60%;
+        left:15%;
+        position: fixed;
+      }
+      #signOffPage{
+        width: 70%;
+        height:60%;
+        left:15%;
+        position: fixed;
+      }
+      #animate{
+        height:100%;
+        width: 100%;
+      }
 
-        </style>
-        <core-card id="core_card" layout vertical center fit>
-            <core-header-panel mode="waterfall-tall" id="core_header_panel" headermargin="128" condenses headerheight="192">
+    </style>
+    <core-card id="core_card" layout vertical center fit>
+      <core-header-panel mode="waterfall-tall" id="core_header_panel" headermargin="128" condenses headerheight="192">
 
-                <core-toolbar id="core_toolbar" class="animate tall">
+        <core-toolbar id="core_toolbar" class="animate tall">
 
-                    <core-icon-button icon="arrow-back" id="core_icon_button"></core-icon-button>
-                    <core-icon-button icon="search" id="search_icon" style="visibility:visible" on-tap="{{loadSearcher}}" ></core-icon-button>    
-                    <div id="div1" class="bottom indent">Ikarus</div>
-                    <div id="div3">
-                        <core-icon-button icon="search" id="core_icon_button1"></core-icon-button>
+          <core-icon-button icon="arrow-back" id="core_icon_button"></core-icon-button>
+          <core-icon-button icon="search" id="search_icon" style="visibility:visible" on-tap="{{loadSearcher}}" ></core-icon-button>    
+          <div id="div1" class="bottom indent">Ikarus</div>
+          <div id="div3">
+            <core-icon-button icon="search" id="core_icon_button1"></core-icon-button>
 
-                        <input id="input" placeholder="Producto..." is="core-input">
-                    </div>
-                    <core-icon-button icon="menu" id="menu" theme="core-light-theme" on-tap="{{show}}"></core-icon-button>
-
-
-                </core-toolbar>
-                <section id="section" content >
-                    <div id="options" hidden horizontal layout right fit>    
-                        <paper-dropdown-menu label="Categories">
-                            <div id="avatar"></div>
-                            <core-item id="paper_item" label="Profile"><img id="profile" src="../perfil.png"></core-item>
-                            <core-item id="paper_item" label="Sign Off"><img src="../down.png"></core-item>
-                        </paper-dropdown-menu>
-                    </div>
-                    <core-animated-pages id="core_card1" valueattr="hash" selected="0" layout vertical end-justified center transitions="slide-from-right">
-                        <section id="movideta">
-                            <profile-page></profile-page>
-                        </section>
-                    </core-animated-pages> 
-                </section>
+            <input id="input" placeholder="Producto..." is="core-input">
+          </div>
+          <core-icon-button icon="menu" id="menu" theme="core-light-theme" on-tap="{{show}}"></core-icon-button>
 
 
-            </core-header-panel>
-        </core-card>
-    </template>
+        </core-toolbar>
+        <section id="section" content >
+          <div id="options" hidden horizontal layout right fit>    
+            <paper-dropdown-menu label="Categories">
+              <div id="avatar"></div>
+              <core-item id="paper_item" label="Profile" on-tap="{{showProfile}}"><img id="profile" src="../img/perfil.png"></core-item>
+              <core-item id="paper_item" label="Sign Off" on-tap="{{showSignOff}}"><img src="../img/down.png"></core-item>
+            </paper-dropdown-menu>
+          </div>
+          <core-animated-pages id="animate" selected="" layout vertical end-justified center >
+            <section id="profilePage">
+              <profile-page></profile-page>
+            </section>
+            <section id="signOffPage">
+              <signoff-page></signoff-page>
+            </section>
+          </core-animated-pages> 
+        </section>
 
-    <script>
+      </core-header-panel>
+    </core-card>
+  </template>
 
-        Polymer({
-            loadSearcher: function () {
-                this.$.div3.style.visibility = "visible";
-                this.$.search_icon.style.visibility = "hidden";
-                this.$.div3.style.width = "100%";
-                this.$.div3.style.backgroundColor = "#185786";
-                this.$.div3.style.fill = "rgb(241, 241, 241)";
-                this.$.div3.style.color = "rgb(241, 241, 241)";
-                this.$.core_icon_button.style.visibility = "hidden";
-                this.$.core_icon_button.style.marginLeft = "-5%";
-                this.$.menu.style.visibility = "hidden";
-            },
-            show: function () {
-                var options = this.$.options;
-                options.hidden = !options.hidden;
-            }
-        });
+  <script>
 
-    </script>
+    Polymer({
+      ready: function () {
+        this.$.profilePage.hidden = true;
+        this.$.signOffPage.hidden = true;
+      },
+      loadSearcher: function () {
+        this.$.div3.style.visibility = "visible";
+        this.$.search_icon.style.visibility = "hidden";
+        this.$.div3.style.width = "100%";
+        this.$.div3.style.backgroundColor = "#185786";
+        this.$.div3.style.fill = "rgb(241, 241, 241)";
+        this.$.div3.style.color = "rgb(241, 241, 241)";
+        this.$.core_icon_button.style.visibility = "hidden";
+        this.$.core_icon_button.style.marginLeft = "-5%";
+        this.$.menu.style.visibility = "hidden";
+      },
+      show: function () {
+        var options = this.$.options;
+        options.hidden = !options.hidden;
+      },
+      showProfile: function () {
+        this.$.animate.selected = "0";
+        var profilePage = this.$.profilePage;
+        profilePage.hidden = !profilePage.hidden;
+        console.log(profilePage);
+      },
+      showSignOff: function () {
+        this.$.animate.selected = "1";
+        var signoff = this.$.signOffPage;
+        signoff.hidden = !signoff.hidden;
+        console.log(signoff);
+        
+      }
+    });
+
+  </script>
 
 </polymer-element>

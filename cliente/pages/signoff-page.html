@@ -1,4 +1,4 @@
-<polymer-element name="profile-page">
+<polymer-element name="signoff-page">
   <template>
     <style>
       :host{
@@ -12,10 +12,14 @@
         box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
         background-color: white;
       }
+      p{
+        margin-top: 20%;
+      }
 
     </style>
     <core-card id="core_card1" layout vertical center>
-      <p>PROFILE</p>
+      <p>Are you sure?</p>
+      <core-item id="core-item" label="Confirm"></core-item>
     </core-card>
   </template>
   <script>
