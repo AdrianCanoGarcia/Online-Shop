@@ -1,0 +1,47 @@
+<link rel = "import" href = "../bower_components/polymer/polymer.html" >
+<polymer-element name = "user-model">
+  <template>
+  </template>
+  <script>
+    (function () {
+      var base = '/user';
+      /* function defaultAjaxErrorHandler(xhr, err, desc) {
+       console.log(xhr, err, desc);
+       var errorToast = document.querySelector('#errorToast');
+       errorToast.text = '[' +xhr.status + '] ' + desc + ': ' + xhr.response;
+       errorToast.show();
+       }
+       */
+      function doAjax(options, success, error) {
+        options.type = options.type || 'GET';
+        options.url = base + (options.url || '');
+        options.dataType = options.dataType || 'json';
+        options.contentType = options.contentType || 'application/json; charset=UTF-8';
+        options.success = success;
+        options.error = (typeof error === 'function') ? error : defaultAjaxErrorHandler;
+
+        $.ajax(options);
+      }
+      var resultado = false;
+
+      Polymer('user-model', {
+        saveUser: function (user) {
+          doAjax({type: 'POST', data: user}, function (result) {
+            console.log(result);
+          }, function () {
+            console.log("Error en algun punto");
+          });
+        },
+        searchUser: function (username) {
+          var that = this;
+          doAjax({type: 'GET', url: '/' + username}, function (result) {
+            that.res = false;
+          }, function (error) {
+            that.res = true;
+          });
+          return that.res;
+        }
+      });
+    }());
+  </script>
+</polymer-element>

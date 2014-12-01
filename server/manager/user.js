@@ -1,13 +1,8 @@
 var daoUser = require('../Dao/user');
 
 
-function create(callback) {
-  var user = {
-    name: "",
-    passwd: "",
-  }
+function create(user, callback) {
   daoUser.create(user, callback);
-
 }
 function setUser(userId, name, password, callback) {
   var update = {

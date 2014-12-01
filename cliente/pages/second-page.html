@@ -1,52 +1,75 @@
 <polymer-element name="login-page">
+
   <template>
     <style>
-       :host {
-            }
-            #core_card2 {
-                width: 70%;
-                height: 60%;
-                border-top-left-radius: 2px;
-                border-top-right-radius: 2px;
-                border-bottom-right-radius: 2px;
-                border-bottom-left-radius: 2px;
-                box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
-                padding: 20px;
-                margin: 50px 30px;
-                background-color: rgb(246, 255, 34);
-            }
-            #paper_input2 {
-                margin: 20px;
-                background-color: rgb(252, 246, 246);
-            }
-            #paper_input3 {
-                background-color: rgb(255, 248, 248);
-            }
-            #paper_input4 {
-                margin: 20px;
-                background-color: rgb(253, 247, 247);
-            }
-            #paper_input5 {
-                background-color: rgb(252, 250, 250);
-            }
-            #paper_button1 {
-                margin: 20px;
-                width: 70px;
-                height: 30px;
-            }
+      :host {
+      }
+      #core_card2 {
+        width: 70%;
+        height: 60%;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+        padding: 20px;
+        margin: 50px 30px;
+        background-color: rgb(246, 255, 34);
+      }
+      #username {
+        margin: 20px;
+        background-color: rgb(252, 246, 246);
+      }
+      #passwd {
+        background-color: rgb(255, 248, 248);
+      }
+      #mail {
+        margin: 20px;
+        background-color: rgb(253, 247, 247);
+      }
+      #mail2 {
+        background-color: rgb(252, 250, 250);
+      }
+      #paper_button1 {
+        margin: 20px;
+        width: 70px;
+        height: 30px;
+      }
+      #core_input {
+        visibility:hidden;
+        color: rgb(255, 0, 0);
+        margin-left: 50%;
+        margin-bottom: 10px;
+      }
 
-        </style>
-        
-        <core-card id="core_card2" layout vertical center>
-            <paper-input label="User..." willvalidate validationmessage="Completa este campo" required invalid id="paper_input2" layout vertical class="invalid"></paper-input>
-            <paper-input label="Password..." willvalidate validationmessage="Completa este campo" required invalid id="paper_input3" layout vertical class="invalid"></paper-input>
-            <paper-input label="Email..." willvalidate validationmessage="Completa este campo" required invalid id="paper_input4" layout vertical class="invalid"></paper-input>
-            <paper-input label="Repeat Email..." willvalidate validationmessage="Completa este campo" required invalid id="paper_input5" layout vertical class="invalid"></paper-input>
-            <paper-button label="Send" id="paper_button1" center center-justified></paper-button>
-        </core-card>
-    </template>
+    </style>
+    <user-model id="userModel"></user-model>
+    <core-card id="core_card2" layout vertical center>
+      <paper-input label="User..." willvalidate validationmessage="Completa este campo" required invalid id="username" layout vertical class="invalid" on-blur="{{checkNameExists}}"></paper-input>
+      <core-input readonly inputvalue="Invalid user or password" value="User already exists" id="core_input"></core-input>
+      <paper-input label="Password..." willvalidate validationmessage="Completa este campo" required invalid id="passwd" layout vertical class="invalid"></paper-input>
+      <paper-input label="Email..." willvalidate validationmessage="Completa este campo"  id="mail" layout vertical class="invalid"></paper-input>
+      <paper-input label="Repeat Email..." willvalidate validationmessage="Completa este campo" id="mail2" layout vertical class="invalid"></paper-input>
+      <paper-button label="Send" id="paper_button1" on-tap="{{handleSaveUser}}" center center-justified ></paper-button>
+    </core-card>
+  </template>
   <script>
     Polymer({
+      handleSaveUser: function () {
+        if (this.checkNameExists(this.$.username.value)) {
+          var user = {
+            username: this.$.username.value,
+            passwd: this.$.passwd.value
+          };
+
+          this.$.userModel.saveUser(JSON.stringify(user));
+        } else {
+          this.$.core_input.style.visibility = "visible";
+        }
+      },
+      checkNameExists: function () {
+        return this.$.userModel.searchUser(this.$.username.value);
+      }
     });
   </script>
 </polymer-element>

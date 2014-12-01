@@ -8,11 +8,14 @@ router.post('/', create);
 router.put('/:userId/set/:name/set/:password/', setUser);
 router.get('/:userName', getUser);
 router.delete('/:userName', delUser);
-
-
+/* ROUTES */
 
 function create(req, res) {
-    userManager.create(function (err, result) {
+  var user={
+    username: req.body.username,
+    passwd: req.body.passwd
+  }
+    userManager.create(user, function(err, result)  {
         res.json(result);
     });
 }
@@ -53,13 +56,13 @@ function getUser(req, res, next) {
 
 }
 
-/*function checkUserExists(req, res, next, userId) {
+function checkUserExists(req, res, next, userId) {
     if (users[userId]) {
         req.user = users[userId];
         next();
     } else {
         next(new Error(userId + ' not exists'));
     }
-}*/
+}
 
 module.exports = router;

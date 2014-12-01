@@ -2,6 +2,7 @@ var db = require('../util/mongodb').db;
 var toObjectID = require('../util/mongodb').toObjectID;
 var col = db.bind('Usuario');
 
+
 function create(user, callback){
     this.insert(user, callback);
     
@@ -18,7 +19,7 @@ function delUser(userName,callback){
     this.remove({name:userName},callback);
 }
 function getUser(userName,callback){
-    this.findOne({name:userName},callback);
+    this.findOne({username:userName},callback);
 }
 
 col.bind({

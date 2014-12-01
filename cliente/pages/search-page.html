@@ -185,7 +185,7 @@
 
         <core-toolbar id="core_toolbar" class="animate tall">
 
-          <core-icon-button icon="arrow-back" id="core_icon_button"></core-icon-button>
+          <core-icon-button icon="arrow-back" on-tap="{{goBack}}" id="core_icon_button"></core-icon-button>
           <core-icon-button icon="search" id="search_icon" style="visibility:visible" on-tap="{{loadSearcher}}" ></core-icon-button>    
           <div id="div1" class="bottom indent">Ikarus</div>
           <div id="div3">
@@ -205,7 +205,9 @@
               <core-item id="paper_item" label="Sign Off" on-tap="{{showSignOff}}"><img src="../img/down.png"></core-item>
             </paper-dropdown-menu>
           </div>
-          <core-animated-pages id="animate" selected="" layout vertical end-justified center >
+          <core-animated-pages id="animate" selected="0" layout vertical end-justified center >
+            <section>
+            </section>
             <section id="profilePage">
               <profile-page></profile-page>
             </section>
@@ -218,14 +220,9 @@
       </core-header-panel>
     </core-card>
   </template>
-
   <script>
 
     Polymer({
-      ready: function () {
-        this.$.profilePage.hidden = true;
-        this.$.signOffPage.hidden = true;
-      },
       loadSearcher: function () {
         this.$.div3.style.visibility = "visible";
         this.$.search_icon.style.visibility = "hidden";
@@ -242,17 +239,15 @@
         options.hidden = !options.hidden;
       },
       showProfile: function () {
-        this.$.animate.selected = "0";
-        var profilePage = this.$.profilePage;
-        profilePage.hidden = !profilePage.hidden;
-        console.log(profilePage);
+        this.$.animate.selected = "1";
+
       },
       showSignOff: function () {
-        this.$.animate.selected = "1";
-        var signoff = this.$.signOffPage;
-        signoff.hidden = !signoff.hidden;
-        console.log(signoff);
-        
+        this.$.animate.selected = "2";
+
+      },
+      goBack: function () {
+        this.$.animate.selected = "0";
       }
     });
 
