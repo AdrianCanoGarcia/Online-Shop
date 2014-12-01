@@ -45,12 +45,12 @@
     </style>
     <user-model id="userModel"></user-model>
     <core-card id="core_card2" layout vertical center>
-      <paper-input label="User..." willvalidate validationmessage="Completa este campo" required invalid id="username" layout vertical class="invalid" on-blur="{{checkNameExists}}"></paper-input>
+      <paper-input label="User..." willvalidate validationmessage="Completa este campo" required invalid id="username" layout vertical class="invalid" on-blur="{{checkNameExists}}" on-keyup="{{ keypressHandler }}" ></paper-input>
       <core-input readonly inputvalue="Invalid user or password" value="User already exists" id="core_input"></core-input>
-      <paper-input label="Password..." willvalidate validationmessage="Completa este campo" required invalid id="passwd" layout vertical class="invalid"></paper-input>
-      <paper-input label="Email..." willvalidate validationmessage="Completa este campo"  id="mail" layout vertical class="invalid"></paper-input>
-      <paper-input label="Repeat Email..." willvalidate validationmessage="Completa este campo" id="mail2" layout vertical class="invalid"></paper-input>
-      <paper-button label="Send" id="paper_button1" on-tap="{{handleSaveUser}}" center center-justified ></paper-button>
+      <paper-input label="Password..." willvalidate validationmessage="Completa este campo" required invalid id="passwd" layout vertical class="invalid" on-keyup="{{ keypressHandler }}" ></paper-input>
+      <paper-input label="Email..." willvalidate validationmessage="Completa este campo"  id="mail" layout vertical class="invalid" on-keyup="{{ keypressHandler }}" ></paper-input>
+      <paper-input label="Repeat Email..." willvalidate validationmessage="Completa este campo" id="mail2" layout vertical class="invalid" on-keyup="{{ keypressHandler }}" ></paper-input>
+      <paper-button label="Send" id="paper_button1" on-tap="{{keypressHandler}}" center center-justified ></paper-button>
     </core-card>
   </template>
   <script>
@@ -69,6 +69,42 @@
       },
       checkNameExists: function () {
         return this.$.userModel.searchUser(this.$.username.value);
+      },
+      keypressHandler: function (event, detail, sender) {
+        var code = event.keyCode;
+        var username = this.$.username.value;
+
+        if (code == 13 || sender.id == "enter") {
+          if (this.validateUser() && this.validatePass()) {
+
+            this.comprobateUser();
+
+
+          } else {
+            console.log("error");
+
+          }
+
+        }
+      },
+      comprobateUser: function () {
+        this.handleSaveUser();
+
+      },
+      validateUser: function () {
+        var username = this.$.username.value;
+        return (this.validateField(username, /^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ_/-]*$/i) && username.length >= 4 && username.length <= 30);
+
+      },
+      validatePass: function () {
+        var password = this.$.passwd.value;
+        return this.validateField(password, /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/);
+      },
+      validateField: function (string, pattern) {
+
+        return string.match(pattern) !== null;
+
+
       }
     });
   </script>
