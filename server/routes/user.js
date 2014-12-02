@@ -13,7 +13,8 @@ router.delete('/:userName', delUser);
 function create(req, res) {
   var user={
     username: req.body.username,
-    passwd: req.body.passwd
+    passwd: req.body.passwd,
+    email: req.body.email
   }
     userManager.create(user, function(err, result)  {
         res.json(result);

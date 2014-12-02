@@ -26,11 +26,13 @@
 
       Polymer('user-model', {
         saveUser: function (user) {
+          var that = this;
           doAjax({type: 'POST', data: user}, function (result) {
-            console.log(result);
+            that.res = true;
           }, function () {
-            console.log("Error en algun punto");
+            that.res = false;
           });
+          return that.res;
         },
         searchUser: function (username) {
           var that = this;
