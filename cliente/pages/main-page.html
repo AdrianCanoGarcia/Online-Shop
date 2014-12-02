@@ -1,106 +1,110 @@
 <polymer-element name="signin-page">
-  <template>
-    <style>
-      :host{
-      }
-      #username {
-        margin-bottom: 30px;
-        width: 95%;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 5px;
-        font-size: 15px;
-        background-color: rgb(249, 246, 246);
-      }
-      #passwd {
-        margin-bottom: 30px;
-        width: 95%;
-        padding-left: 10px;
-        padding-top: 5px;
-        padding-right: 10px;
-        font-size: 15px;
-        background-color: rgb(249, 246, 246);
-      }
-      #core_card1 {
-        width: 300px;
-        height: 230px;
-        border-top-left-radius: 2px;
-        border-top-right-radius: 2px;
-        border-bottom-right-radius: 2px;
-        border-bottom-left-radius: 2px;
-        box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
-        padding: 20px;
-        margin: 50px 50px;
-        background-color: #3f7eaa;
-        border-radius: 5px;
-      }
-      #core_input {
-        visibility:hidden;
-        color: black;
-        margin-left: 50%;
-        margin-bottom: 10px;
-      }
-      #core_icon {
-        visibility:hidden;
-        color: black;
-        width:15px;
-        height:15px;
-      }
-      #enter{
-        color: rgb(255, 255, 255);
-        width: 100%;
-      }
-    </style>
+    <template>
+        <style>
+            :host{
+            }
+            #username {
+                margin-bottom: 30px;
+                width: 95%;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-top: 5px;
+                font-size: 15px;
+                background-color: rgb(249, 246, 246);
+            }
+            #passwd {
+                margin-bottom: 30px;
+                width: 95%;
+                padding-left: 10px;
+                padding-top: 5px;
+                padding-right: 10px;
+                font-size: 15px;
+                background-color: rgb(249, 246, 246);
+            }
+            #core_card1 {
+                width: 300px;
+                height: 230px;
+                border-top-left-radius: 2px;
+                border-top-right-radius: 2px;
+                border-bottom-right-radius: 2px;
+                border-bottom-left-radius: 2px;
+                box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
+                padding: 20px;
+                margin: 50px 50px;
+                background-color: #3f7eaa;
+                border-radius: 5px;
+            }
+            #core_input {
+                visibility:hidden;
+                color: black;
+                margin-left: 50%;
+                margin-bottom: 10px;
+            }
+            #core_icon {
+                visibility:hidden;
+                color: black;
+                width:15px;
+                height:15px;
+            }
+            #enter{
+                color: rgb(255, 255, 255);
+                width: 100%;
+            }
+        </style>
 
-    <user-model id="userModel"></user-model>
-    <core-card id="core_card1" layout vertical center>
-      <paper-input label="User..." willvalidate id="username" value="{{ user }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
-      <paper-input type="password" label="Password..." willvalidate id="passwd" value="{{ password }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
-      <core-icon icon="lock" id="core_icon"></core-icon>
-      <core-input readonly inputvalue="Invalid user or password" value="Invalid user or password" id="core_input"></core-input>
-      <paper-button id ="enter" on-click="{{ keypressHandler }}">Entry</paper-button>
-    </core-card>
-  </template>
-  <script>
-    Polymer({
-      keypressHandler: function (event, detail, sender) {
-        var code = event.keyCode;
-        var user = this.$.username.value;
+        <user-model id="userModel"></user-model>
+        <core-card id="core_card1" layout vertical center>
+            <paper-input label="User..." willvalidate id="username" value="{{ user }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
+            <paper-input type="password" label="Password..." willvalidate id="passwd" value="{{ password }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
+            <core-icon icon="lock" id="core_icon"></core-icon>
+            <core-input readonly inputvalue="Invalid user or password" value="Invalid user or password" id="core_input"></core-input>
+            <paper-button id ="enter" on-click="{{ keypressHandler }}">Entry</paper-button>
+        </core-card>
+    </template>
+    <script>
+        Polymer({
+            keypressHandler: function (event, detail, sender) {
+                var code = event.keyCode;
+                if (code == 13 || sender.id == "enter") {
+                    var user = this.$.username.value;
+                    
+                    if (this.validateUser() && this.validatePass()) {
+                        this.comprobateUser();
+                    } else {
+                        this.$.core_input.style.visibility = "visible";
+                        this.$.core_icon.style.visibility = "visible";
+                    }
+                }
+            },
+            comprobateUser: function () {
+                var user = {
+                    username: this.$.username.value,
+                    passwd: this.$.passwd.value
+                };
+                
+                var result = this.$.userModel.verifyUser(user);
+                
+                if (!result) {
+                    console.log("usuario y contraseña no validos");
+                }else{
+                    console.log("REGISTRADO CON EXITO");
+                }
+            },
+            validateUser: function () {
+                var user = this.$.username.value;
+                return (this.validateField(user, /^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ_/-]*$/i) && user.length >= 4 && user.length <= 30);
 
-        if (code == 13 || sender.id == "enter") {
-          if (this.validateUser() && this.validatePass()) {
-            this.comprobateUser();
-          } else {
-            this.$.core_input.style.visibility = "visible";
-            this.$.core_icon.style.visibility = "visible";
-          }
-        }
-      },
-      comprobateUser: function () {
-        var user = {
-          username: this.$.username.value,
-          passwd: this.$.passwd.value
-        };
-        var result = this.$.userModel.verifyUser(JSON.stringify(user));
-        if (result){
-          console.log ("usuario y contraseña no validos");
-        }
-      },
-      validateUser: function () {
-        var user = this.$.username.value;
-        return (this.validateField(user, /^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ_/-]*$/i) && user.length >= 4 && user.length <= 30);
+            },
+            validatePass: function () {
+                var password = this.$.passwd.value;
+                return this.validateField(password, /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/);
+            },
+            validateField: function (string, pattern) {
 
-      },
-      validatePass: function () {
-        var password = this.$.passwd.value;
-        return this.validateField(password, /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/);
-      },
-      validateField: function (string, pattern) {
-
-        return string.match(pattern) !== null;
+                return string.match(pattern) !== null;
 
 
-      },
-    });
-  </script>
+            },
+        });
+    </script>
 </polymer-element>

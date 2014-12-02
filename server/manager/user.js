@@ -19,7 +19,7 @@ function getUser(userName, callback) {
   daoUser.getUser(userName, callback);
 }
 function verifyUser (user, callback){
-  daoUser.getUser (user.username, callback);
+  daoUser.getUser(user, callback);
   
 }
 module.exports = {
