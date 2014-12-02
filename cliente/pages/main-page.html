@@ -3,7 +3,7 @@
     <style>
       :host{
       }
-      #user {
+      #username {
         margin-bottom: 30px;
         width: 95%;
         padding-left: 10px;
@@ -12,7 +12,7 @@
         font-size: 15px;
         background-color: rgb(249, 246, 246);
       }
-      #password {
+      #passwd {
         margin-bottom: 30px;
         width: 95%;
         padding-left: 10px;
@@ -52,9 +52,10 @@
       }
     </style>
 
+    <user-model id="userModel"></user-model>
     <core-card id="core_card1" layout vertical center>
-      <paper-input label="User..." willvalidate id="user" value="{{ user }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
-      <paper-input type="password" label="Password..." willvalidate id="password" value="{{ password }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
+      <paper-input label="User..." willvalidate id="username" value="{{ user }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
+      <paper-input type="password" label="Password..." willvalidate id="passwd" value="{{ password }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
       <core-icon icon="lock" id="core_icon"></core-icon>
       <core-input readonly inputvalue="Invalid user or password" value="Invalid user or password" id="core_input"></core-input>
       <paper-button id ="enter" on-click="{{ keypressHandler }}">Entry</paper-button>
@@ -64,38 +65,34 @@
     Polymer({
       keypressHandler: function (event, detail, sender) {
         var code = event.keyCode;
-        var user = this.$.user.value;
+        var user = this.$.username.value;
 
         if (code == 13 || sender.id == "enter") {
           if (this.validateUser() && this.validatePass()) {
-
             this.comprobateUser();
-
-
           } else {
             this.$.core_input.style.visibility = "visible";
             this.$.core_icon.style.visibility = "visible";
-
           }
-
         }
       },
       comprobateUser: function () {
-        if (usuario === this.$.user.value && pass === this.$.password.value) {
-
-          location.href = "www.google.es";
-        } else {
-
+        var user = {
+          username: this.$.username.value,
+          passwd: this.$.passwd.value
+        };
+        var result = this.$.userModel.verifyUser(JSON.stringify(user));
+        if (result){
+          console.log ("usuario y contraseña no validos");
         }
-
       },
       validateUser: function () {
-        var user = this.$.user.value;
+        var user = this.$.username.value;
         return (this.validateField(user, /^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ_/-]*$/i) && user.length >= 4 && user.length <= 30);
 
       },
       validatePass: function () {
-        var password = this.$.password.value;
+        var password = this.$.passwd.value;
         return this.validateField(password, /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/);
       },
       validateField: function (string, pattern) {

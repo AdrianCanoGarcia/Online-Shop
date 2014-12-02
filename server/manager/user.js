@@ -15,13 +15,17 @@ function setUser(userId, name, password, callback) {
 function delUser(userName, callback) {
   daoUser.delUser(userName, callback);
 }
-
 function getUser(userName, callback) {
   daoUser.getUser(userName, callback);
+}
+function verifyUser (user, callback){
+  daoUser.getUser (user.username, callback);
+  
 }
 module.exports = {
   create: create,
   setUser: setUser,
   delUser: delUser,
-  getUser: getUser
+  getUser: getUser,
+  verifyUser: verifyUser
 };

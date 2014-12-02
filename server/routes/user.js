@@ -8,62 +8,75 @@ router.post('/', create);
 router.put('/:userId/set/:name/set/:password/', setUser);
 router.get('/:userName', getUser);
 router.delete('/:userName', delUser);
+router.get('/verify', verifyUser);
 /* ROUTES */
 
 function create(req, res) {
-  var user={
+  var user = {
     username: req.body.username,
     passwd: req.body.passwd,
     email: req.body.email
   }
-    userManager.create(user, function(err, result)  {
+  userManager.create(user, function (err, result) {
+    res.json(result);
+  });
+}
+function verifyUser(req, res, next) {
+  var user = {
+    username: req.body.username,
+    passwd: req.body.passwd,
+  }
+  userManager.verifyUser(user, function (err, result) {
+    if (result) {
+      if (result.passwd !== user.passwd) {
+        next(new Error(new Error(user.username + ' not exists')));
+      } else {
         res.json(result);
-    });
+      }
+    } else {
+      next(new Error(new Error(user.username + ' not exists')));
+    }
+  });
 }
 function setUser(req, res) {
-    var userId = req.params.userId;
-    var name = req.params.name;
-    var password = req.params.password;
-    userManager.setUser(userId, name, password, function (err, newUser) {
-        if (newUser === null) {
-            next(new Error(new Error(userId + ' not exists')));
-        } else {
-            res.json(newUser);
-        }
-    });
+  var userId = req.params.userId;
+  var name = req.params.name;
+  var password = req.params.password;
+  userManager.setUser(userId, name, password, function (err, newUser) {
+    if (newUser === null) {
+      next(new Error(new Error(userId + ' not exists')));
+    } else {
+      res.json(newUser);
+    }
+  });
 }
-
 function delUser(req, res, next) {
-    var userName = req.params.userName;
-    userManager.delUser(userName, function (err, result) {
-        if (result === 0) {
-            next(new Error(userName + ' not exists'));
-        } else {
-            res.send('User[' + userName + ' deleted');
-        }
-    });
-
+  var userName = req.params.userName;
+  userManager.delUser(userName, function (err, result) {
+    if (result === 0) {
+      next(new Error(userName + ' not exists'));
+    } else {
+      res.send('User[' + userName + ' deleted');
+    }
+  });
 }
 function getUser(req, res, next) {
-    var userName = req.params.userName;
-    userManager.getUser(userName, function (err, user) {
-        if (user) {
-            res.json(user);
-        } else {
-            next(new Error(new Error(userName + ' not exists')));
-        }
-    });
-
-
-}
-
-function checkUserExists(req, res, next, userId) {
-    if (users[userId]) {
-        req.user = users[userId];
-        next();
+  var userName = req.params.userName;
+  userManager.getUser(userName, function (err, user) {
+    if (user) {
+      res.json(user);
     } else {
-        next(new Error(userId + ' not exists'));
+      next(new Error(new Error(userName + ' not exists')));
     }
+  });
+}
+function checkUserExists(req, res, next, userId) {
+  if (users[userId]) {
+    req.user = users[userId];
+    next();
+  } else {
+    next(new Error(userId + ' not exists'));
+  }
 }
 
 module.exports = router;

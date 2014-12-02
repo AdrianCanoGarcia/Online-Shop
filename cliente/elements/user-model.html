@@ -19,11 +19,9 @@
         options.contentType = options.contentType || 'application/json; charset=UTF-8';
         options.success = success;
         options.error = (typeof error === 'function') ? error : defaultAjaxErrorHandler;
-
         $.ajax(options);
       }
       var resultado = false;
-
       Polymer('user-model', {
         saveUser: function (user) {
           var that = this;
@@ -37,6 +35,16 @@
         searchUser: function (username) {
           var that = this;
           doAjax({type: 'GET', url: '/' + username}, function (result) {
+            that.res = false;
+          }, function (error) {
+            that.res = true;
+          });
+          return that.res;
+        },
+        verifyUser: function (user) {
+          var that= this;
+          doAjax({type: 'GET', url: '/verify' + user.username}, function (result) {
+            console.log(result);
             that.res = false;
           }, function (error) {
             that.res = true;
