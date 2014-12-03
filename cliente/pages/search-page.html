@@ -1,6 +1,6 @@
 
 
-<polymer-element name="prueba-search">
+<polymer-element name="search-page">
 
   <template>
     <style>    
@@ -194,14 +194,15 @@
             <input id="input" placeholder="Producto..." is="core-input">
           </div>
           <core-icon-button icon="menu" id="menu" theme="core-light-theme" on-tap="{{show}}"></core-icon-button>
-
-
+          
         </core-toolbar>
+        
         <section id="section" content >
+          
           <div id="options" hidden horizontal layout right fit>    
             <paper-dropdown-menu label="Categories">
               <div id="avatar"></div>
-              <core-item id="paper_item" label="Profile" on-tap="{{showProfile}}"><img id="profile" src="../img/perfil.png"></core-item>
+              <core-item id="paper_item" label="Profile" on-tap="{{showProfile}}"><img src="../img/perfil.png" id="profile"></core-item>
               <core-item id="paper_item" label="Sign Off" on-tap="{{showSignOff}}"><img src="../img/down.png"></core-item>
             </paper-dropdown-menu>
           </div>
@@ -215,6 +216,7 @@
               <signoff-page></signoff-page>
             </section>
           </core-animated-pages> 
+          
         </section>
 
       </core-header-panel>
@@ -223,7 +225,7 @@
   <script>
 
     Polymer({
-      loadSearcher: function () {
+      loadSearcher: function() {
         this.$.div3.style.visibility = "visible";
         this.$.search_icon.style.visibility = "hidden";
         this.$.div3.style.width = "100%";
@@ -234,20 +236,31 @@
         this.$.core_icon_button.style.marginLeft = "-5%";
         this.$.menu.style.visibility = "hidden";
       },
-      show: function () {
+      show: function() {
         var options = this.$.options;
         options.hidden = !options.hidden;
       },
-      showProfile: function () {
-        this.$.animate.selected = "1";
-
+      showProfile: function() {
+        var animate = this.$.animate;
+        if (this.$.animate.selected == "1"){
+          animate.hidden = !animate.hidden;
+        }else{
+          this.$.animate.selected = "1";
+          this.$.animate.style.visibility = "visible";
+        }
       },
-      showSignOff: function () {
-        this.$.animate.selected = "2";
-
+      showSignOff: function() {
+        var animate = this.$.animate;
+        if (this.$.animate.selected == "2"){
+          animate.hidden = !animate.hidden;
+        }else{
+          this.$.animate.selected = "2";
+          this.$.animate.style.visibility = "visible";
+        }
       },
-      goBack: function () {
+      goBack: function() {
         this.$.animate.selected = "0";
+        
       }
     });
 

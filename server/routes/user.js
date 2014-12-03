@@ -6,7 +6,7 @@ var userManager = require('../manager/user');
 /* ROUTES */
 router.post('/', create);
 router.put('/:userId/set/:name/set/:password/', setUser);
-//router.get('/:userName', getUser);
+router.get('/:userName', getUser);
 router.delete('/:userName', delUser);
 router.get('/verify/:userName/:password', verifyUser);
 /* ROUTES */

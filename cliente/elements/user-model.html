@@ -41,18 +41,12 @@
           });
           return that.res;
         },
-        verifyUser: function (user) {
-          var that = this;
-          var resultado1;
-          doAjax({type: 'GET',url: '/verify/' + user.username +'/' +user.passwd}, function (result) {
-           /*that.res = true;
-           console.log(result);*/
-             resultado1=result;
+        verifyUser: function (user, callback) {
+          doAjax({type: 'GET', url: '/verify/' + user.username + '/' + user.passwd}, function (result) {
+            callback(result);
           }, function (error) {
-            //that.res = false;
+            callback();
           });
-          console.log(resultado1);
-            return resultado;
         }
       });
     }());
