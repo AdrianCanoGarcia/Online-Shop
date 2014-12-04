@@ -58,15 +58,22 @@
       <paper-input type="password" label="Password..." willvalidate id="passwd" value="{{ password }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
       <core-icon icon="lock" id="core_icon"></core-icon>
       <core-input readonly inputvalue="Invalid user or password" value="Invalid user or password" id="core_input"></core-input>
-      <paper-button id ="enter" on-click="{{ keypressHandler }}">Entry</paper-button>
+      <paper-button id ="enter" on-click="{{ keypressHandler }}" >Entry</paper-button>
+   
 
     </core-card>
     
   </template>
   <script>
+    function ocul(){
+      var t=document.querySelector('main-menu').shadowRoot.querySelector('#core_card');
+      t.style.height="100%";
+      console.log(t);
+    }
     Polymer({
       keypressHandler: function (event, detail, sender) {
-
+       
+       console.log(location.hash);
         this.$.core_input.style.visibility = "hidden";
         this.$.core_icon.style.visibility = "hidden";
         var code = event.keyCode;
@@ -80,6 +87,7 @@
           }
         }
       },
+   
       comprobateUser: function () {
         var user = {
           username: this.$.username.value,
@@ -91,6 +99,7 @@
             that.showError();
           } else {
             location.href = "#SearchPage";
+            ocul();
           }
         });
       },

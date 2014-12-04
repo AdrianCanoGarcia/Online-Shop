@@ -30,11 +30,7 @@
       paper-tabs#paper_tabs /deep/ #ink{
         color: #4996CC;
       }
-      #paper_radio_button1 {
-        left: 1250px;
-        top: 490px;
-      }
-      template {
+     template {
         display: none !important;
       }
 
@@ -51,19 +47,19 @@
       <section hash="LogIn" layout vertical center-center>
         <login-page></login-page>
       </section>
-      <section hash="SearchPage">
+      <section id="search" hash="SearchPage">
         <search-page></search-page>
       </section>
 
     </core-animated-pages>  
 
-    <paper-tabs selected="{{route}}" selectedindex="one" valueattr="hash" id="paper_tabs" end-justified vertical layout wrap end>
-      <template repeat="{{page in pages}}" >
-        <paper-tab id = "{{page.id}}" hash = "{{page.hash}}">
-          {{page.name}} <a href='#{{page.hash}}'></a>
-        </paper-tab>
-      </template>
-    </paper-tabs>
+      <paper-tabs selected="{{route}}" selectedindex="one" valueattr="hash" id="paper_tabs" end-justified vertical layout wrap end>
+        <template repeat="{{page in pages}}" >
+          <paper-tab id = "{{page.id}}" hash = "{{page.hash}}">
+            {{page.name}} <a href='#{{page.hash}}'></a>
+          </paper-tab>
+        </template>
+      </paper-tabs>
 
   </template>  
 
@@ -75,11 +71,16 @@
           {name: 'Sign In', id: 'paper_tab', hash: 'SignIn'},
           {name: 'Log In', id: 'paper_tab1', hash: 'LogIn'}
         ];
-        console.log (this.route);
-        if (this.route == "SearchPage"){
-          this.$.core_card.style.height = "100%";
-        }
+        
       },
+     
+      styles: function (a,e,i) {
+        console.log(a);
+        console.log(e);
+        console.log(i);
+        
+      
+      }
     });
 
   </script>
