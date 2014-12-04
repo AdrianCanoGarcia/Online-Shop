@@ -4,13 +4,11 @@ var daoUser = require('../Dao/user');
 function create(user, callback) {
   daoUser.create(user, callback);
 }
-function setUser(userId, name, password, callback) {
+function setUser(name,mail, callback) {
   var update = {
-    $set: {}
+    $set:{email:mail}
   };
-  update.$set.name = name;
-  update.$set.passwd = password;
-  daoUser.setUser(userId, update, callback);
+  daoUser.setUser(name, update, callback);
 }
 function delUser(userName, callback) {
   daoUser.delUser(userName, callback);

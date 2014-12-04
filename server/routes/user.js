@@ -5,7 +5,7 @@ var userManager = require('../manager/user');
 
 /* ROUTES */
 router.post('/', create);
-router.put('/:userId/set/:name/set/:password/', setUser);
+router.put('/', setUser);
 router.get('/:userName', getUser);
 router.delete('/:userName', delUser);
 router.get('/verify/:userName/:password', verifyUser);
@@ -39,12 +39,12 @@ function verifyUser(req, res, next) {
     });
 }
 function setUser(req, res) {
-    var userId = req.params.userId;
-    var name = req.params.name;
-    var password = req.params.password;
-    userManager.setUser(userId, name, password, function (err, newUser) {
+    var name = req.body.username;
+    var mail = req.body.email;
+    
+    userManager.setUser(name,mail, function (err, newUser) {
         if (newUser === null) {
-            next(new Error(new Error(userId + ' not exists')));
+            new Error(new Error(name + ' not exists'));
         } else {
             res.json(newUser);
         }

@@ -7,6 +7,7 @@
         height: 100%;
         box-sizing: border-box;
         overflow: hidden;
+        
       }
       #core_card {
         width: 100%;
@@ -64,7 +65,7 @@
   </template>  
 
   <script>
-
+    var logName;
     Polymer({
       ready: function () {
         this.pages = [
@@ -72,14 +73,6 @@
           {name: 'Log In', id: 'paper_tab1', hash: 'LogIn'}
         ];
         
-      },
-     
-      styles: function (a,e,i) {
-        console.log(a);
-        console.log(e);
-        console.log(i);
-        
-      
       }
     });
 

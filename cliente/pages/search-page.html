@@ -115,6 +115,9 @@
         border: 2px;
         margin-left: 15px;
         background-color: white;
+        background-image: url("../img/person.jpg");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
       }
       img{
         width: 35px;
@@ -178,6 +181,7 @@
         height:100%;
         width: 100%;
       }
+      
 
     </style>
     <core-card id="core_card" layout vertical center fit>
@@ -210,7 +214,7 @@
             <section>
             </section>
             <section id="profilePage">
-              <profile-page></profile-page>
+              <profile-page id="profileId"></profile-page>
             </section>
             <section id="signOffPage">
               <signoff-page></signoff-page>
@@ -243,6 +247,7 @@
       },
       showProfile: function() {
         var animate = this.$.animate;
+        this.$.profileId.test2();
         if (this.$.animate.selected == "1"){
           animate.hidden = !animate.hidden;
         }else{

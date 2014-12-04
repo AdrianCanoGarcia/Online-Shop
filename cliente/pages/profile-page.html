@@ -1,25 +1,120 @@
 <polymer-element name="profile-page">
-  <template>
-    <style>
-      :host{
-      }
-      #core_card1 {
-        margin-top: 17%;
-        margin-left: 25%;
-        width: 40%;
-        height: 90%;
-        border-radius: 5px;
-        box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
-        background-color: white;
-      }
+    <template>
+        <style>
+            :host{
+            }
+            #core_card1 {
+                margin-top: 17%;
+                margin-left: 25%;
+                width: 40%;
+                height: 90%;
+                border-radius: 5px;
+                box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
+                background-color: white;
+            }
+            #name{
+                height:15px;
+                font-family: sans-seri; 
+                text-shadow:  0.1em 0.1em #333;
+                color:#2d6e9a;
+                font-size: 130%;
+                margin-top: 20px;
+                font-weight: bold;
+            }
+            core-input#name /deep/ input{
+                text-align:center;
+            }
+            #emailFixed{
+                height:15px;
+                font-family: sans-seri; 
+                text-shadow:  0.1em 0.1em #333;
+                color:#2d6e9a;
+                font-size: 120%;
+                margin-top: 22px;
+                font-weight: bold;
+            }
+            core-input#emailFixed /deep/ input{
+                text-align:center;
+            }
+            #email{
+                height:15px;
+                font-family: sans-seri; 
+                text-shadow:  0.1em 0.1em #333;
+                color:#2d6e9a;
+                font-size: 120%;
+                margin-top: 15px;
+                font-weight: bold;
+            }
+            core-input#email /deep/ input{
+                text-align:center;
+            }
+            img{
+                margin-top: 50px;
+                width: 40%;
+                height: 40%;
+            }
+            #enter{
+                margin-top: 10px;
+                height: 30px;
+                color:#2d6e9a;
+                width: 50%;
+                text-transform: none;
+                font-size:17px;
+            }
+            paper-button#enter /deep/ #ink{
+                color: #4db0cf;
+            }
+            #newMail{
+                width: 40%;
+                visibility:hidden;
+                
+            }
+            #enter2{
+                visibility:hidden; 
+                height: 30px;
+                color:#2d6e9a;
+                width: 20%;
+                text-transform: none;
+                font-size:17px;
+            }
 
-    </style>
-    <core-card id="core_card1" layout vertical center>
-      <p>PROFILE</p>
-    </core-card>
-  </template>
-  <script>
-    Polymer({
-    });
-  </script>
+
+
+        </style>
+        <user-model id="userModel"></user-model>
+        <core-card id="core_card1" layout vertical center>
+            <p on-click="{{test2}}">PROFILE</p>
+            <core-input readonly  name="user" value="Antonio" id="name"></core-input><br>
+            <core-input readonly  name="user" value="E-MAIL: " id="emailFixed"></core-input>
+            <core-input readonly  name="user" value="Antonio@gmail.com" id="email"></core-input>
+            <paper-button id ="enter" on-click="{{ keypressHandler }}" label="Change E-mail" ></paper-button>
+            <paper-input label="New email..." id="newMail" layout verticals ></paper-input>
+            <paper-button id ="enter2" label="Enter"on-click="{{refreshEmail}}" ></paper-button>
+            <img src="../img/person.jpg">
+
+        </core-card>
+    </template>
+    <script>
+        Polymer({
+            test2: function () {
+                this.$.name.value = logName.username;
+                this.$.email.value = logName.email;
+            },
+            keypressHandler:function(){
+                this.$.enter2.style.visibility="visible";
+                this.$.newMail.style.visibility="visible";
+            },
+            refreshEmail:function(){
+                 debugger
+                var user={
+                    username:logName.username,
+                    email:this.$.newMail.value
+                }
+                
+                this.$.userModel.refresh(JSON.stringify(user));
+                
+            }
+
+        });
+    </script>
 </polymer-element>

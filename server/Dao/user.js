@@ -7,13 +7,11 @@ function create(user, callback){
     this.insert(user, callback);
     
 }
-function setUser(userId, update, callback){
+function setUser(name, update, callback){
     var query = {
-        _id: toObjectID(userId)
+        username: name
     };
-    var sort =[ ['_id',1] ];
-    
-    col.findAndModify(query,sort,update,{new:true},callback);
+    col.update(query,update,callback);
 }
 function delUser(userName,callback){
     this.remove({name:userName},callback);
