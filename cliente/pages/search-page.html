@@ -247,13 +247,13 @@
       },
       showProfile: function() {
         var animate = this.$.animate;
-        this.$.profileId.test2();
         if (this.$.animate.selected == "1"){
           animate.hidden = !animate.hidden;
         }else{
           this.$.animate.selected = "1";
           this.$.animate.style.visibility = "visible";
         }
+        this.$.profileId.saveUserValues();
       },
       showSignOff: function() {
         var animate = this.$.animate;

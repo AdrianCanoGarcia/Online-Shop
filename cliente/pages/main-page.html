@@ -32,18 +32,18 @@
                 box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
                 padding: 20px;
                 margin: 50px 50px;
-                background-color: #3f7eaa;
+                background-color: #1d649b;
                 border-radius: 5px;
             }
             #core_input {
                 visibility:hidden;
-                color: black;
+                color: #f7f704;
                 margin-left: 50%;
                 margin-bottom: 10px;
             }
             #core_icon {
                 visibility:hidden;
-                color: black;
+                color: #f7f704;
                 width:15px;
                 height:15px;
             }
@@ -72,12 +72,9 @@
         function hidden() {
             var hidden = document.querySelector('main-menu').shadowRoot.querySelector('#core_card');
             hidden.style.height = "100%";
-
         }
         Polymer({
             keypressHandler: function (event, detail, sender) {
-
-
                 this.$.core_input.style.visibility = "hidden";
                 this.$.core_icon.style.visibility = "hidden";
                 var code = event.keyCode;
