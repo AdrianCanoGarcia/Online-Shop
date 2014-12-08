@@ -1,132 +1,207 @@
 <polymer-element name="profile-page">
-  <template>
-    <style>
-      :host{
-      }
-      #core_card1 {
-        margin-top: 17%;
-        margin-left: 25%;
-        width: 40%;
-        height: 90%;
-        border-radius: 5px;
-        box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
-        background-color: white;
-      }
-      #name{
-        height:15px;
-        font-family: sans-seri; 
-        text-shadow:  0.1em 0.1em #333;
-        color:#2d6e9a;
-        font-size: 130%;
-        margin-top: 20px;
-        font-weight: bold;
-      }
-      core-input#name /deep/ input{
-        text-align:center;
-      }
-      #emailFixed{
-        height:15px;
-        font-family: sans-seri; 
-        text-shadow:  0.1em 0.1em #333;
-        color:#2d6e9a;
-        font-size: 120%;
-        margin-top: 22px;
-        font-weight: bold;
-      }
-      core-input#emailFixed /deep/ input{
-        text-align:center;
-      }
-      #email{
-        height:15px;
-        font-family: sans-seri; 
-        text-shadow:  0.1em 0.1em #333;
-        color:#2d6e9a;
-        font-size: 120%;
-        margin-top: 15px;
-        font-weight: bold;
-      }
-      core-input#email /deep/ input{
-        text-align:center;
-      }
-      img{
-        margin-top: 50px;
-        width: 40%;
-        height: 40%;
-      }
-      #enter{
-        margin-top: 10px;
-        height: 30px;
-        color:#2d6e9a;
-        width: 50%;
-        text-transform: none;
-        font-size:17px;
-      }
-      paper-button#enter /deep/ #ink{
-        color: #4db0cf;
-      }
-      #newMail{
-        width: 40%;
-        visibility:hidden;
+    <template>
+        <style>
+            :host{
+            }
+            #core_card1 {
+                margin-left: 30%;
+                width: 50%;
+                height: 100%;
+                border-radius: 5px;
+                box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
+                background-color: white;
 
-      }
-      #enter2{
-        visibility:hidden; 
-        height: 30px;
-        color:#2d6e9a;
-        width: 20%;
-        text-transform: none;
-        font-size:17px;
-      }
+            }
+            #name{
+                height:15px;
+                font-family: sans-seri; 
+                text-shadow:  0.1em 0.1em #333;
+                color:#2d6e9a;
+                font-size: 130%;
+                margin-top: 20px;
+                font-weight: bold;
+            }
+            core-input#name /deep/ input{
+                text-align:center;
+            }
+            #emailFixed{
+                height:15px;
+                font-family: sans-seri; 
+                text-shadow:  0.1em 0.1em #333;
+                color:#2d6e9a;
+                font-size: 120%;
+                margin-top: 22px;
+                font-weight: bold;
+            }
+            core-input#emailFixed /deep/ input{
+                text-align:center;
+            }
+            #email{
+                height:15px;
+                font-family: sans-seri; 
+                text-shadow:  0.1em 0.1em #333;
+                color:#2d6e9a;
+                font-size: 120%;
+                margin-top: 15px;
+                font-weight: bold;
+            }
+            core-input#email /deep/ input{
+                text-align:center;
+            }
+            img{
+                margin-top: 10px;
+                width: 40%;
+                height: 50%;
+            }
+            #enter{
+                margin-top: 10px;
+                height: 30px;
+                color:#2d6e9a;
+                width: 50%;
+                text-transform: none;
+                font-size:17px;
+            }
+            paper-button#enter /deep/ #ink{
+                color: #4db0cf;
+            }
+            #newMail{
+                height: 50px;
+                width: 200px;
+                visibility:hidden;
+
+            }
+            #enter2{
+                visibility:hidden; 
+                height: 30px;
+                color:#2d6e9a;
+                width: 20%;
+                text-transform: none;
+                font-size:17px;
+            }
+            p1{
+                color:blue;
+                margin-left:245px;
+            }
+            #core_card2{
+
+                width: 200px;
+                height: 60px;
+                padding-top: 10px;
+                margin-top: -230px;
+                margin-left:280px;
+                position: fixed;
+                text-align: center;
+                border-top-left-radius: 2px;
+                border-top-right-radius: 2px;
+                border-bottom-right-radius: 2px;
+                border-bottom-left-radius: 2px;
+                box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
+                background-color: #3f7eaa;
+                opacity: 0.80;
+                border:1px solid;
+                border-color: red;
+
+            }
+            #delete{
+                margin-left: 80%;
+                width: 40px;
+                height: 40px;
+            }
+            #delete:hover{
+                color: #3f7eaa;
+            }
+            #done{
+                width:25px;
+                height: 25px;
+            }
+            #cancel{
+                width: 25px;
+                height: 25px;
+
+            }
+            #done:hover{
+                color: green;
+                width: 26px;
+                height: 26px;
+            }
+            #cancel:hover{
+                color: red;
+                width: 26px;
+                height: 26px;
+            }
 
 
 
-    </style>
-    <user-model id="userModel"></user-model>
-    <core-card id="core_card1" layout vertical center>
-      <p on-click="{{saveUserValues}}">PROFILE</p>
-      <core-input readonly  name="user" value="Default" id="name"></core-input><br>
-      <core-input readonly  name="user" value="E-MAIL: " id="emailFixed"></core-input>
-      <core-input readonly  name="user" value="default@default.com" id="email"></core-input>
-      <paper-button id ="enter" on-click="{{ keypressHandler }}" label="Change E-mail" ></paper-button>
-      <paper-input label="New email..." id="newMail" layout verticals ></paper-input>
-      <paper-button id ="enter2" label="Enter"on-click="{{refreshEmail}}" ></paper-button>
-      <img src="../img/person.jpg">
+        </style>
+        <user-model id="userModel"></user-model>
 
-    </core-card>
-  </template>
-  <script>
-    Polymer({
-      saveUserValues: function () {
-        this.$.name.value = logName.username;
-        this.$.email.value = logName.email;
-      },
-      keypressHandler: function () {
-        this.$.enter2.style.visibility = "visible";
-        this.$.newMail.style.visibility = "visible";
-      },
-      refreshEmail: function (event, detail, sender) {
-        if (this.validateEmail()) {
-          var user = {
-            username: logName.username,
-            email: this.$.newMail.value
-          }
-          this.$.userModel.refresh(JSON.stringify(user));
-          this.$.enter2.style.visibility = "hidden";
-          this.$.newMail.style.visibility = "hidden";
-          this.$.email.value = this.$.newMail.value;
-          this.$.newMail.value ="";
-        } else {
-          this.$.newMail.value = "";
-          this.$.newMail.label = "Invalid e-mail";
+        <core-card id="core_card1" layout vertical center>
+            <p on-click="{{saveUserValues}}">PROFILE</p>
+            <core-input readonly  name="user" value="Default" id="name"></core-input>
+            <core-input readonly  name="user" value="E-MAIL: " id="emailFixed"></core-input>
+            <core-input readonly  name="user" value="default@default.com" id="email"></core-input>
+            <paper-button id ="enter" on-click="{{ keypressHandler }}" label="Change E-mail" ></paper-button>
+            <paper-input label="New email..." id="newMail" layout verticals ></paper-input>
+            <paper-button id ="enter2" label="Enter" on-click="{{refreshEmail}}" ></paper-button>
+            <img src="../img/person.jpg">
+            <core-icon icon="delete" id="delete" on-click="{{warning}}"></core-icon>
+        </core-card>
+        <core-card id="core_card2" hidden="true">
+            Are you sure?<br>
+            <core-icon  icon="done" id ="done" on-click="{{deleteUser}}" ></core-icon>
+            <core-icon  icon="cancel" id ="cancel" on-click="{{warning}}" ></core-icon>
+        </core-card>
+
+    </template>
+    <script>
+        function hidden() {
+            var hidden = document.querySelector('main-menu').shadowRoot.querySelector('#core_card');
+            hidden.style.height = "100%";
         }
-      },
-      validateEmail: function () {
-        var string = this.$.newMail.value;
-        return this.validateField(string, /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-      },
-      validateField: function (string, pattern) {
-        return string.match(pattern) !== null;
-      }
-    });
-  </script>
+        Polymer({
+            saveUserValues: function () {
+                this.$.name.value = logName.username;
+                this.$.email.value = logName.email;
+            },
+            keypressHandler: function () {
+                this.$.enter2.style.visibility = "visible";
+                this.$.newMail.style.visibility = "visible";
+            },
+            refreshEmail: function (event, detail, sender) {
+                if (this.validateEmail()) {
+                    var user = {
+                        username: logName.username,
+                        email: this.$.newMail.value
+                    }
+                    this.$.userModel.refresh(JSON.stringify(user));
+                    this.$.enter2.style.visibility = "hidden";
+                    this.$.newMail.style.visibility = "hidden";
+                    this.$.email.value = this.$.newMail.value;
+                    this.$.newMail.value = "";
+                } else {
+                    this.$.newMail.value = "";
+                    this.$.newMail.label = "Invalid e-mail";
+                }
+            },
+            validateEmail: function () {
+                var string = this.$.newMail.value;
+                return this.validateField(string, /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+            },
+            validateField: function (string, pattern) {
+                return string.match(pattern) !== null;
+            },
+            warning: function () {
+                this.$.core_card2.hidden = !this.$.core_card2.hidden;
+            },
+            deleteUser: function () {
+                this.$.userModel.deleteUser(logName.username, function (result) {
+                    if (result) {
+                        logName = "";
+                        location.href = " ";
+                        hidden();
+                    }
+                });
+            }
+        });
+    </script>
 </polymer-element>

@@ -56,7 +56,8 @@ function delUser(req, res, next) {
         if (result === 0) {
             next(new Error(userName + ' not exists'));
         } else {
-            res.send('User[' + userName + ' deleted');
+            //res.send('User[' + userName + ' deleted');
+            res.json(result);
         }
     });
 }

@@ -50,9 +50,16 @@
                 },
                 refresh: function (user) {
                     doAjax({type: 'PUT', data:user}, function (result) {
-                        console.log("OK")
+                        
                     }, function (error) {
-                        console.log("KO");
+                        
+                    });
+                },
+                deleteUser:function(user,callback){
+                    doAjax({type: 'DELETE', url: '/'+user}, function (result) {
+                        callback(result);
+                    }, function (error) {
+                       console.log("ERROR DELETE USER");
                     });
                 }
             });

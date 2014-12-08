@@ -14,7 +14,7 @@ function setUser(name, update, callback){
     col.update(query,update,callback);
 }
 function delUser(userName,callback){
-    this.remove({name:userName},callback);
+    this.remove({username:userName},callback);
 }
 function getUser(userName,callback){
     this.findOne({username:userName},callback);
