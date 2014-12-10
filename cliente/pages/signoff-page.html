@@ -1,37 +1,29 @@
 <polymer-element name="signoff-page">
-    <template>
-        <style>
-            :host{
-            }
-            #core_card1 {
-                width: 40%;
-                height: 100%;
-                margin-left: 30%;
-                border-radius: 5px;
-                box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
-                background-color: white;
-            }
-            p{
-                margin-top: 20%;
-            }
+  <template>
+    <style>
+      :host{
+      }
+      #core_card1 {
+        width: 40%;
+        height: 100%;
+        margin-left: 30%;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
+        background-color: white;
+      }
+    </style>
+    <core-card id="core_card1" layout vertical center>
 
-        </style>
-        <core-card id="core_card1" layout vertical center>
-            <button>
-                Modal dialog with backdrop and actions
+     
+      <paper-button label="Transition B" on-click="{{toogle}}"></paper-button>
 
-                <paper-action-dialog backdrop autoCloseDisabled>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-                    <paper-button affirmative autofocus>Tap me to close</paper-button>
-                </paper-action-dialog>
-
-            </button>
-
-        </core-card>
-    </template>
-    <script>
-        Polymer({
-        });
-    </script>
+    </core-card>
+  </template>
+  <script>
+    Polymer({
+      toogle: function () {
+        this.fire ('dialog');
+      }
+    });
+  </script>
 </polymer-element>

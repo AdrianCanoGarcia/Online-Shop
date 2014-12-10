@@ -223,6 +223,12 @@
         </section>
 
       </core-header-panel>
+      <paper-dialog on-dialog="{{toggle}}" autoCloseDisabled="true" backdrop="true"  id="dialog" heading="Dialog" transition="paper-dialog-transition-center">
+        <p>Some content</p>
+        <paper-button dismissive>More Info</paper-button>
+        <paper-button affirmative>Decline</paper-button>
+        <paper-button affirmative>Accept</paper-button>
+      </paper-dialog>
     </core-card>
   </template>
   <script>
@@ -245,26 +251,30 @@
       },
       showProfile: function() {
         var animate = this.$.animate;
-        if (this.$.animate.selected == "1"){
+        if (this.$.animate.selected == 1){
           animate.hidden = !animate.hidden;
         }else{
-          this.$.animate.selected = "1";
+          this.$.animate.selected = 1;
           this.$.animate.style.visibility = "visible";
         }
         this.$.profileId.saveUserValues();
       },
       showSignOff: function() {
         var animate = this.$.animate;
-        if (this.$.animate.selected == "2"){
+        if (this.$.animate.selected == 2){
           animate.hidden = !animate.hidden;
         }else{
-          this.$.animate.selected = "2";
+          this.$.animate.selected = 2;
           this.$.animate.style.visibility = "visible";
         }
       },
       goBack: function() {
-        this.$.animate.selected = "0";
+        this.$.animate.selected = 0;
         
+      },
+      toggle: function() {
+        debugger;
+        this.$.dialog.toggle();
       }
     });
 

@@ -1,0 +1,31 @@
+<polymer-element name="test-page">
+  <template>
+    <style>
+      div{
+        background-color: green;
+      }
+
+    </style>
+   
+      <paper-dialog autoCloseDisabled="true" backdrop="true"  id="dialog" heading="Dialog" transition="paper-dialog-transition-center">
+        
+          <p>Some content</p>
+          <paper-button dismissive>More Info</paper-button>
+          <paper-button affirmative>Decline</paper-button>
+          <paper-button affirmative>Accept</paper-button>
+        
+
+      </paper-dialog>
+  
+    <paper-button label="Transition B" on-click="{{toogle}}"></paper-button>
+
+
+  </template>
+  <script>
+    Polymer({
+      toogle: function () {
+        this.$.dialog.toggle();
+      }
+    });
+  </script>
+</polymer-element>
