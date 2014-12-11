@@ -1,0 +1,30 @@
+<polymer-element name="show-images">
+    <template>
+        <style>
+            :host{
+            }
+            #container {
+                
+            }
+        </style>
+        <user-model id="userModel"></user-model>
+        <div layout horizontal wrap id="scoreboard-container" on-score-remove="{{handleRemoveScore}}">
+            <template repeat="{{userModel.imagenes}}">
+                <div class="container">
+                    <img src="{{userModel.imagenes}}">
+                </div><br>
+            </template>
+        </div>
+    </template>
+    <script>
+        
+        Polymer({
+            ready:function(){
+                console.log(this.$.userModel.imagenes);
+            },
+            toogle: function () {
+                this.fire('dialog');
+            }
+        });
+    </script>
+</polymer-element>

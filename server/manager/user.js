@@ -13,14 +13,18 @@ function setUser(name,mail, callback) {
 function delUser(userName, callback) {
   daoUser.delUser(userName, callback);
 }
-function getUser(userName, callback) {
-  daoUser.getUser(userName, callback);
+function getUser(userName,callback){
+    this.findOne({username:userName},callback);
+}
+function getTodo(callback){
+    daoUser.getTodo(callback);
 }
 function verifyUser (user, callback){
   daoUser.getUser(user, callback);
   
 }
 module.exports = {
+  getTodo: getTodo,
   create: create,
   setUser: setUser,
   delUser: delUser,

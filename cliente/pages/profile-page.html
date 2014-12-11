@@ -146,13 +146,7 @@
             <img src="../img/person.jpg">
             <core-icon icon="delete" id="delete" on-click="{{warning}}"></core-icon>
         </core-card>
-        <core-card id="core_card2" hidden="true">
-            Are you sure?<br>
-            <core-icon  icon="done" id ="done" on-click="{{deleteUser}}" ></core-icon>
-            <core-icon  icon="cancel" id ="cancel" on-click="{{warning}}" ></core-icon>
-            
-        </core-card>
-
+        
     </template>
     <script>
         function hidden() {
@@ -192,16 +186,7 @@
                 return string.match(pattern) !== null;
             },
             warning: function () {
-                this.$.core_card2.hidden = !this.$.core_card2.hidden;
-            },
-            deleteUser: function () {
-                this.$.userModel.deleteUser(logName.username, function (result) {
-                    if (result) {
-                        logName = "";
-                        location.href = " ";
-                        hidden();
-                    }
-                });
+                 this.fire ('dialog');
             }
         });
     </script>

@@ -3,6 +3,7 @@
     <template>
     </template>
     <script>
+         var imagenes;
         (function () {
             var base = '/user';
             /* function defaultAjaxErrorHandler(xhr, err, desc) {
@@ -22,6 +23,7 @@
                 $.ajax(options);
             }
             var resultado = false;
+           
             Polymer('user-model', {
                 saveUser: function (user) {
                     var that = this;
@@ -61,6 +63,14 @@
                     }, function (error) {
                        console.log("ERROR DELETE USER");
                     });
+                },
+                getImages:function(callback){
+                    doAjax({type: 'GET', url:'/'}, function (result) {
+                        this.imagenes=result;
+                    }, function (error) {
+                       callback();
+                    });
+                    
                 }
             });
         }());

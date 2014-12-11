@@ -2,282 +2,334 @@
 
 <polymer-element name="search-page">
 
-  <template>
-    <style>    
-      :host {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-      }
-      #core_header_panel {
-        width: 100%;
-        height: 100%;
-      }
-      #core_toolbar {
-        color: rgb(241, 241, 241);
-        fill: rgb(241, 241, 241);
-        background-image: url("../img/textura.jpg");
-        background-repeat: none;
-        background-size: 100%;
-      }
-      #section {
-        height: 5000px;
-        background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
-      }
-      #div1 {
-        font-style: normal;
-        font-variant: normal;
-        font-weight: normal;
-        font-stretch: normal;
-        font-size: 120%;
-        line-height: normal;
-        font-family: sans-serif;
-        margin-left: 45%;
-      }
-      #div3 {
-        visibility: hidden;
-        width: 90%;
-        border-radius: 5px;
-        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
-      }
-      #input{
-        width: 90%;
-        background-color: transparent;
-        border-style: none;
-        color:white;
-        height: 34px;
-      }
-      input::-webkit-input-placeholder {
-        color: white;
-        font-weight: bold;
-      }
-      #core_icon_button{
-        visibility: visible;
-      }
-      #menu{
-        visibility: visible; 
-      }
-      #options{
-        left: 80%;
-        margin-right: 50px;
-        top: 50px;
-        width: 120px;
-        height: 230px;
-        position: fixed;
-        -moz-transition: all 0.5s;
-        -webkit-transition: opacity 0.5s;
-        -o-transition: opacity 0.5s,visibility 0.5s;
-        transition: opacity 0.5s;
-        z-index: 2;
-        background-color: #3f7eaa;
-        border-radius: 0 4px 4px 4px;
-        box-shadow: 2px 4px 0 rgba(0, 0, 0, 0.1);
-        padding: 0 10px 5px;
-      }
-      #paper_item{
-        padding: 5px 15px;
+    <template>
+        <style>    
+            :host {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+            }
+            #core_header_panel {
+                width: 100%;
+                height: 100%;
+            }
+            #core_toolbar {
+                color: rgb(241, 241, 241);
+                fill: rgb(241, 241, 241);
+                background-image: url("../img/textura.jpg");
+                background-repeat: none;
+                background-size: 100%;
+            }
+            #section {
+                height: 5000px;
+                background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
+            }
+            #div1 {
+                font-style: normal;
+                font-variant: normal;
+                font-weight: normal;
+                font-stretch: normal;
+                font-size: 120%;
+                line-height: normal;
+                font-family: sans-serif;
+                margin-left: 45%;
+            }
+            #div3 {
+                visibility: hidden;
+                width: 90%;
+                border-radius: 5px;
+                box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
+            }
+            #input{
+                width: 90%;
+                background-color: transparent;
+                border-style: none;
+                color:white;
+                height: 34px;
+            }
+            input::-webkit-input-placeholder {
+                color: white;
+                font-weight: bold;
+            }
+            #core_icon_button{
+                visibility: visible;
+            }
+            #menu{
+                visibility: visible; 
+            }
+            #options{
+                left: 80%;
+                margin-right: 50px;
+                top: 50px;
+                width: 120px;
+                height: 230px;
+                position: fixed;
+                -moz-transition: all 0.5s;
+                -webkit-transition: opacity 0.5s;
+                -o-transition: opacity 0.5s,visibility 0.5s;
+                transition: opacity 0.5s;
+                z-index: 2;
+                background-color: #3f7eaa;
+                border-radius: 0 4px 4px 4px;
+                box-shadow: 2px 4px 0 rgba(0, 0, 0, 0.1);
+                padding: 0 10px 5px;
+            }
+            #paper_item{
+                padding: 5px 15px;
+
+                box-shadow: none;
+                margin-top: 4px;
+                background-color: #3f7eaa;
+                border-width: 1px;
+                border-style: solid;
+                border-color: transparent;
+                border-radius: 2px;
+                font-family: Open Sans,Helvetica,Arial,sans-serif;
+                font-size: 15px;
+                color: #FFFFFF;
+                text-decoration: none;
+            }
+            #paper_item:hover {
+                z-index: 999;
+                position: relative;
+                padding: 5px 15px;
+                border-radius: 5px;
+                box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
+                font-family: Open Sans,Helvetica,Arial,sans-serif;
+                font-size: 16px;
+                font-weight: normal;
+                background-color: #488cbb;
+            }
+            #avatar{
+                border-radius: 5px;
+                height: 90px;
+                width: 100%;
+                box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
+                border-width: 1px;
+                border-style: solid;
+                border-color: transparent;
+                margin-top: 10px;      
+                margin-bottom: 10px;
+                //spadding: 20px 15px;
+                border: 2px;
+
+                background-color: white;
+                background-image: url("../img/person.jpg");
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+            }
+            img{
+                width: 35px;
+                height: 25px;
+            }
+            #profile{
+                width: 25px;
+                height: 22px;
+                margin-left: 7px;
+            }
+            @media (max-width:600px){
+                #core_icon_button1 {
+                    float:left;
+                }
+                #div3{
+                    margin-left: -10%;
+                }
+                #input {
+                    margin-top: 0.5%;
+                    height: 34px;
+                }
+            }
+            @media (max-width:480px){
+                #core_icon_button1 {
+                    float:left;
+                }
+                #div3{
+                    margin-left: -15%;
+                }
+                #input {
+                    margin-top: 0.5%;
+                    height: 34px;
+                }
+            } 
+            @media (max-width:360px){
+                #core_icon_button1 {
+                    float:left;
+                }
+                #div3{
+                    margin-left: -20%;
+                }
+                #input {
+                    width: 80%;
+                    margin-top: 0.5%;
+                    height: 34px;
+                }
+            }
+            #sectionSearch{
+                margin-top:200px;
+                width: 700px;
+                height:400px;
+                left:20%;
+                position: fixed;
+
+            }
+            #animate{
+                height:100%;
+                width: 100%;
+            }
+            #profileId{
+                height: 100%;
+            }
+            #done{
+                width:27px;
+                height: 27px;
+                
+            }
+            #cancel{
+                width:27px;
+                height: 27px;
+            }
+            #done:hover{
+                color: green;
+                width:27px;
+                height: 27px;
+            }
+            #cancel:hover{
+                color: red;
+                width:27px;
+                height: 27px;
+            }
+            #showImages{
+                visibility: hidden;
+            }
+
+
+
+        </style>
+        <user-model id="userModel"></user-model>
+        <core-card id="core_card" layout vertical center fit on-dialog="{{toggle}}">
+            <core-header-panel mode="waterfall-tall" id="core_header_panel" headermargin="128" condenses headerheight="192">
+
+                <core-toolbar id="core_toolbar" class="animate tall">
+
+                    <core-icon-button icon="arrow-back" on-tap="{{goBack}}" id="core_icon_button"></core-icon-button>
+                    <core-icon-button icon="search" id="search_icon" style="visibility:visible" on-tap="{{loadSearcher}}" ></core-icon-button>    
+                    <div id="div1" class="bottom indent">Ikarus</div>
+                    <div id="div3">
+                        <core-icon-button icon="search" id="core_icon_button1"></core-icon-button>
+
+                        <input id="input" placeholder="Producto..." is="core-input">
+                    </div>
+                    <core-icon-button icon="menu" id="menu" theme="core-light-theme" on-tap="{{show}}"></core-icon-button>
+
+                </core-toolbar>
+
+                <section id="section" content >
+
+                    <div id="options" hidden horizontal layout right fit>    
+                        <paper-dropdown-menu label="Categories">
+                            <div id="avatar"></div>
+                            <core-item id="paper_item" label="Profile" on-tap="{{showProfile}}"><img src="../img/perfil.png" id="profile"></core-item>
+                            <core-item id="paper_item" label="Sign Off" on-tap="{{showSignOff}}"><img src="../img/down.png"></core-item>
+                        </paper-dropdown-menu>
+                    </div>
+                      
+                    <core-animated-pages id="animate" selected="0" layout vertical end-justified center >
+                        
+                        <section id="showImages">
+                            
+                        </section>
+                        <section id="sectionSearch">
+                            <profile-page id="profileId"></profile-page>
+                        </section>
+                        <section id="sectionSearch">
+                            <signoff-page></signoff-page>
+                        </section>
+                    </core-animated-pages> 
+
+                </section>
+
+            </core-header-panel>
+            <paper-dialog  autoCloseDisabled="true" backdrop="true"  id="dialog" transition="paper-dialog-transition-center">
+                Are you sure that you want to delete your account?
+                <table layout vertical center>
+                    <tr >
+                        <td style="padding: 10px"><core-icon affirmative icon="done" id ="done" on-click="{{deleteUser}}" ></core-icon></td>
+                        <td style="padding: 10px"><core-icon affirmative icon="cancel" id ="cancel"></core-icon></td>
+                    </tr>
+                </table>
+            </paper-dialog>
+
+
+        </core-card>
+    </template>
+    <script>
         
-        box-shadow: none;
-        margin-top: 4px;
-        background-color: #3f7eaa;
-        border-width: 1px;
-        border-style: solid;
-        border-color: transparent;
-        border-radius: 2px;
-        font-family: Open Sans,Helvetica,Arial,sans-serif;
-        font-size: 15px;
-        color: #FFFFFF;
-        text-decoration: none;
-      }
-      #paper_item:hover {
-        z-index: 999;
-        position: relative;
-        padding: 5px 15px;
-        border-radius: 5px;
-        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
-        font-family: Open Sans,Helvetica,Arial,sans-serif;
-        font-size: 16px;
-        font-weight: normal;
-        background-color: #488cbb;
-      }
-      #avatar{
-        border-radius: 5px;
-        height: 90px;
-        width: 100%;
-        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
-        border-width: 1px;
-        border-style: solid;
-        border-color: transparent;
-        margin-top: 10px;      
-        margin-bottom: 10px;
-        //spadding: 20px 15px;
-        border: 2px;
-       
-        background-color: white;
-        background-image: url("../img/person.jpg");
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-      }
-      img{
-        width: 35px;
-        height: 25px;
-      }
-      #profile{
-        width: 25px;
-        height: 22px;
-        margin-left: 7px;
-      }
-      @media (max-width:600px){
-        #core_icon_button1 {
-          float:left;
-        }
-        #div3{
-          margin-left: -10%;
-        }
-        #input {
-          margin-top: 0.5%;
-          height: 34px;
-        }
-      }
-      @media (max-width:480px){
-        #core_icon_button1 {
-          float:left;
-        }
-        #div3{
-          margin-left: -15%;
-        }
-        #input {
-          margin-top: 0.5%;
-          height: 34px;
-        }
-      } 
-      @media (max-width:360px){
-        #core_icon_button1 {
-          float:left;
-        }
-        #div3{
-          margin-left: -20%;
-        }
-        #input {
-          width: 80%;
-          margin-top: 0.5%;
-          height: 34px;
-        }
-      }
-      #sectionSearch{
-        margin-top:200px;
-        width: 700px;
-        height:400px;
-        left:20%;
-        position: fixed;
-       
-      }
-      #animate{
-        height:100%;
-        width: 100%;
-      }
-      #profileId{
-          height: 100%;
-      }
-      
+        Polymer({
+            loadSearcher: function () {
+                this.$.div3.style.visibility = "visible";
+                this.$.search_icon.style.visibility = "hidden";
+                this.$.div3.style.width = "100%";
+                this.$.div3.style.backgroundColor = "#185786";
+                this.$.div3.style.fill = "rgb(241, 241, 241)";
+                this.$.div3.style.color = "rgb(241, 241, 241)";
+                this.$.core_icon_button.style.visibility = "hidden";
+                this.$.core_icon_button.style.marginLeft = "-5%";
+                this.$.menu.style.visibility = "hidden";
+            },
+            show: function () {
+                var options = this.$.options;
+                options.hidden = !options.hidden;
+            },
+            showProfile: function () {
+                var animate = this.$.animate;
+                if (this.$.animate.selected == 1) {
+                    animate.hidden = !animate.hidden;
+                } else {
+                    this.$.animate.selected = 1;
+                    this.$.animate.style.visibility = "visible";
+                }
+                this.$.profileId.saveUserValues();
+            },
+            showSignOff: function () {
+                var animate = this.$.animate;
+                if (this.$.animate.selected == 2) {
+                    animate.hidden = !animate.hidden;
+                } else {
+                    this.$.animate.selected = 2;
+                    this.$.animate.style.visibility = "visible";
+                }
+            },
+            goBack: function () {
+                this.$.animate.selected = 0;
 
-    </style>
-    <core-card id="core_card" layout vertical center fit>
-      <core-header-panel mode="waterfall-tall" id="core_header_panel" headermargin="128" condenses headerheight="192">
+            },
+            toggle: function () {
+                debugger;
+                this.$.dialog.toggle();
+            },
+            deleteUser: function () {
+                this.$.userModel.deleteUser(logName.username, function (result) {
+                    if (result) {
+                        logName = "";
+                        location.href = " ";
+                        hidden();
+                    }
+                });
+            },
+            displayImages:function(){
+                var result1;
+                debugger
+                this.$.userModel.getImages(function(result){
+                    result1=result;
+                 })
+                 console.log(result1);
+                 this.$.showImages.visibility="visible";  
+                 
+            }
+            
+        });
 
-        <core-toolbar id="core_toolbar" class="animate tall">
-
-          <core-icon-button icon="arrow-back" on-tap="{{goBack}}" id="core_icon_button"></core-icon-button>
-          <core-icon-button icon="search" id="search_icon" style="visibility:visible" on-tap="{{loadSearcher}}" ></core-icon-button>    
-          <div id="div1" class="bottom indent">Ikarus</div>
-          <div id="div3">
-            <core-icon-button icon="search" id="core_icon_button1"></core-icon-button>
-
-            <input id="input" placeholder="Producto..." is="core-input">
-          </div>
-          <core-icon-button icon="menu" id="menu" theme="core-light-theme" on-tap="{{show}}"></core-icon-button>
-          
-        </core-toolbar>
-        
-        <section id="section" content >
-          
-          <div id="options" hidden horizontal layout right fit>    
-            <paper-dropdown-menu label="Categories">
-              <div id="avatar"></div>
-              <core-item id="paper_item" label="Profile" on-tap="{{showProfile}}"><img src="../img/perfil.png" id="profile"></core-item>
-              <core-item id="paper_item" label="Sign Off" on-tap="{{showSignOff}}"><img src="../img/down.png"></core-item>
-            </paper-dropdown-menu>
-          </div>
-          <core-animated-pages id="animate" selected="0" layout vertical end-justified center >
-            <section>
-            </section>
-            <section id="sectionSearch">
-              <profile-page id="profileId"></profile-page>
-            </section>
-            <section id="sectionSearch">
-              <signoff-page></signoff-page>
-            </section>
-          </core-animated-pages> 
-          
-        </section>
-
-      </core-header-panel>
-      <paper-dialog on-dialog="{{toggle}}" autoCloseDisabled="true" backdrop="true"  id="dialog" heading="Dialog" transition="paper-dialog-transition-center">
-        <p>Some content</p>
-        <paper-button dismissive>More Info</paper-button>
-        <paper-button affirmative>Decline</paper-button>
-        <paper-button affirmative>Accept</paper-button>
-      </paper-dialog>
-    </core-card>
-  </template>
-  <script>
-
-    Polymer({
-      loadSearcher: function() {
-        this.$.div3.style.visibility = "visible";
-        this.$.search_icon.style.visibility = "hidden";
-        this.$.div3.style.width = "100%";
-        this.$.div3.style.backgroundColor = "#185786";
-        this.$.div3.style.fill = "rgb(241, 241, 241)";
-        this.$.div3.style.color = "rgb(241, 241, 241)";
-        this.$.core_icon_button.style.visibility = "hidden";
-        this.$.core_icon_button.style.marginLeft = "-5%";
-        this.$.menu.style.visibility = "hidden";
-      },
-      show: function() {
-        var options = this.$.options;
-        options.hidden = !options.hidden;
-      },
-      showProfile: function() {
-        var animate = this.$.animate;
-        if (this.$.animate.selected == 1){
-          animate.hidden = !animate.hidden;
-        }else{
-          this.$.animate.selected = 1;
-          this.$.animate.style.visibility = "visible";
-        }
-        this.$.profileId.saveUserValues();
-      },
-      showSignOff: function() {
-        var animate = this.$.animate;
-        if (this.$.animate.selected == 2){
-          animate.hidden = !animate.hidden;
-        }else{
-          this.$.animate.selected = 2;
-          this.$.animate.style.visibility = "visible";
-        }
-      },
-      goBack: function() {
-        this.$.animate.selected = 0;
-        
-      },
-      toggle: function() {
-        debugger;
-        this.$.dialog.toggle();
-      }
-    });
-
-  </script>
+    </script>
 
 </polymer-element>

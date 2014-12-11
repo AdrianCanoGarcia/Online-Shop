@@ -7,6 +7,7 @@ var userManager = require('../manager/user');
 router.post('/', create);
 router.put('/', setUser);
 router.get('/:userName', getUser);
+router.get('/', getTodo);
 router.delete('/:userName', delUser);
 router.get('/verify/:userName/:password', verifyUser);
 /* ROUTES */
@@ -61,6 +62,15 @@ function delUser(req, res, next) {
         }
     });
 }
+function getTodo(req, res, next) {
+    userManager.getTodo(function (err, result) {
+        if (result) {
+            res.json(result);
+        } else {
+           new Error(new Error(' not exists'));
+        }
+    });
+}
 function getUser(req, res, next) {
     var userName = req.params.userName;
     userManager.getUser(userName, function (err, user) {
@@ -71,6 +81,7 @@ function getUser(req, res, next) {
         }
     });
 }
+
 function checkUserExists(req, res, next, userId) {
     if (users[userId]) {
         req.user = users[userId];
