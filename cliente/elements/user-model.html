@@ -22,8 +22,6 @@
                 options.error = (typeof error === 'function') ? error : defaultAjaxErrorHandler;
                 $.ajax(options);
             }
-            var resultado = false;
-           
             Polymer('user-model', {
                 saveUser: function (user) {
                     var that = this;
@@ -47,14 +45,12 @@
                     doAjax({type: 'GET', url: '/verify/' + user.username + '/' + user.passwd}, function (result) {
                         callback(result);
                     }, function (error) {
-                        callback();
+                        callback("");
                     });
                 },
                 refresh: function (user) {
                     doAjax({type: 'PUT', data:user}, function (result) {
-                        
                     }, function (error) {
-                        
                     });
                 },
                 deleteUser:function(user,callback){
@@ -70,7 +66,6 @@
                     }, function (error) {
                        callback();
                     });
-                    
                 }
             });
         }());

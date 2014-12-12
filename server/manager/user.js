@@ -14,7 +14,7 @@ function delUser(userName, callback) {
   daoUser.delUser(userName, callback);
 }
 function getUser(userName,callback){
-    this.getUser(userName,callback);
+    daoUser.getUser(userName,callback);
 }
 function getTodo(callback){
     daoUser.getTodo(callback);
