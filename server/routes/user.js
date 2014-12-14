@@ -28,14 +28,14 @@ function verifyUser(req, res, next) {
         passwd: req.params.password
     }
     userManager.verifyUser(user.userName, function (err, result) {
-        if (user) {
+        if (result) {
             if(result.passwd==user.passwd){
                 res.json(result);
             }else{
-                next(new Error(new Error(req.params.password+ ' not existS')));
+                next(new Error(new Error(req.params+ ' not exists')));
             }
         } else {
-            next(new Error(new Error(userName + ' not exists')));
+            next(new Error(new Error(req.params+ ' not exists')));
         }
     });
 }

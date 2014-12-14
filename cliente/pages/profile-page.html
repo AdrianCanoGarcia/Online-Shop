@@ -3,15 +3,6 @@
         <style>
             :host{
             }
-            #core_card1 {
-                margin-left: 30%;
-                width: 50%;
-                height: 100%;
-                border-radius: 5px;
-                box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
-                background-color: white;
-
-            }
             #name{
                 height:15px;
                 font-family: sans-seri; 
@@ -54,7 +45,7 @@
                 height: 50%;
             }
             #enter{
-                margin-top: 10px;
+                margin-top: 15px;
                 height: 30px;
                 color:#2d6e9a;
                 width: 50%;
@@ -82,26 +73,7 @@
                 color:blue;
                 margin-left:245px;
             }
-            #core_card2{
 
-                width: 200px;
-                height: 60px;
-                padding-top: 10px;
-                margin-top: -230px;
-                margin-left:280px;
-                position: fixed;
-                text-align: center;
-                border-top-left-radius: 2px;
-                border-top-right-radius: 2px;
-                border-bottom-right-radius: 2px;
-                border-bottom-left-radius: 2px;
-                box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
-                background-color: #3f7eaa;
-                opacity: 0.80;
-                border:1px solid;
-                border-color: red;
-
-            }
             #delete{
                 margin-left: 80%;
                 width: 40px;
@@ -135,18 +107,20 @@
         </style>
         <user-model id="userModel"></user-model>
 
-        <core-card id="core_card1" layout vertical center>
+        <core-card  layout vertical center fit>
             <p on-click="{{saveUserValues}}">PROFILE</p>
             <core-input readonly  name="user" value="Default" id="name"></core-input>
             <core-input readonly  name="user" value="E-MAIL: " id="emailFixed"></core-input>
             <core-input readonly  name="user" value="default@default.com" id="email"></core-input>
-            <paper-button id ="enter" on-click="{{ keypressHandler }}" label="Change E-mail" ></paper-button>
-            <paper-input label="New email..." id="newMail" layout verticals ></paper-input>
-            <paper-button id ="enter2" label="Enter" on-click="{{refreshEmail}}" ></paper-button>
+            <core-icon  id ="enter" icon="mail" on-click="{{ keypressHandler }}" ></core-icon>
+            <div layout horizontal center>
+            <paper-input label="New email..." id="newMail" ></paper-input>
+            <core-icon icon="done" id ="enter2" on-click="{{refreshEmail}}" ></core-icon>
+            </div>
             <img src="../img/person.jpg">
             <core-icon icon="delete" id="delete" on-click="{{warning}}"></core-icon>
         </core-card>
-        
+
     </template>
     <script>
         function hidden() {
@@ -186,7 +160,7 @@
                 return string.match(pattern) !== null;
             },
             warning: function () {
-                 this.fire ('dialog');
+                this.fire('dialog');
             }
         });
     </script>

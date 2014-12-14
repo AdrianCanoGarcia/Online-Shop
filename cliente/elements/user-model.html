@@ -45,7 +45,7 @@
                     doAjax({type: 'GET', url: '/verify/' + user.username + '/' + user.passwd}, function (result) {
                         callback(result);
                     }, function (error) {
-                        callback("");
+                       callback();
                     });
                 },
                 refresh: function (user) {
