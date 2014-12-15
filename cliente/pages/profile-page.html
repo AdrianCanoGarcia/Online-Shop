@@ -51,6 +51,10 @@
                 width: 50%;
                 text-transform: none;
                 font-size:17px;
+                
+            }
+            :host{
+                box-sizing: none;
             }
             paper-button#enter /deep/ #ink{
                 color: #4db0cf;
@@ -101,7 +105,8 @@
                 width: 26px;
                 height: 26px;
             }
-
+            
+             
 
 
         </style>
@@ -112,10 +117,14 @@
             <core-input readonly  name="user" value="Default" id="name"></core-input>
             <core-input readonly  name="user" value="E-MAIL: " id="emailFixed"></core-input>
             <core-input readonly  name="user" value="default@default.com" id="email"></core-input>
-            <core-icon  id ="enter" icon="mail" on-click="{{ keypressHandler }}" ></core-icon>
+            <core-tooltip label='Change e-mail' position="left">
+                <core-icon-button  id ="enter" icon="mail" on-click="{{ keypressHandler }}" ></core-icon-button>
+            </core-tooltip>
+            
+
             <div layout horizontal center>
-            <paper-input label="New email..." id="newMail" ></paper-input>
-            <core-icon icon="done" id ="enter2" on-click="{{refreshEmail}}" ></core-icon>
+                <paper-input label="New email..." id="newMail" ></paper-input>
+                <core-icon icon="done" id ="enter2" on-click="{{refreshEmail}}" ></core-icon>
             </div>
             <img src="../img/person.jpg">
             <core-icon icon="delete" id="delete" on-click="{{warning}}"></core-icon>
