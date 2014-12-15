@@ -51,7 +51,7 @@
                 color: rgb(255, 255, 255);
                 width: 100%;
                 text-transform: none;
-                font-size:25px;
+                font-size:20px;
             }
         </style>
 
@@ -61,7 +61,7 @@
             <paper-input type="password" label="Password..." willvalidate id="passwd" value="{{ password }}" on-keyup="{{ keypressHandler }}" layout vertical></paper-input>
             <core-icon icon="lock" id="core_icon"></core-icon>
             <core-input readonly inputvalue="Invalid user or password" value="Invalid user or password" id="core_input"></core-input>
-            <paper-button id ="enter" on-click="{{ keypressHandler }}" >Entry</paper-button>
+            <paper-button id ="enter" on-click="{{ keypressHandler }}">Entry</paper-button>
         </core-card>
 
     </template>

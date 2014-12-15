@@ -45,7 +45,7 @@
       <section hash="SignIn" layout vertical center-center>
         <signin-page></signin-page>
       </section>
-      <section hash="SingUp" layout vertical center-center>
+      <section hash="SignUp" layout vertical center-center>
         <login-page></login-page>
       </section>
       <section id="search" hash="SearchPage">
@@ -70,7 +70,7 @@
       ready: function () {
         this.pages = [
           {name: 'Sign In', id: 'paper_tab', hash: 'SignIn'},
-          {name: 'Sign Up', id: 'paper_tab1', hash: 'SingUp'}
+          {name: 'Sign Up', id: 'paper_tab1', hash: 'SignUp'}
         ];
         if (this.route !== "SearchPage"){
           this.$.core_card.style.height = "95%";
