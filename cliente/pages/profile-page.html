@@ -23,6 +23,7 @@
                 font-size: 120%;
                 margin-top: 22px;
                 font-weight: bold;
+
             }
             core-input#emailFixed /deep/ input{
                 text-align:center;
@@ -51,7 +52,7 @@
                 width: 50%;
                 text-transform: none;
                 font-size:17px;
-                
+
             }
             :host{
                 box-sizing: none;
@@ -105,8 +106,8 @@
                 width: 26px;
                 height: 26px;
             }
-            
-             
+
+
 
 
         </style>
@@ -117,11 +118,7 @@
             <core-input readonly  name="user" value="Default" id="name"></core-input>
             <core-input readonly  name="user" value="E-MAIL: " id="emailFixed"></core-input>
             <core-input readonly  name="user" value="default@default.com" id="email"></core-input>
-            <core-tooltip label='Change e-mail' position="left">
-                <core-icon-button  id ="enter" icon="mail" on-click="{{ keypressHandler }}" ></core-icon-button>
-            </core-tooltip>
-            
-
+            <core-icon  id ="enter" icon="mail" on-click="{{ keypressHandler }}" ></core-icon>
             <div layout horizontal center>
                 <paper-input label="New email..." id="newMail" ></paper-input>
                 <core-icon icon="done" id ="enter2" on-click="{{refreshEmail}}" ></core-icon>
