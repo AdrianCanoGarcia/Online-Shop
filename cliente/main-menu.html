@@ -7,7 +7,6 @@
         height: 100%;
         box-sizing: border-box;
         overflow: hidden;
-        
       }
       #core_card {
         width: 100%;
@@ -36,9 +35,9 @@
       }
 
     </style>
-    <flatiron-director route="{{route}}" autoHash></flatiron-director>
+    <flatiron-director route="{{ route }}" autoHash></flatiron-director>
 
-    <core-animated-pages id="core_card" valueattr="hash" selected="{{route}}" layout vertical end-justified center transitions="slide-from-right">
+    <core-animated-pages id="core_card" valueattr="hash" selected="{{ route }}" layout vertical end-justified center transitions="slide-from-right">
 
       <section>
       </section>
@@ -54,21 +53,19 @@
 
     </core-animated-pages>  
 
-      <paper-tabs selected="{{route}}" selectedindex="one" valueattr="hash" id="paper_tabs" end-justified vertical layout wrap end>
-        <template repeat="{{page in pages}}" >
-          <paper-tab id = "{{page.id}}" hash = "{{page.hash}}">
-            {{page.name}} <a href='#{{page.hash}}'></a>
+      <paper-tabs selected="{{ route }}" selectedindex="one" valueattr="hash" id="paper_tabs" end-justified vertical layout wrap end>
+        <template repeat="{{ page in pages }}" >
+          <paper-tab id="{{ page.id }}" hash = "{{ page.hash }}">
+            {{ page.name }} <a href='#{{ page.hash }}'></a>
           </paper-tab>
         </template>
       </paper-tabs>
-
   </template>  
 
   <script>
     var logName;
     Polymer({
       ready: function () {
-          
         this.pages = [
           {name: 'Sign In', id: 'paper_tab', hash: 'SignIn'},
           {name: 'Sign Up', id: 'paper_tab1', hash: 'SignUp'}
@@ -80,6 +77,5 @@
         }
       }
     });
-
   </script>
 </polymer-element>
