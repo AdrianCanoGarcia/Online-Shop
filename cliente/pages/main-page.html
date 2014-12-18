@@ -22,14 +22,16 @@
         box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
         padding: 20px;
         margin: 50px 50px;
-        background-color: #1d649b;
+        background-color: rgba(29, 100, 155, 0.5);
         border-radius: 5px;
       }
       #core_input {
         visibility:hidden;
         color: #f7f704;
-        margin-left: 50%;
         margin-bottom: 10px;
+      }
+      #core_input /deep/ #input{
+        text-align: center;
       }
       #core_icon {
         visibility:hidden;
@@ -43,6 +45,26 @@
         text-transform: none;
         font-size:20px;
       }
+      /* Smartphones (portrait and landscape) ----------- */
+      @media (min-device-width : 320px) and (max-width:480px){
+        #core_card {
+          width: 200px;
+          height: 230px;
+        }
+        #core_input {
+          font-size: 15px;
+        }
+        #core_icon {
+          width:12px;
+          height:12px;
+        }
+        #username, #passwd {
+          font-size: 12px;
+          height: 26px;
+
+        }      
+      } 
+
     </style>
 
     <user-model id="userModel"></user-model>
@@ -65,7 +87,7 @@
         this.$.core_input.style.visibility = "hidden";
         this.$.core_icon.style.visibility = "hidden";
         var code = event.keyCode;
-        
+
         if (code == 13 || sender.id == "enter") {
           if (this.validateUser() && this.validatePass()) {
             this.comprobateUser();

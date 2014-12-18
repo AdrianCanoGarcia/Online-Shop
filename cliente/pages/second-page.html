@@ -13,7 +13,7 @@
         box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
         padding: 20px;
         margin: 50px 30px;
-        background-color: #1d649b;
+        background-color: rgba(29, 100, 155, 0.5);
         border-radius: 5px;
       }
       #username, #email {
@@ -61,7 +61,7 @@
         text-align: center;
       }
       p{
-        font-size: 80%;
+        font-size: 12px;
         margin-bottom: 15px;
         color: #f7f704;
         margin-left: 10px;
@@ -84,13 +84,49 @@
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
       }
+
+
+      /* Smartphones (portrait and landscape) ----------- */
+      @media (min-device-width : 320px) and (max-width:480px){
+        #core_card {
+          width: 200px;
+          height: 340px;
+        }
+        #username, #email, #repeatEmail {
+          font-size: 12px;
+          margin-bottom: 20px;
+          height: 30px;
+        }
+        p{
+          font-size: 9px;
+        }
+        .fancy /deep/ .core-tooltip{
+          font-size: 6px;
+          width: 53px;
+          padding: 6px;
+        }
+        #div {
+          margin-bottom: 10px;
+        }
+        #passwd {
+          font-size: 12px;
+          margin-bottom: 10px;
+          height: 30px;
+        }
+        #invalid {
+          font-size: 15px;
+        }
+        #enter {
+          margin-bottom: 5px;
+        }
+      } 
     </style>
 
     <user-model id="userModel"></user-model>
     <core-card id="core_card" layout vertical center>
       <paper-input label="User..." id="username" layout vertical  on-blur="{{ checkNameExists }}" on-keyup="{{ keypressHandler }}"></paper-input>
       <paper-input type="password" label="Password..." id="passwd" layout vertical on-keyup="{{ keypressHandler }}"></paper-input>
-      <div layout horizontal center>
+      <div id="div" layout horizontal center>
         <core-tooltip label="Show password" position="left" class="fancy">
           <paper-checkbox id="checkbox" on-change="{{ showPasswd }}"></paper-checkbox>
         </core-tooltip>
@@ -137,10 +173,10 @@
         var invalid = this.$.invalid;
         invalid.style.visibility = "hidden";
         var code = event.keyCode;
-        
+
         if (code == 13 || sender.id == "enter") {
           var username = this.$.username.value;
-          
+
           if (this.validateUser() && this.validatePass() && this.validateEmail() && this.verifyEmail(this.$.repeatEmail.value)) {
             this.handleSaveUser();
           } else if (!this.validateUser()) {
