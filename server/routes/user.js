@@ -2,12 +2,10 @@ var express = require('express');
 var router = express.Router();
 var userManager = require('../manager/user');
 
-
 /* ROUTES */
 router.post('/', create);
 router.put('/', setUser);
 router.get('/:userName', getUser);
-router.get('/', getTodo);
 router.delete('/:userName', delUser);
 router.get('/verify/:userName/:password', verifyUser);
 /* ROUTES */
@@ -20,6 +18,7 @@ function create(req, res) {
     }
     userManager.create(user, function (err, result) {
         res.json(result);
+        userManager.sendMail(user);
     });
 }
 function verifyUser(req, res, next) {
@@ -59,15 +58,6 @@ function delUser(req, res, next) {
         } else {
             //res.send('User[' + userName + ' deleted');
             res.json(result);
-        }
-    });
-}
-function getTodo(req, res, next) {
-    userManager.getTodo(function (err, result) {
-        if (result) {
-            res.json(result);
-        } else {
-           new Error(new Error(' not exists'));
         }
     });
 }
