@@ -1,0 +1,41 @@
+<link rel = "import" href = "../bower_components/polymer/polymer.html" >
+<polymer-element name = "use-api">
+    <template>
+    </template>
+    <script>
+
+        (function () {
+            var base = 'http://open.api.ebay.com/shopping?version=713';
+            var appid = 'Ikaruscfa-4fc4-4be7-a6b0-4e54505e4f8';
+            var callname = 'callname=FindItems';
+            var keryWords = 'QueryKeywords=';
+            var response = 'ResponseEncodingType=JSON';
+            var entries = 'MaxEntries=60';
+            /* function defaultAjaxErrorHandler(xhr, err, desc) {
+             console.log(xhr, err, desc);
+             var errorToast = document.querySelector('#errorToast');
+             errorToast.text = '[' +xhr.status + '] ' + desc + ': ' + xhr.response;
+             errorToast.show();
+             }
+             */
+            function doAjax(options, success, error) {
+                options.type = options.type || 'GET';
+                options.url = base + (options.url || '');
+                options.dataType = options.dataType || 'json';
+                options.contentType = options.contentType || 'application/json; charset=UTF-8';
+                options.success = success;
+                options.error = (typeof error === 'function') ? error : defaultAjaxErrorHandler;
+                $.ajax(options);
+            }
+            Polymer('use-Api', {.
+                        getImages: function (callback) {
+                            doAjax({type: 'GET', url:'&'+appid+'&'+callname+'&'+keryWords+"iphone"+"&"+response+"&"+entries }, function (result) {
+                            //result
+                            }, function (error) {
+                            //error
+                            });
+                        }
+            });
+        }());
+    </script>
+</polymer-element>
