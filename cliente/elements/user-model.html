@@ -59,13 +59,6 @@
                     }, function (error) {
                        console.log("ERROR DELETE USER");
                     });
-                },
-                getImages:function(callback){
-                    doAjax({type: 'GET', url:'/'}, function (result) {
-                        this.imagenes=result;
-                    }, function (error) {
-                       callback();
-                    });
                 }
             });
         }());

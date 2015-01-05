@@ -1,12 +1,11 @@
-<link rel = "import" href = "../bower_components/polymer/polymer.html" >
-<polymer-element name = "use-api">
+<polymer-element name = "using-api">
     <template>
     </template>
     <script>
 
         (function () {
             var base = 'http://open.api.ebay.com/shopping?version=713';
-            var appid = 'Ikaruscfa-4fc4-4be7-a6b0-4e54505e4f8';
+            var appid = 'appid=Ikaruscfa-4fc4-4be7-a6b0-4e54505e4f8';
             var callname = 'callname=FindItems';
             var keryWords = 'QueryKeywords=';
             var response = 'ResponseEncodingType=JSON';
@@ -21,20 +20,20 @@
             function doAjax(options, success, error) {
                 options.type = options.type || 'GET';
                 options.url = base + (options.url || '');
-                options.dataType = options.dataType || 'json';
+                options.dataType = options.dataType || 'jsonp';
                 options.contentType = options.contentType || 'application/json; charset=UTF-8';
                 options.success = success;
                 options.error = (typeof error === 'function') ? error : defaultAjaxErrorHandler;
                 $.ajax(options);
             }
-            Polymer('use-Api', {.
-                        getImages: function (callback) {
-                            doAjax({type: 'GET', url:'&'+appid+'&'+callname+'&'+keryWords+"iphone"+"&"+response+"&"+entries }, function (result) {
-                            //result
-                            }, function (error) {
-                            //error
-                            });
-                        }
+            Polymer('using-api', {
+                getObject: function () {
+                    doAjax({type: 'GET', url: '&' + appid + '&' + callname + '&' + keryWords + "iphone" + "&" + response + "&" + entries}, function (result) {
+                        console.log(result);
+                    }, function (error) {
+                        console.log("Error Propio ");
+                    });
+                }
             });
         }());
     </script>

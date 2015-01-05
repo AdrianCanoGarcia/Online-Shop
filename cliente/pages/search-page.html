@@ -1,3 +1,4 @@
+
 <polymer-element name="search-page">
     <template>
         <style>    
@@ -153,7 +154,7 @@
                     width: 80%;
                     margin-top: 0.5%;
                     height: 34px;
-                    
+
                 }
             }
             #done, cancel{
@@ -193,12 +194,12 @@
                 width: 500px;
                 height: 500px;
             }
-            
+
 
 
 
         </style>
-
+        <using-api id="useApi"></using-api>
         <user-model id="userModel"></user-model>
         <core-card id="core_card" layout vertical center fit on-dialog="{{ toggle }}">
             <core-header-panel mode="waterfall-tall" id="core_header_panel" headermargin="128" condenses headerheight="192">
@@ -227,9 +228,9 @@
                 </core-toolbar>
 
                 <section id="section" content>
-
+                    <core-icon-button icon="menu" id="menu" theme="core-light-theme" on-tap="{{ showApi }}"></core-icon-button>
                 </section>
-
+                
             </core-header-panel>
             <paper-dialog  id="profileDialog" transition="core-transition-center" layout vertical center>
                 <profile-page id="profileId"></profile-page>
@@ -245,11 +246,15 @@
             </paper-dialog>
 
 
+
         </core-card>
     </template>
     <script>
 
         Polymer({
+            showApi: function () {
+                this.$.useApi.getObject();
+            },
             unloadSearcher: function () {
                 this.$.div3.style.visibility = "hidden";
                 this.$.search_icon.style.visibility = "visible";

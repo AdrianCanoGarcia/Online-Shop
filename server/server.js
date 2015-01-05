@@ -12,7 +12,7 @@ app.use(favicon(__dirname + '/../cliente/favicon.png'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, '/../cliente')));
-
+app.set("jsonp callback", true);
  
 // Routes
 var basePath = path.join(__dirname, '/routes/');
