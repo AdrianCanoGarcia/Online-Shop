@@ -1,0 +1,30 @@
+<polymer-element name="products-container">
+    <template>
+        <style>
+            :host {
+            }
+            #core_card {
+               background-color: rgba(29, 100, 155, 0.5);
+               border-radius: 5px;
+               width: 300px;
+               height: 300px;
+            }
+        </style>
+        <using-api id="usingApi"></using-api>
+            
+        <core-card id="core_card" layout vertical center>
+            <paper-input readonly value="{{ model.items }}"></paper-input>
+        </core-card>
+    </template>
+
+    <script>
+        
+        Polymer({
+            loadData:function(result){
+                console.log(result);
+            }
+           
+                
+    });
+    </script>
+</polymer-element>

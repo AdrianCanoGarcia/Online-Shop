@@ -10,6 +10,7 @@
             var keryWords = 'QueryKeywords=';
             var response = 'ResponseEncodingType=JSON';
             var entries = 'MaxEntries=60';
+
             /* function defaultAjaxErrorHandler(xhr, err, desc) {
              console.log(xhr, err, desc);
              var errorToast = document.querySelector('#errorToast');
@@ -20,16 +21,17 @@
             function doAjax(options, success, error) {
                 options.type = options.type || 'GET';
                 options.url = base + (options.url || '');
-                options.dataType = options.dataType || 'jsonp';
+                options.dataType = options.dataType || 'json';
                 options.contentType = options.contentType || 'application/json; charset=UTF-8';
                 options.success = success;
                 options.error = (typeof error === 'function') ? error : defaultAjaxErrorHandler;
                 $.ajax(options);
             }
             Polymer('using-api', {
-                getObject: function () {
-                    doAjax({type: 'GET', url: '&' + appid + '&' + callname + '&' + keryWords + "iphone" + "&" + response + "&" + entries}, function (result) {
-                        console.log(result);
+                getObject: function (item, callback) {
+                    doAjax({type: 'GET', url: '&' + appid + '&' + callname + '&' + keryWords + item + "&" + response + "&" + entries}, function (result) {
+                        callback(result);
+
                     }, function (error) {
                         console.log("Error Propio ");
                     });

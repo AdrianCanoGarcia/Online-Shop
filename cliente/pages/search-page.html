@@ -22,6 +22,7 @@
             #section {
                 height: 5000px;
                 background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
+                padding-top: 30px;
             }
             #ikarus {
                 font-size: 120%;
@@ -195,9 +196,6 @@
                 height: 500px;
             }
 
-
-
-
         </style>
         <using-api id="useApi"></using-api>
         <user-model id="userModel"></user-model>
@@ -210,9 +208,9 @@
                     <core-icon-button icon="search" id="search_icon" style="visibility:visible" on-tap="{{ loadSearcher }}" ></core-icon-button>    
                     <div id="ikarus" class="bottom indent">Ikarus</div>
 
-                    <div id="div3" >
-                        <core-icon-button icon="search" id="core_icon_button1"></core-icon-button>
-                        <input id="input" placeholder="Producto..." is="core-input" on-blur="{{ unloadSearcher }}" >
+                    <div id="div3">
+                        <core-icon-button icon="search" id="core_icon_button1" on-tap="{{ searchObject }}"></core-icon-button>
+                        <input id="input" placeholder="Producto..." is="core-input" on-blur="{{ unloadSearcher }}" on-keyup="{{ searchObject }}">
                     </div>
 
                     <core-icon-button icon="menu" id="menu" theme="core-light-theme" on-tap="{{ showOptions }}">
@@ -227,10 +225,10 @@
 
                 </core-toolbar>
 
-                <section id="section" content>
-                    <core-icon-button icon="menu" id="menu" theme="core-light-theme" on-tap="{{ showApi }}"></core-icon-button>
+                <section id="section" content layout vertical center>
+                    <products-container id="itemsContainer"></products-container>
                 </section>
-                
+
             </core-header-panel>
             <paper-dialog  id="profileDialog" transition="core-transition-center" layout vertical center>
                 <profile-page id="profileId"></profile-page>
@@ -252,8 +250,21 @@
     <script>
 
         Polymer({
-            showApi: function () {
-                this.$.useApi.getObject();
+            searchObject: function (event, detail, sender) {
+                var code = event.keyCode;
+                
+                var that=this;
+                if (code == 13 || sender.id == "core_icon_button1") {
+                    
+                    this.$.useApi.getObject(this.$.input.value, function (result) {
+                         
+                         that.$.itemsContainer.loadData(result);
+                        
+                    });
+                    
+
+
+                }
             },
             unloadSearcher: function () {
                 this.$.div3.style.visibility = "hidden";
