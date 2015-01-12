@@ -4,27 +4,47 @@
             :host {
             }
             #core_card {
-               background-color: rgba(29, 100, 155, 0.5);
-               border-radius: 5px;
-               width: 300px;
-               height: 300px;
+                background-color: rgba(29, 100, 155, 0.5);
+                border-radius: 5px;
+                width: 300px;
+                height: 300px;
+            }
+            #img{
+                width: 100%;
+                height: 100%;
+            }
+            #imgContainer{
+                width: 100px;
+                height: 100px;
             }
         </style>
         <using-api id="usingApi"></using-api>
+        <template>  
+            <core-card id="core_card" layout vertical center>
+                <core-input readonly  name="user" value="" id="text"></core-input>
+                <div id="imgContainer">   
+                    <a id="a" href=""><img id ="img" src="" ></a>
+                </div>
+            </core-card>
+        </template>
+        <template>
+            <core-input readonly  name="user" value="JAJAJ" id="text"></core-input>
+        </template>
             
-        <core-card id="core_card" layout vertical center>
-            <paper-input readonly value="{{ model.items }}"></paper-input>
-        </core-card>
     </template>
 
     <script>
-        
+
         Polymer({
-            loadData:function(result){
+            loadData: function (result) {
                 console.log(result);
+                this.$.core_card.querySelector('text').value = 'New foo';
+                //this.$.text.value = result.Item[0].Title;
+                //this.$.img.src = result.Item[0].GalleryURL;
+                //this.$.a.href = result.Item[0].ViewItemURLForNaturalSearch;
             }
-           
-                
-    });
+
+
+        });
     </script>
 </polymer-element>
