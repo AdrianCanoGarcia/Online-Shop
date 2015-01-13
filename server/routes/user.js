@@ -61,7 +61,7 @@ function delUser(req, res, next) {
         }
     });
 }
-function getUser(req, res, next) {
+function getUser(req, res, next){
     var userName = req.params.userName;
     userManager.getUser(userName, function (err, user) {
         if (user) {

@@ -4,13 +4,7 @@
     <script>
 
         (function () {
-            var base = 'http://open.api.ebay.com/shopping?version=713';
-            var appid = 'appid=Ikaruscfa-4fc4-4be7-a6b0-4e54505e4f8';
-            var callname = 'callname=FindItems';
-            var keryWords = 'QueryKeywords=';
-            var response = 'ResponseEncodingType=JSON';
-            var entries = 'MaxEntries=10';
-
+            var base = "/api"
             /* function defaultAjaxErrorHandler(xhr, err, desc) {
              console.log(xhr, err, desc);
              var errorToast = document.querySelector('#errorToast');
@@ -29,11 +23,10 @@
             }
             Polymer('using-api', {
                 getObject: function (item, callback) {
-                    doAjax({type: 'GET', url: '&' + appid + '&' + callname + '&' + keryWords + item + "&" + response + "&" + entries}, function (result) {
+                    doAjax({type: 'GET', url: '/' + item}, function (result) {
                         callback(result);
-
                     }, function (error) {
-                        console.log("Error Propio ");
+                        console.log("Error Propio");
                     });
                 }
             });

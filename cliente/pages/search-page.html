@@ -259,7 +259,7 @@
                 if (code == 13 || sender.id == "core_icon_button1") {
                     
                     this.$.useApi.getObject(this.$.input.value, function (result) {
-                         
+                         console.log(result);
                          that.$.itemsContainer.loadData(result);
                         
                     });
