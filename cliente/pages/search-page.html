@@ -254,18 +254,13 @@
         Polymer({
             searchObject: function (event, detail, sender) {
                 var code = event.keyCode;
-                
                 var that=this;
                 if (code == 13 || sender.id == "core_icon_button1") {
                     
                     this.$.useApi.getObject(this.$.input.value, function (result) {
-                         console.log(result);
-                         that.$.itemsContainer.loadData(result);
-                        
+                          result = JSON.parse(result);
+                          that.$.itemsContainer.loadData(result);
                     });
-                    
-
-
                 }
             },
             unloadSearcher: function () {

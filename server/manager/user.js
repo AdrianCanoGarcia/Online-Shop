@@ -29,12 +29,11 @@ function sendMail(user) {
             text: "Wellcome to Ikarus your account has been created sucesfully \n User name: "
                     + user.username + "\n Password: " + user.passwd
         }
-    }, function (error, response)
-    {
-       
-        if (error)
+    }, function (error, response){
+       if (error)
             console.log(JSON.stringify(error));
-        else
+       
+    else
             console.log(response);
     });
 }
