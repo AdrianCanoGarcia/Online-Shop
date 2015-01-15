@@ -65,6 +65,7 @@
                 padding: 0 10px 5px;
             }
             #paper_item{
+                width: 80%;
                 padding: 5px 15px;
                 box-shadow: none;
                 margin-top: 4px;
@@ -80,6 +81,7 @@
                 margin-right: 20px;
             }
             #paper_item:hover {
+                width: 80%;
                 z-index: 999;
                 position: relative;
                 padding: 5px 15px;
@@ -108,17 +110,22 @@
             core-item#paper_item /deep/ #social{
                 width: 40px;
                 height: 25px;
-                left: 4px;
+                left: 2px;
             }
             core-item#paper_item /deep/ #power{
                 width: 40px;
                 height: 25px;
-                left: 12px;
+                left: 1px;
             }
             core-item#paper_item /deep/ #power:hover{
                 width: 40px;
                 height: 25px;
-                left: 12px;
+                left: 1px;
+            }
+            core-item#paper_item /deep/ #ad{
+                width: 40px;
+                height: 25px;
+                left: 13px;
             }
             @media (max-width:600px){
                 #core_icon_button1 {
@@ -176,7 +183,7 @@
                 top: 54px;
                 right: 38px;
                 width: 150px;
-                height: 270px;
+                height: 310px;
             }
             paper-dropdown#paperDropdown /deep/ #background{
                 background-color: #3f7eaa;
@@ -192,6 +199,18 @@
                 max-width: none;
             }
             paper-dialog#profileDialog /deep/ #container{
+                width: 500px;
+                height: 500px;
+            }
+            #adDialog{
+                border-radius: 5px;
+                box-shadow: rgba(0, 0, 0, 0.08) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
+                background-color: white;
+                max-height: none;
+                max-width: none;
+                
+            }
+            paper-dialog#adDialog /deep/ #container{
                 width: 500px;
                 height: 500px;
             }
@@ -219,6 +238,7 @@
                                 <div id="avatar"></div>
                                 <core-item id="paper_item" label="Profile" on-tap="{{ showProfile }}"><core-icon icon="social:person" id="social"></core-icon></core-item>
                                 <core-item id="paper_item" label="Sign Off" on-tap="{{ showSignOff }}"><core-icon icon="settings-power" id="power"></core-icon></core-item>
+                                <core-item id="paper_item" label="Publis an ad" on-tap="{{ adToogle }}"><core-icon icon="note-add" id="ad"></core-icon></core-item>
                             </div>
                         </paper-dropdown>
                     </core-icon-button>
@@ -226,7 +246,6 @@
                 </core-toolbar>
 
                 <section id="section" content layout vertical center>
-                    
                     <products-container id="itemsContainer"></products-container>
                     
                 </section>
@@ -234,6 +253,9 @@
             </core-header-panel>
             <paper-dialog  id="profileDialog" transition="core-transition-center" layout vertical center>
                 <profile-page id="profileId"></profile-page>
+            </paper-dialog>
+            <paper-dialog  id="adDialog" transition="core-transition-center" layout vertical center>
+                <announcement-page id="anouncement"></announcement-page>
             </paper-dialog>
             <paper-dialog  autoCloseDisabled="true" backdrop="true" id="dialog" transition="core-transition-center">
                 Are you sure that you want to delete your account?
@@ -245,21 +267,22 @@
                 </table>
             </paper-dialog>
 
-
-
         </core-card>
     </template>
     <script>
 
         Polymer({
+            adToogle: function () {
+                this.$.adDialog.toggle();
+            },
             searchObject: function (event, detail, sender) {
                 var code = event.keyCode;
-                var that=this;
+                var that = this;
                 if (code == 13 || sender.id == "core_icon_button1") {
-                    
+
                     this.$.useApi.getObject(this.$.input.value, function (result) {
-                          result = JSON.parse(result);
-                          that.$.itemsContainer.loadData(result);
+                        result = JSON.parse(result);
+                        that.$.itemsContainer.loadData(result);
                     });
                 }
             },
