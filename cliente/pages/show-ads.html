@@ -1,0 +1,25 @@
+<polymer-element name="show-ads">
+    <template>
+        <style>
+            :host{
+            }
+            
+
+        </style>
+        <user-model id="userModel"></user-model>
+
+        <core-card  id="core_card" layout vertical center fit>
+           <paper-button raised on-click="{{ toast }}">Discard Draft</paper-button>
+           <paper-toast id="toast1" text="A new acquisition announcement has been published"></paper-toast>
+        </core-card>
+
+    </template>
+    <script>
+       Polymer({
+           toast:function(){
+               this.$.toast1.show();
+           }
+            
+        });
+    </script>
+</polymer-element>
