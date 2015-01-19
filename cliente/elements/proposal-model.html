@@ -1,0 +1,38 @@
+<link rel = "import" href = "../bower_components/polymer/polymer.html" >
+<polymer-element name = "proposal-model">
+  <template>
+  </template>
+  <script>
+
+    (function () {
+      var base = '/proposal';
+      /* function defaultAjaxErrorHandler(xhr, err, desc) {
+       console.log(xhr, err, desc);
+       var errorToast = document.querySelector('#errorToast');
+       errorToast.text = '[' +xhr.status + '] ' + desc + ': ' + xhr.response;
+       errorToast.show();
+       }
+       */
+      function doAjax(options, success, error) {
+        options.type = options.type || 'GET';
+        options.url = base + (options.url || '');
+        options.dataType = options.dataType || 'json';
+        options.contentType = options.contentType || 'application/json; charset=UTF-8';
+        options.success = success;
+        options.error = (typeof error === 'function') ? error : defaultAjaxErrorHandler;
+        $.ajax(options);
+      }
+      Polymer('proposal-model', {
+        publishPost: function (post) {
+          var that = this;
+          doAjax({type: 'POST', data: post}, function (result) {
+            that.res = true;
+          }, function () {
+            that.res = false;
+          });
+          return that.res;
+        }
+      });
+    }());
+  </script>
+</polymer-element>

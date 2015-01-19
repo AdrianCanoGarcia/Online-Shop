@@ -29,6 +29,7 @@
     "debug": "~2.1.0",
     "mongoskin": "~1.4.4",
     "socket.io": "~1.2.1",
-    "node-mandrill": "~1.0.1"
+    "node-mandrill": "~1.0.1",
+    "request": "~2.51.0"
   }
 }

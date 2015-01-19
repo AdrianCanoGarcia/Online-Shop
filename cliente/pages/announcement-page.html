@@ -18,7 +18,7 @@
 
 
     </style>
-    <user-model id="userModel"></user-model>
+    <proposal-model id="proposal"></proposal-model>
 
     <core-card  id="core_card" layout vertical center fit>
 
@@ -26,17 +26,23 @@
       <div id="advert"><p>Introduce your advert:</p>
         <textarea id="textarea"></textarea>
         <p>Introduce your contact email:</p>
-        <paper-input placeholder="email@example.com"></paper-input>
+        <paper-input id="mail" placeholder="email@example.com"></paper-input>
       </div>
       <paper-button raised on-click="{{ toast }}">Publish Ad</paper-button>
-      <paper-toast id="toast1" text="A new acquisition announcement has been published"></paper-toast>
+      <paper-toast id="popup" text="A new acquisition announcement has been published"></paper-toast>
     </core-card>
 
   </template>
   <script>
     Polymer({
       toast: function () {
-        this.$.toast1.show();
+        post = {
+          content:this.$.textarea.value,
+          mail:this.$.mail.value
+          
+        }
+        var result = this.$.proposal.publishPost(JSON.stringify(post));
+        this.$.popup.show();
       }
 
     });
