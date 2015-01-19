@@ -33,7 +33,22 @@
     </core-card>
 
   </template>
+    <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+                socket.addEvent(function() {
+				addListeners.call(this, static);
+			
+                        function addListeners(static) {
+                            this.on('createPublishment', function() {
+                                console.log("Publicacion Creada");
+                            )};
+                        }
+                });
+            
+        </script>
   <script>
+      
     Polymer({
       toast: function () {
         post = {

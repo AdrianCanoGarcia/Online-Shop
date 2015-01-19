@@ -6,6 +6,12 @@ var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var app = express();
+var http = require('http').Server(app);
+var io = require('../node_modules/socket.io/index.js')(http);
+
+io.on('connection',function(socket){
+    console.log('a user connected');
+})
 
 
 
@@ -33,7 +39,7 @@ addRoutes(basePath);
 var ip = process.env.OPENSHIFT_NODEJS_IP || process.env.IP || '0.0.0.0';
 var port = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 9001;
 
-app.listen(port, ip, function () {
+http.listen(9001, ip, function () {
     debug('Application listening on http://' + ip + ':' + port);
 });
 
