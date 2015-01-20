@@ -28,6 +28,7 @@ function worker(io) {
     proposalManager.getAll(function (err, result) {
       if (result) {
         res.json(result);
+        console.log(result);
       } else {
         next(new Error(new Error('Unable to connect')));
       }

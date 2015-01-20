@@ -8,7 +8,12 @@ function create(post, callback){
     col.insert(post, callback);      
 }
 function getAll(callback){
-  col.find(callback);
+    col.find({},function(err, cursor){
+        if(err){
+            return callback(err);
+        }
+        cursor.toArray(callback);
+    });
 }
 
 col.bind({

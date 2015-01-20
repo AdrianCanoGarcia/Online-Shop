@@ -31,7 +31,7 @@
           });
         },
         getAll: function (callback) {
-          doAjax({type: 'GET'}, function (result) {
+          doAjax({type: 'GET', url: "/"}, function (result) {
             callback(result);
           }, function (error) {
             callback();

@@ -1,33 +1,52 @@
 <polymer-element name="show-publishment">
-  <template>
-    <style>
-      :host{
-      }
+    <template>
+        <style>
+            :host{
+            }
 
+            #adsContainer{
+                background-color: blue;
+                width: 300px;
+                height: 300px;
+            }
+            #container{
+                background-color:red;
+                width: 300px;
+                height: 300px;
+            }
+        </style>
+        <proposal-model id="proposalModel"></proposal-model>
+        <div id="container">
+        <template repeat="{{ ad in ads }}">
+            Hola
 
-    </style>
-    <user-model id="userModel"></user-model>
-    
-   
+        </template>
+        </div>
+    </template>
 
-  </template>
-  
-  <script>
-   var socket=io();
-    
-    socket.on('AdPublished', function (result) {
-      console.log(result);
-      
-    });
-    Polymer({
-      ready: function (){
-        
-        
-      },
-      toast: function () {
-        this.$.toast1.show();
-      }
+    <script>
+        var socket = io();
+        socket.on('AdPublished', function (result) {
 
-    });
-  </script>
+            /*document.getElementById("proposalModel").getAll(function(collection){
+             console.log(collection);
+             });*/
+
+        });
+        Polymer({
+            letters:['a', 'b', 'c'],
+            
+            ready: function () {
+                this.$.proposalModel.getAll(function (result) {
+                   ads:result;
+                   //Creo que el problema esta al darle valor a la variable dentro del callback habria que mirarla fuera.
+                });
+                
+            },
+            toast: function () {
+                this.$.toast1.show();
+            }
+
+        });
+    </script>
 </polymer-element>
