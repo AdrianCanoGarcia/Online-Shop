@@ -1,19 +1,19 @@
 var db = require('../util/mongodb').db;
 var toObjectID = require('../util/mongodb').toObjectID;
 var col = db.bind('Publications');
-var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-var io = require('../../node_modules/socket.io/index.js')(http);
+
 
 
 function create(post, callback){
-    col.insert(post, callback);
-        io.emit('createPublishment',{ for: 'everyone' });
+    col.insert(post, callback);      
+}
+function getAll(callback){
+  col.find(callback);
 }
 
 col.bind({
-    create: create
+    create: create,
+    getAll: getAll
 });
 
 module.exports = col;

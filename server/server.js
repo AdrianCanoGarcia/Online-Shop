@@ -5,14 +5,15 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+
 var app = express();
 var http = require('http').Server(app);
-var io = require('../node_modules/socket.io/index.js')(http);
+/*var io = require('./util/socket.io')(http);*/
+var io = require('socket.io')(http);
 
-io.on('connection',function(socket){
-    console.log('a user connected');
-})
-
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
 
 
 app.use(favicon(__dirname + '/../cliente/favicon.png'));
@@ -30,7 +31,7 @@ function addRoutes(basePath, prefix) {
     } else {
       var basePathService = (prefix ? prefix : '/') + filename.replace(/\.js$/, '');
       var serviceDefinition = basePath + filename;
-      app.use(basePathService, require(serviceDefinition));
+      app.use(basePathService, require(serviceDefinition)(io));
     }
   });
 }
@@ -39,8 +40,8 @@ addRoutes(basePath);
 var ip = process.env.OPENSHIFT_NODEJS_IP || process.env.IP || '0.0.0.0';
 var port = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 9001;
 
-http.listen(9001, ip, function () {
-    debug('Application listening on http://' + ip + ':' + port);
+http.listen(port, ip, function() {
+	debug('Application listening on http://' + ip + ':' + port);
 });
 
 module.exports = app;

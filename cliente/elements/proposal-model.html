@@ -23,14 +23,19 @@
         $.ajax(options);
       }
       Polymer('proposal-model', {
-        publishPost: function (post) {
-          var that = this;
+        publishPost: function (post, callback) {
           doAjax({type: 'POST', data: post}, function (result) {
-            that.res = true;
-          }, function () {
-            that.res = false;
+            callback(result);
+          }, function (error) {
+            callback();
           });
-          return that.res;
+        },
+        getAll: function (callback) {
+          doAjax({type: 'GET'}, function (result) {
+            callback(result);
+          }, function (error) {
+            callback();
+          });
         }
       });
     }());

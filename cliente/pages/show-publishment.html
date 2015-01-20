@@ -1,25 +1,33 @@
 <polymer-element name="show-publishment">
-    <template>
-        <style>
-            :host{
-            }
-            
+  <template>
+    <style>
+      :host{
+      }
 
-        </style>
-        <user-model id="userModel"></user-model>
 
-        <core-card  id="core_card" layout vertical center fit>
-           <paper-button raised on-click="{{ toast }}">Discard Draft</paper-button>
-           <paper-toast id="toast1" text="A new acquisition announcement has been published"></paper-toast>
-        </core-card>
+    </style>
+    <user-model id="userModel"></user-model>
+    
+   
 
-    </template>
-    <script>
-       Polymer({
-           toast:function(){
-               this.$.toast1.show();
-           }
-            
-        });
-    </script>
+  </template>
+  
+  <script>
+   var socket=io();
+    
+    socket.on('AdPublished', function (result) {
+      console.log(result);
+      
+    });
+    Polymer({
+      ready: function (){
+        
+        
+      },
+      toast: function () {
+        this.$.toast1.show();
+      }
+
+    });
+  </script>
 </polymer-element>
