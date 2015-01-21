@@ -1,52 +1,116 @@
 <polymer-element name="show-publishment">
-    <template>
-        <style>
-            :host{
-            }
+  <template>
+    <style>
+      :host{
+      }
+      #container{
+        background-color: rgba(255, 255, 255, 0.1);
+        width: 100%;
+        height: 300px;
+      }
+      #content{
+        width: 95%;
+        height: 200px;
+        border: solid 1px rgba(255, 255, 255, 0.4);
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 10px;
+        margin-top: 25px;
+      }
+      #email{
+        width: 95%;
+        margin-top: 10px;
+      }
+      #notice{
+        border: solid 1px rgba(255, 255, 255, 0.4);
+        background-color: rgba(255, 255, 255, 0.5);
+        width: 100%;
+        height: 50px;
+      }
+      hr{
+        margin: 0;
+        border: 0;
+        height: 1px;
+        background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+        background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+        background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+        background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+      }
+      date{
+        margin-right: 46.5%;
+        float: right;
+      }
+      .button {
+        border-top: 1px solid #96d1f8;
+        background: #65a9d7;
+        background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+        background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+        background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+        background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+        background: -o-linear-gradient(top, #3e779d, #65a9d7);
+        padding: 5px 10px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+        -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+        box-shadow: rgba(0,0,0,1) 0 1px 0;
+        text-shadow: rgba(0,0,0,.4) 0 1px 0;
+        color: white;
+        font-size: 14px;
+        font-family: Georgia, serif;
+        text-decoration: none;
+        vertical-align: middle;
+        text-align: center;
+        width: 10%;
+      }
+      .button:hover {
+        border-top-color: #28597a;
+        background: #28597a;
+        color: #ccc;
+      }
+      .button:active {
+        border-top-color: #1b435e;
+        background: #1b435e;
+      }
+      button-container{
+        width: 95%;
+      }
 
-            #adsContainer{
-                background-color: blue;
-                width: 300px;
-                height: 300px;
-            }
-            #container{
-                background-color:red;
-                width: 300px;
-                height: 300px;
-            }
-        </style>
-        <proposal-model id="proposalModel"></proposal-model>
-        <div id="container">
-        <template repeat="{{ ad in ads }}">
-            Hola
 
-        </template>
-        </div>
+    </style>
+    <proposal-model id="proposalModel"></proposal-model>
+    <div id='button-container' layout vertical center ><div class="button" on-click="{{loadAds}}" id="button" style="visibility:hidden">There're more publications</div></div>
+    <template repeat="{{ ad in ads }}">
+      <div id="container" layout vertical center>
+        <div id="content">{{ad.content}}</div>
+        <div id="email"> Contact e-mail: {{ad.mail}} <date> {{ad.date}} </date></div>
+      </div>
+      <hr/>
     </template>
+  </template>
 
-    <script>
+  <script>
+
+    Polymer({
+      ready: function () {
         var socket = io();
+        var that = this;
         socket.on('AdPublished', function (result) {
-
-            /*document.getElementById("proposalModel").getAll(function(collection){
-             console.log(collection);
-             });*/
-
+          that.$.button.style.visibility = "visible";
         });
-        Polymer({
-            letters:['a', 'b', 'c'],
-            
-            ready: function () {
-                this.$.proposalModel.getAll(function (result) {
-                   ads:result;
-                   //Creo que el problema esta al darle valor a la variable dentro del callback habria que mirarla fuera.
-                });
-                
-            },
-            toast: function () {
-                this.$.toast1.show();
-            }
-
+      },
+      loadAds: function () {
+        var that = this;
+        that.$.button.style.visibility = "hidden";
+        this.$.proposalModel.getAll(function (result) {
+          that.ads = result;
         });
-    </script>
+
+      },
+      toast: function () {
+        this.$.toast1.show();
+      }
+
+    });
+  </script>
 </polymer-element>

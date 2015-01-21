@@ -21,12 +21,12 @@
       }
       #section {
         height: 5000px;
-        background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
+        background: linear-gradient(to bottom, #b7dbf1 0%,#5398ce 98%);
         padding-top: 30px;
       }
       #sectionAds {
         height: 5000px;
-        background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
+        background: linear-gradient(to bottom, #b7dbf1 0%,#5398ce 98%);
         padding-top: 30px;
       }
       #ikarus {
@@ -224,6 +224,9 @@
         width: 500px;
         height: 500px;
       }
+      #showPublishment{
+        width: 100%;
+      }
 
     </style>
     <using-api id="useApi"></using-api>
@@ -248,7 +251,7 @@
                 <div id="avatar"></div>
                 <core-item id="paper_item" label="Profile" on-tap="{{ showProfile }}"><core-icon icon="social:person" id="social"></core-icon></core-item>
                 <core-item id="paper_item" label="Publish an Ad" on-tap="{{ adToogle }}"><core-icon icon="communication:messenger" id="messenger"></core-icon></core-item>
-                <core-item id="paper_item" label="Show Ads" on-tap="{{ showAdd }}"><core-icon icon="question-answer" id="ad"></core-icon></core-item>
+                <core-item id="paper_item" label="Show Ads" on-tap="{{ showAds }}"><core-icon icon="question-answer" id="ad"></core-icon></core-item>
                 <core-item id="paper_item" label="Sign Off" on-tap="{{ showSignOff }}"><core-icon icon="settings-power" id="power"></core-icon></core-item>
               </div>
             </paper-dropdown>
@@ -264,7 +267,7 @@
           </section>
             
           <section id="sectionAds" content layout vertical center>
-            <show-publishment></show-publishment>
+            <show-publishment id="showPublishment"></show-publishment>
           </section>
           
         </core-pages>
@@ -290,9 +293,9 @@
   <script>
 
     Polymer({
-      showAdd:function(){
+      showAds:function(){
+        this.$.showPublishment.loadAds();
         this.$.pages.selected=2;
-        
       },
       adToogle: function () {
         this.$.adDialog.toggle();

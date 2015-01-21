@@ -12,7 +12,8 @@ function worker(io) {
   function create(req, res, next) {
     var post = {
       content: req.body.content,
-      mail: req.body.mail
+      mail: req.body.mail,
+      date: req.body.date
     }
     proposalManager.create(post, function (err, result) {
       if (err) {
@@ -20,7 +21,6 @@ function worker(io) {
       }
       res.json(result);
       io.sockets.emit('AdPublished', result);
-
     });
 
   }

@@ -8,7 +8,7 @@ function create(post, callback){
     col.insert(post, callback);      
 }
 function getAll(callback){
-    col.find({},function(err, cursor){
+    col.find().sort({date: -1},function(err, cursor){
         if(err){
             return callback(err);
         }

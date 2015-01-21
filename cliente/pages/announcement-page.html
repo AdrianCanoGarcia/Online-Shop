@@ -21,8 +21,6 @@
     <proposal-model id="proposal"></proposal-model>
 
     <core-card  id="core_card" layout vertical center fit>
-
-
       <div id="advert"><p>Introduce your advert:</p>
         <textarea id="textarea"></textarea>
         <p>Introduce your contact email:</p>
@@ -38,10 +36,11 @@
 
     Polymer({
       toast: function () {
+        var date = this.getDate();
         post = {
           content: this.$.textarea.value,
-          mail: this.$.mail.value
-
+          mail: this.$.mail.value,
+          date: date
         }
         that = this;
         this.$.proposal.publishPost(JSON.stringify(post), function (result) {
@@ -51,6 +50,11 @@
             that.$.popupError.show();
           }
         });
+      },
+      getDate: function () {
+        var f = new Date();
+        var date = (f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear() + "  " + f.getHours() + ":" + (f.getMinutes()<10?'0':'') + f.getMinutes()  + ":" + f.getSeconds());
+        return date;
       }
     });
   </script>
