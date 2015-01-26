@@ -5,16 +5,12 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var url = require('url');
 
 var app = express();
 var http = require('http').Server(app);
 /*var io = require('./util/socket.io')(http);*/
 var io = require('socket.io')(http);
-
-io.on('connection', function(socket){
-  console.log('a user connected');
-});
-
 
 app.use(favicon(__dirname + '/../cliente/favicon.png'));
 app.use(bodyParser.json());

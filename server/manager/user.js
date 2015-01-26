@@ -19,7 +19,7 @@ function getUser(userName, callback) {
 function verifyUser(user, callback) {
     daoUser.getUser(user, callback);
 }
-function sendMail(user) {
+function sendMail(user,logId) {
     
     mandrill('/messages/send', {
         message: {
@@ -27,7 +27,9 @@ function sendMail(user) {
             from_email: 'Admin@ikarus.com',
             subject: "Wellcome to Ikarus",
             text: "Wellcome to Ikarus your account has been created sucesfully \n User name: "
-                    + user.username + "\n Password: " + user.passwd
+                    + user.username + "\n Password: " + user.passwd +"\n ClICK HERE TO ACTIVATE THE ACCOUNT: \n"+
+                    'localhost:9001/loggin/'+logId
+                    
         }
     }, function (error, response){
        if (error)
@@ -44,5 +46,6 @@ module.exports = {
     setUser: setUser,
     delUser: delUser,
     getUser: getUser,
-    verifyUser: verifyUser
+    verifyUser: verifyUser,
+    
 };

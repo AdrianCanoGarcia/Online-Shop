@@ -1,14 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var proposalManager = require('../manager/proposal');
-
+var url = require('url');
 
 function worker(io) {
   /* ROUTES */
   router.post('/', create);
   router.get('/', getAll);
+  
   /* ROUTES */
 
+  
+      
+  
   function create(req, res, next) {
     var post = {
       content: req.body.content,
