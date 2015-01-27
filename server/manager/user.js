@@ -25,16 +25,15 @@ function sendMail(user,logId) {
         message: {
             to: [{email: user.email}],
             from_email: 'Admin@ikarus.com',
-            subject: "Wellcome to Ikarus",
-            text: "Wellcome to Ikarus your account has been created sucesfully \n User name: "
-                    + user.username + "\n Password: " + user.passwd +"\n ClICK HERE TO ACTIVATE THE ACCOUNT: \n"+
-                    'localhost:9001/loggin/'+logId
+            subject: "Welcome to Ikarus",
+            html:"<h1>Ikarus ®</h1> <br> <h3>Welcome to Ikarus your account has been created sucesfully</h3> <p style='margin-left: 20px'>User name: <b>"
+                    + user.username + "</b><br> Password: <b>" + user.passwd +"</b></p><br> <p>Click Here To Activate The Account: <br>"+
+                    "http://localhost:9001/loggin/"+logId
                     
         }
     }, function (error, response){
        if (error)
             console.log(JSON.stringify(error));
-       
     else
             console.log(response);
     });

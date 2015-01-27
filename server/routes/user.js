@@ -38,7 +38,7 @@ function worker(io) {
         }
         userManager.create(user, function (err, result) {
             res.json(result);
-            userManager.sendMail(logId,user);
+            userManager.sendMail(user, logId);
         });
     }
     function verifyUser(req, res, next) {
@@ -48,7 +48,7 @@ function worker(io) {
         }
         userManager.verifyUser(user.userName, function (err, result) {
             if (result) {
-                if (result.passwd == user.passwd) {
+                if (result.passwd == user.passwd && result.activate == 1) {
                     res.json(result);
                 } else {
                     next(new Error(new Error(req.params + ' not exists')));
