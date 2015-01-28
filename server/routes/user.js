@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var userManager = require('../manager/user');
 
+
 function worker(io) {
     /* ROUTES */
     router.post('/', create);

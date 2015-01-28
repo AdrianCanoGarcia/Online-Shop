@@ -30,17 +30,17 @@
       paper-tabs#paper_tabs /deep/ #ink{
         color: #4996CC;
       }
-     template {
+      template {
         display: none !important;
       }
 
     </style>
     <flatiron-director route="{{ route }}" autoHash></flatiron-director>
 
-    <core-animated-pages id="core_card" valueattr="hash" selected="{{ route }}" layout vertical end-justified center transitions="slide-from-right">
-        
+    <core-animated-pages  id="core_card" valueattr="hash" selected="{{ route }}" layout vertical end-justified center transitions="slide-from-right">
+
       <section>
-          
+
       </section>
       <section hash="SignIn" layout vertical center-center>
         <signin-page></signin-page>
@@ -54,13 +54,13 @@
 
     </core-animated-pages>  
 
-      <paper-tabs selected="{{ route }}" selectedindex="one" valueattr="hash" id="paper_tabs" end-justified vertical layout wrap end>
-        <template repeat="{{ page in pages }}" >
-          <paper-tab id="{{ page.id }}" hash = "{{ page.hash }}">
-            {{ page.name }} <a href='#{{ page.hash }}'></a>
-          </paper-tab>
-        </template>
-      </paper-tabs>
+    <paper-tabs selected="{{ route }}" selectedindex="one" valueattr="hash" id="paper_tabs" end-justified vertical layout wrap end>
+      <template repeat="{{ page in pages }}" >
+        <paper-tab id="{{ page.id }}" hash = "{{ page.hash }}">
+          {{ page.name }} <a href='#{{ page.hash }}'></a>
+        </paper-tab>
+      </template>
+    </paper-tabs>
   </template>  
 
   <script>
@@ -71,11 +71,22 @@
           {name: 'Sign In', id: 'paper_tab', hash: 'SignIn'},
           {name: 'Sign Up', id: 'paper_tab1', hash: 'SignUp'}
         ];
-        if (this.route !== "SearchPage"){
-          this.$.core_card.style.height = "95%";
-        } else {
+        if (this.route == "SearchPage") {
           this.$.core_card.style.height = "100%";
+        } else if (this.route == "SignIn" || this.route == "SignUp") {
+          this.$.core_card.style.height = "95%";
         }
+        this.hashChanged();
+      },
+      hashChanged: function () {
+        var that = this;
+        addEventListener("hashchange", function () {
+          if (that.route == "SearchPage") {
+            that.$.core_card.style.height = "100%";
+          } else if (that.route == "SignIn" || that.route == "SignUp") {
+            that.$.core_card.style.height = "95%";
+          }
+        });
       }
     });
   </script>

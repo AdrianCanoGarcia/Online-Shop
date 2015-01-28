@@ -43,7 +43,7 @@
                 },
                 verifyUser: function (user, callback) {
                     doAjax({type: 'GET', url: '/verify/' + user.username + '/' + user.passwd}, function (result) {
-                        callback(result);
+                       callback(result);
                     }, function (error) {
                        callback();
                     });

@@ -20,7 +20,7 @@ function worker(io) {
                   }
                 });
                 res.redirect("/#SignIn");
-                
+                logginManager.createToken();
             }
 
         });

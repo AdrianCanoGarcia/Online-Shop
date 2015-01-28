@@ -27,7 +27,7 @@
         <paper-input id="mail" placeholder="email@example.com"></paper-input>
       </div>
       <paper-button raised on-click="{{ toast }}">Publish Ad</paper-button>
-      <paper-toast id="popup" text="A new announcement has been published"></paper-toast>
+      <paper-toast id="popup"></paper-toast>
       <paper-toast id="popupError" text="Unable to publish your ad"></paper-toast>
     </core-card>
 
@@ -36,25 +36,39 @@
 
     Polymer({
       toast: function () {
-        var date = this.getDate();
-        post = {
-          content: this.$.textarea.value,
-          mail: this.$.mail.value,
-          date: date
-        }
-        that = this;
-        this.$.proposal.publishPost(JSON.stringify(post), function (result) {
-          if (result) {
-            that.$.popup.show();
-          } else {
-            that.$.popupError.show();
+        if (this.validateEmail()) {
+          
+          var date = this.getDate();
+          post = {
+            content: this.$.textarea.value,
+            mail: this.$.mail.value,
+            date: date
           }
-        });
+          that = this;
+          this.$.proposal.publishPost(JSON.stringify(post), function (result) {
+            if (result) {
+              that.$.popup.text = "A new announcement has been published";
+              that.$.popup.show();
+            } else {
+              that.$.popupError.show();
+            }
+          });
+        }else{
+          this.$.popup.text = "Invalid e-mail";
+          this.$.popup.show();
+        }
       },
       getDate: function () {
         var f = new Date();
-        var date = (f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear() + "  " + f.getHours() + ":" + (f.getMinutes()<10?'0':'') + f.getMinutes()  + ":" + f.getSeconds());
+        var date = (f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear() + "  " + f.getHours() + ":" + (f.getMinutes() < 10 ? '0' : '') + f.getMinutes() + ":" + f.getSeconds());
         return date;
+      },
+      validateEmail: function () {
+        var string = this.$.mail.value;
+        return this.validateField(string, /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+      },
+      validateField: function (string, pattern) {
+        return string.match(pattern) !== null;
       }
     });
   </script>
