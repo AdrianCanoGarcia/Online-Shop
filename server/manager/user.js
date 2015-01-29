@@ -1,10 +1,15 @@
 var daoUser = require('../Dao/user');
 var mandrill = require('node-mandrill')('Rdsh06EthIf4eJZQOAu0og');
 var jwt = require('jsonwebtoken');
+var jwtSecret = require('../util/config').jwtSecret;
 
 function create(user, callback) {
   daoUser.create(user, callback);
- 
+  createToken(user);
+}
+function createToken(user){
+    var token = jwt.sign(user, jwtSecret);
+    return token;
 }
 
 function setUser(name, mail, callback) {
@@ -43,7 +48,7 @@ function sendMail(user, logId) {
 }
 
 module.exports = {
-  createToken: createToken,
+  createToken:createToken,
   sendMail: sendMail,
   create: create,
   setUser: setUser,
