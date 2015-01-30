@@ -5,13 +5,11 @@ var jwtSecret = require('../util/config').jwtSecret;
 
 function create(user, callback) {
   daoUser.create(user, callback);
-  createToken(user);
 }
 function createToken(user){
     var token = jwt.sign(user, jwtSecret);
     return token;
 }
-
 function setUser(name, mail, callback) {
   var update = {
     $set: {email: mail}
@@ -46,13 +44,18 @@ function sendMail(user, logId) {
       console.log(response);
   });
 }
+function decryptToken(token, callback){
+  var decode = jwt.decode(token);
+ // console.log("token" + token);
+}
 
 module.exports = {
+  decryptToken: decryptToken,
   createToken:createToken,
   sendMail: sendMail,
   create: create,
   setUser: setUser,
   delUser: delUser,
   getUser: getUser,
-  verifyUser: verifyUser,
+  verifyUser: verifyUser
 };

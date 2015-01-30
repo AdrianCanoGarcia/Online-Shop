@@ -35,13 +35,12 @@
       }
 
     </style>
+    <user-model id="userModel"></user-model>
     <flatiron-director route="{{ route }}" autoHash></flatiron-director>
 
     <core-animated-pages  id="core_card" valueattr="hash" selected="{{ route }}" layout vertical end-justified center transitions="slide-from-right">
 
-      <section>
-
-      </section>
+      <section></section>
       <section hash="SignIn" layout vertical center-center>
         <signin-page></signin-page>
       </section>
@@ -64,20 +63,20 @@
   </template>  
 
   <script>
-    var logName;
-    window.localStorage.setItem("->","mis cojones");
     Polymer({
       ready: function () {
         this.pages = [
           {name: 'Sign In', id: 'paper_tab', hash: 'SignIn'},
           {name: 'Sign Up', id: 'paper_tab1', hash: 'SignUp'}
         ];
-        if (this.route == "SearchPage") {
-          this.$.core_card.style.height = "100%";
-        } else if (this.route == "SignIn" || this.route == "SignUp") {
-          this.$.core_card.style.height = "95%";
+        if (){
+          if (this.route == "SearchPage") {
+            this.$.core_card.style.height = "100%";
+          } else if (this.route == "SignIn" || this.route == "SignUp") {
+            this.$.core_card.style.height = "95%";
+          }
+          this.hashChanged();
         }
-        this.hashChanged();
       },
       hashChanged: function () {
         var that = this;
@@ -86,6 +85,7 @@
             that.$.core_card.style.height = "100%";
           } else if (that.route == "SignIn" || that.route == "SignUp") {
             that.$.core_card.style.height = "95%";
+            location.href = "#SearchPage";
           }
         });
       }

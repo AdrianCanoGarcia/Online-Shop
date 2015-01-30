@@ -107,7 +107,7 @@
           if (!result) {
             that.showError();
           } else {
-            logName = result;
+            window.localStorage.setItem("token", result);
             hidden();
             location.href = "#SearchPage";
           }

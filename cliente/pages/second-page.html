@@ -1,230 +1,240 @@
 <polymer-element name="login-page">
-    <template>
-        <style>
-            :host {
-            }
-            #core_card {
-                width: 70%;
-                height: 55%;
-                border-top-left-radius: 2px;
-                border-top-right-radius: 2px;
-                border-bottom-right-radius: 2px;
-                border-bottom-left-radius: 2px;
-                box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
-                padding: 20px;
-                margin: 50px 30px;
-                background-color: rgba(29, 100, 155, 0.5);
-                border-radius: 5px;
-            }
-            #username, #email {
-                margin-bottom: 30px;
-                width: 95%;
-                padding-left: 10px;
-                padding-right: 10px;
-                padding-top: 5px;
-                font-size: 15px;
-                background-color: rgb(249, 246, 246);
-                
-            }
-            #passwd {
-                width: 95%;
-                padding-left: 10px;
-                padding-right: 10px;
-                padding-top: 5px;
-                font-size: 15px;
-                background-color: rgb(249, 246, 246);
-            }
-            #repeatEmail {
-                width: 95%;
-                padding-left: 10px;
-                padding-right: 10px;
-                padding-top: 5px;
-                font-size: 15px;
-                background-color: rgb(249, 246, 246);
-                margin-bottom: 20px;
-                
-            }
-            #enter {
-                margin-bottom: 10px;
-                padding-top: 5px;
-                width: 100%;
-                color: rgb(255, 255, 255);
-                text-transform: none;
-                font-size:25px;
-            }
-            #invalid{
-                visibility:hidden;
-                color: #f7f704;
-                margin-bottom: 5px;
-                text-align: center;
-                margin-top: 5px;
-            }
-            core-input#invalid /deep/ input{
-                text-align: center;
-            }
-            p{
-                font-size: 12px;
-                margin-bottom: 15px;
-                color: #f7f704;
-                margin-left: 10px;
-            }
-            #checkbox, paper-checkbox#checkbox /deep/ #checkbox.checked {
-                color: #f7f704;
-            }
-            paper-checkbox#checkbox /deep/ #checkbox{
-                border-color: #f7f704;
-            }
-            .fancy::shadow .core-tooltip {
-                opacity: 2;
-                -webkit-transition: all 300ms cubic-bezier(0,1.92,.99,1.07);
-                transition: all 300ms cubic-bezier(0,1.92,.99,1.07);
-                -webkit-transform: translate3d(-40px, 0, 0);
-                transform: translate3d(-10px, 0, 0);
-            }
-            .fancy:hover::shadow .core-tooltip, .fancy:focus::shadow .core-tooltip {
-                opacity: 1;
-                -webkit-transform: translate3d(0, 0, 0);
-                transform: translate3d(0, 0, 0);
-            }
+  <template>
+    <style>
+      :host {
+      }
+      #core_card {
+        width: 70%;
+        height: 55%;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+        box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
+        padding: 20px;
+        margin: 50px 30px;
+        background-color: rgba(29, 100, 155, 0.5);
+        border-radius: 5px;
+      }
+      #username, #email {
+        margin-bottom: 30px;
+        width: 95%;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 5px;
+        font-size: 15px;
+        background-color: rgb(249, 246, 246);
+
+      }
+      #passwd {
+        width: 95%;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 5px;
+        font-size: 15px;
+        background-color: rgb(249, 246, 246);
+      }
+      #repeatEmail {
+        width: 95%;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 5px;
+        font-size: 15px;
+        background-color: rgb(249, 246, 246);
+        margin-bottom: 20px;
+
+      }
+      #enter {
+        margin-bottom: 10px;
+        padding-top: 5px;
+        width: 100%;
+        color: rgb(255, 255, 255);
+        text-transform: none;
+        font-size:25px;
+      }
+      #invalid{
+        visibility:hidden;
+        color: #f7f704;
+        margin-bottom: 5px;
+        text-align: center;
+        margin-top: 5px;
+      }
+      core-input#invalid /deep/ input{
+        text-align: center;
+      }
+      p{
+        font-size: 12px;
+        margin-bottom: 15px;
+        color: #f7f704;
+        margin-left: 10px;
+      }
+      #checkbox, paper-checkbox#checkbox /deep/ #checkbox.checked {
+        color: #f7f704;
+      }
+      paper-checkbox#checkbox /deep/ #checkbox{
+        border-color: #f7f704;
+      }
+      .fancy::shadow .core-tooltip {
+        opacity: 2;
+        -webkit-transition: all 300ms cubic-bezier(0,1.92,.99,1.07);
+        transition: all 300ms cubic-bezier(0,1.92,.99,1.07);
+        -webkit-transform: translate3d(-40px, 0, 0);
+        transform: translate3d(-10px, 0, 0);
+      }
+      .fancy:hover::shadow .core-tooltip, .fancy:focus::shadow .core-tooltip {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
 
 
-            /* Smartphones (portrait and landscape) ----------- */
-            @media (min-device-width : 320px) and (max-width:480px){
-                #core_card {
-                    width: 200px;
-                    height: 340px;
-                }
-                #username, #email, #repeatEmail {
-                    font-size: 12px;
-                    margin-bottom: 20px;
-                    height: 30px;
-                }
-                p{
-                    font-size: 9px;
-                }
-                .fancy /deep/ .core-tooltip{
-                    font-size: 6px;
-                    width: 53px;
-                    padding: 6px;
-                }
-                #div {
-                    margin-bottom: 10px;
-                }
-                #passwd {
-                    font-size: 12px;
-                    margin-bottom: 10px;
-                    height: 30px;
-                }
-                #invalid {
-                    font-size: 15px;
-                }
-                #enter {
-                    margin-bottom: 5px;
-                }
-            } 
-        </style>
-        <user-model id="userModel"></user-model>
-        <core-card id="core_card" layout vertical center>
-            <paper-input label="User..." id="username" layout vertical  on-blur="{{ checkNameExists }}" on-keyup="{{ keypressHandler }}"></paper-input>
-            <paper-input type="password" label="Password..." id="passwd" layout vertical on-keyup="{{ keypressHandler }}"></paper-input>
-            <div id="div" layout horizontal center>
-                <core-tooltip label="Show password" position="left" class="fancy">
-                    <paper-checkbox id="checkbox" on-change="{{ showPasswd }}"></paper-checkbox>
-                </core-tooltip>
-                <p>Password must constains letters and numbers</p>
-            </div>
-            <paper-input label="Email..." id="email" layout vertical on-keyup="{{ keypressHandler }}" ></paper-input>
-            <paper-input label="Repeat Email..." id="repeatEmail" layout vertical on-keyup="{{ keypressHandler }}" ></paper-input>
-            <div><core-input center-justified readonly value="" id="invalid"></core-input></div>
-            <paper-button id="enter" on-tap="{{ keypressHandler }}" center center-justified >Send</paper-button>
-        </core-card>
-    </template>
+      /* Smartphones (portrait and landscape) ----------- */
+      @media (min-device-width : 320px) and (max-width:480px){
+        #core_card {
+          width: 200px;
+          height: 340px;
+        }
+        #username, #email, #repeatEmail {
+          font-size: 12px;
+          margin-bottom: 20px;
+          height: 30px;
+        }
+        p{
+          font-size: 9px;
+        }
+        .fancy /deep/ .core-tooltip{
+          font-size: 6px;
+          width: 53px;
+          padding: 6px;
+        }
+        #div {
+          margin-bottom: 10px;
+        }
+        #passwd {
+          font-size: 12px;
+          margin-bottom: 10px;
+          height: 30px;
+        }
+        #invalid {
+          font-size: 15px;
+        }
+        #enter {
+          margin-bottom: 5px;
+        }
+      } 
+    </style>
+    <user-model id="userModel"></user-model>
+    <core-card id="core_card" layout vertical center>
+      <paper-input label="User..." id="username" layout vertical  on-blur="{{ checkNameExists }}" on-keyup="{{ keypressHandler }}"></paper-input>
+      <paper-input type="password" label="Password..." id="passwd" layout vertical on-keyup="{{ keypressHandler }}"></paper-input>
+      <div id="div" layout horizontal center>
+        <core-tooltip label="Show password" position="left" class="fancy">
+          <paper-checkbox id="checkbox" on-change="{{ showPasswd }}"></paper-checkbox>
+        </core-tooltip>
+        <p>Password must constains letters and numbers</p>
+      </div>
+      <paper-input label="Email..." id="email" layout vertical on-keyup="{{ keypressHandler }}" ></paper-input>
+      <paper-input label="Repeat Email..." id="repeatEmail" layout vertical on-keyup="{{ keypressHandler }}" ></paper-input>
+      <div><core-input center-justified readonly value="" id="invalid"></core-input></div>
+      <paper-button id="enter" on-tap="{{ keypressHandler }}" center center-justified >Send</paper-button>
+    </core-card>
+  </template>
 
-    <script>
-        
-                Polymer({
-                    handleSaveUser: function () {
-                        if (this.checkNameExists(this.$.username.value)) {
-                            var user = {
-                                username: this.$.username.value,
-                                passwd: this.$.passwd.value,
-                                email: this.$.email.value
-                            };
+  <script>
 
-                            var result = this.$.userModel.saveUser(JSON.stringify(user));
-                            if (result) {
-                                this.$.invalid.style.visibility = "visible";
-                                this.$.invalid.value = "User created successfully";
-                                this.resetValues();
-                                setTimeout(function () {
-                                    location.hash = "#SignIn";
-                                }, 1000);
-                            } else {
-                                this.$.invalid.style.visibility = "visible";
-                                this.$.invalid.value = "Cannot create user";
-                            }
-                        } else {
-                            this.$.invalid.style.visibility = "visible";
-                            this.$.invalid.value = "User already exists";
-                        }
-                    },
-                    checkNameExists: function () {
-                        return this.$.userModel.searchUser(this.$.username.value);
-                    },
-                    keypressHandler: function (event, detail, sender) {
-                        var invalid = this.$.invalid;
-                        invalid.style.visibility = "hidden";
-                        var code = event.keyCode;
+    Polymer({
+      handleSaveUser: function () {
+        if (this.checkNameExists()) {
+          var user = {
+            username: this.$.username.value,
+            passwd: this.$.passwd.value,
+            email: this.$.email.value
+          };
+          var that = this;
+          this.$.userModel.saveUser(JSON.stringify(user), function (result) {
+            if (result) {
+              that.$.invalid.style.visibility = "visible";
+              that.$.invalid.value = "User created successfully";
+              that.resetValues();
+              setTimeout(function () {
+                location.hash = "#SignIn";
+              }, 1000);
+            } else {
+              that.$.invalid.style.visibility = "visible";
+              that.$.invalid.value = "Cannot create user";
+            }
+          });
+        } else {
+          this.$.invalid.style.visibility = "visible";
+          this.$.invalid.value = "User already exists";
+        }
+      },
+      checkNameExists: function () {
+        var exists;
+        var value = this.$.username.value;
+        this.$.userModel.searchUser(value, function (result) {
+            if (result){
+              exists=true;
+            } else {
+              exists=false;
+            }
+        });
+        return exists;
+      },
+      keypressHandler: function (event, detail, sender) {
+        var invalid = this.$.invalid;
+        invalid.style.visibility = "hidden";
+        var code = event.keyCode;
 
-                        if (code == 13 || sender.id == "enter") {
-                            var username = this.$.username.value;
+        if (code == 13 || sender.id == "enter") {
+          var username = this.$.username.value;
 
-                            if (this.validateUser() && this.validatePass() && this.validateEmail() && this.verifyEmail(this.$.repeatEmail.value)) {
-                                this.handleSaveUser();
-                            } else if (!this.validateUser()) {
-                                invalid.style.visibility = "visible";
-                                invalid.value = "Invalid user";
-                            } else if (!this.validatePass()) {
-                                invalid.style.visibility = "visible";
-                                invalid.value = "Invalid password";
-                            } else if (!this.validateEmail()) {
-                                invalid.style.visibility = "visible";
-                                invalid.value = "Invalid e-mail";
-                            }
-                        }
-                    },
-                    validateUser: function () {
-                        var username = this.$.username.value;
-                        return (this.validateField(username, /^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ_/-]*$/i) && username.length >= 4 && username.length <= 30);
-                    },
-                    validatePass: function () {
-                        var password = this.$.passwd.value;
-                        return this.validateField(password, /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/);
-                    },
-                    validateEmail: function () {
-                        var string = this.$.email.value;
-                        return this.validateField(string, /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-                    },
-                    validateField: function (string, pattern) {
-                        return string.match(pattern) !== null;
-                    },
-                    resetValues: function () {
-                        this.$.username.value = "";
-                        this.$.passwd.value = "";
-                        this.$.email.value = "";
-                        this.$.repeatEmail.value = "";
-                    },
-                    verifyEmail: function (email) {
-                        if (this.$.email.value == email) {
-                            return true;
-                        } else {
-                            this.$.invalid.style.visibility = "visible";
-                            this.$.invalid.value = "The emails don't match";
-                        }
-                    },
-                    showPasswd: function () {
-                        this.$.passwd.type === "password" ? this.$.passwd.type = "none" : this.$.passwd.type = "password";
-                    }
-                });
-    </script>
+          if (this.validateUser() && this.validatePass() && this.validateEmail() && this.verifyEmail(this.$.repeatEmail.value)) {
+            this.handleSaveUser();
+          } else if (!this.validateUser()) {
+            invalid.style.visibility = "visible";
+            invalid.value = "Invalid user";
+          } else if (!this.validatePass()) {
+            invalid.style.visibility = "visible";
+            invalid.value = "Invalid password";
+          } else if (!this.validateEmail()) {
+            invalid.style.visibility = "visible";
+            invalid.value = "Invalid e-mail";
+          }
+        }
+      },
+      validateUser: function () {
+        var username = this.$.username.value;
+        return (this.validateField(username, /^[a-zA-Z0-9áéíóúñÁÉÍÓÚÑ_/-]*$/i) && username.length >= 4 && username.length <= 30);
+      },
+      validatePass: function () {
+        var password = this.$.passwd.value;
+        return this.validateField(password, /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,16})$/);
+      },
+      validateEmail: function () {
+        var string = this.$.email.value;
+        return this.validateField(string, /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+      },
+      validateField: function (string, pattern) {
+        return string.match(pattern) !== null;
+      },
+      resetValues: function () {
+        this.$.username.value = "";
+        this.$.passwd.value = "";
+        this.$.email.value = "";
+        this.$.repeatEmail.value = "";
+      },
+      verifyEmail: function (email) {
+        if (this.$.email.value == email) {
+          return true;
+        } else {
+          this.$.invalid.style.visibility = "visible";
+          this.$.invalid.value = "The emails don't match";
+        }
+      },
+      showPasswd: function () {
+        this.$.passwd.type === "password" ? this.$.passwd.type = "none" : this.$.passwd.type = "password";
+      }
+    });
+  </script>
 </polymer-element>
