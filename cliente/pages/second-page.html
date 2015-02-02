@@ -144,7 +144,7 @@
 
     Polymer({
       handleSaveUser: function () {
-        if (this.checkNameExists()) {
+        if (!this.checkNameExists()) {
           var user = {
             username: this.$.username.value,
             passwd: this.$.passwd.value,

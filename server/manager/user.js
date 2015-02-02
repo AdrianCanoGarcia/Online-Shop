@@ -46,6 +46,9 @@ function sendMail(user, logId) {
 }
 function decryptToken(token, callback){
   var decode = jwt.decode(token);
+  console.log(decode);
+  daoUser.getUser(decode.userName,callback);
+  //callback(decode);
  // console.log("token" + token);
 }
 

@@ -78,11 +78,6 @@
   </template>
 
   <script>
-    function hidden() {
-      var hidden = document.querySelector('main-menu').shadowRoot.querySelector('#core_card');
-      hidden.style.height = "100%";
-      
-    }
     Polymer({
       keypressHandler: function (event, detail, sender) {
         this.$.core_input.style.visibility = "hidden";
@@ -92,6 +87,7 @@
         if (code == 13 || sender.id == "enter") {
           if (this.validateUser() && this.validatePass()) {
             this.comprobateUser();
+            
           } else {
             this.showError();
           }
@@ -107,11 +103,18 @@
           if (!result) {
             that.showError();
           } else {
-            window.localStorage.setItem("token", result);
-            hidden();
-            location.href = "#SearchPage";
+             
+              window.localStorage.setItem("token", result);
+              that.fire("checkToken");
+            that.refreshToken(result, function(){
+                location.href = "#SearchPage";
+            });
           }
         });
+      },
+      refreshToken:function(result, callback){
+        
+        callback()
       },
       validateUser: function () {
         var user = this.$.username.value;

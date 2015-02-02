@@ -251,7 +251,7 @@
                 <core-item id="paper_item" label="Profile" on-tap="{{ showProfile }}"><core-icon icon="social:person" id="social"></core-icon></core-item>
                 <core-item id="paper_item" label="Publish an Ad" on-tap="{{ adToogle }}"><core-icon icon="communication:messenger" id="messenger"></core-icon></core-item>
                 <core-item id="paper_item" label="Show Ads" on-tap="{{ showAds }}"><core-icon icon="question-answer" id="ad"></core-icon></core-item>
-                <core-item id="paper_item" label="Sign Off" on-tap="{{ showSignOff }}"><core-icon icon="settings-power" id="power"></core-icon></core-item>
+                <core-item id="paper_item" label="Sign Off" on-tap="{{ signOff }}"><core-icon icon="settings-power" id="power"></core-icon></core-item>
               </div>
             </paper-dropdown>
           </core-icon-button>
@@ -336,8 +336,8 @@
         this.$.profileDialog.toggle();
         this.$.profileId.saveUserValues();
       },
-      showSignOff: function () {
-        logName = "";
+      signOff: function () {
+        localStorage.clear();
         location.href = " ";
       },
       toggle: function () {
