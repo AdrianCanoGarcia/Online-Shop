@@ -344,9 +344,9 @@
         this.$.dialog.toggle();
       },
       deleteUser: function () {
-        this.$.userModel.deleteUser(logName.username, function (result) {
+        this.$.userModel.deleteUser(localStorage.getItem('token'), function (result) {
           if (result) {
-            logName = "";
+            localStorage.clear();
             location.href = " ";
           }
         });

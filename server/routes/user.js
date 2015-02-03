@@ -78,12 +78,12 @@ function worker(io) {
         });
     }
     function delUser(req, res, next) {
-        var userName = req.params.userName;
+        token = verifyToken(req.params.token);
+        var userName = token.username
         userManager.delUser(userName, function (err, result) {
             if (result === 0) {
                 next(new Error(userName + ' not exists'));
             } else {
-
                 res.json(result);
             }
         });
@@ -100,18 +100,7 @@ function worker(io) {
         });
     }
     function verifyToken(req, res, next) {
-        userManager.decryptToken(req.params.token, function (err,result) {
-            if (result) {
-                var user={
-                    name:result.username,
-                    email:result.email
-                }
-                
-                res.json(user);
-            } else {
-                console.log("capa routes: "+err);
-            }
-        });
+        userManager.decryptToken(req.params.token, res); 
     }
     return router;
 }

@@ -6,9 +6,9 @@ var jwtSecret = require('../util/config').jwtSecret;
 function create(user, callback) {
   daoUser.create(user, callback);
 }
-function createToken(user){
-    var token = jwt.sign(user, jwtSecret);
-    return token;
+function createToken(user) {
+  var token = jwt.sign(user, jwtSecret);
+  return token;
 }
 function setUser(name, mail, callback) {
   var update = {
@@ -44,17 +44,26 @@ function sendMail(user, logId) {
       console.log(response);
   });
 }
-function decryptToken(token, callback){
+function decryptToken(token, res) {
   var decode = jwt.decode(token);
-  console.log(decode);
-  daoUser.getUser(decode.userName,callback);
-  //callback(decode);
- // console.log("token" + token);
+  daoUser.getUser(decode.userName, function (err, result) {
+    if (result) {
+      if (result.passwd == decode.passwd) {
+        var user = {
+          name: result.username,
+          email: result.email
+        }
+        res.json(user);
+      } else {
+        console.log("token result not matched with bbdd: " + err);
+      }
+    }
+  });
 }
 
 module.exports = {
   decryptToken: decryptToken,
-  createToken:createToken,
+  createToken: createToken,
   sendMail: sendMail,
   create: create,
   setUser: setUser,

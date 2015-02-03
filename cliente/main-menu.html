@@ -1,128 +1,100 @@
 <polymer-element name="main-menu">
-    <template>
-        <style>    
-            :host {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                box-sizing: border-box;
-                overflow: hidden;
-            }
-            #core_card {
-                width: 100%;
-                height: 95%;
-                border-top-left-radius: 2px;
-                border-top-right-radius: 2px;
-                border-bottom-right-radius: 2px;
-                border-bottom-left-radius: 2px;
-                box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
-                background-image: url(img/textura.jpg);
-                background-size: 100% 100%;
-                background-repeat: no-repeat;
-            }
-            #paper_tabs {
-                width: 100%;
-                height: 5%;
-                color: rgb(255, 255, 255);
-                box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 2px;
-                background-color: #023256;
-            }
-            paper-tabs#paper_tabs /deep/ #ink{
-                color: #4996CC;
-            }
-            template {
-                display: none !important;
-            }
+  <template>
+    <style>    
+      :host {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      #core_card {
+        width: 100%;
+        height: 95%;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+        background-image: url(img/textura.jpg);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+      #paper_tabs {
+        width: 100%;
+        height: 5%;
+        color: rgb(255, 255, 255);
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 2px;
+        background-color: #023256;
+      }
+      paper-tabs#paper_tabs /deep/ #ink{
+        color: #4996CC;
+      }
+      template {
+        display: none !important;
+      }
 
-        </style>
-        <user-model id="userModel"></user-model>
-        <flatiron-director route="{{ route }}" autoHash></flatiron-director>
+    </style>
+    <flatiron-director route="{{ route }}" autoHash></flatiron-director>
+    <user-model id="userModel"></user-model>
 
-        <core-animated-pages  id="core_card" valueattr="hash" selected="{{ route }}" on-checkToken="{{ ready }}" layout vertical end-justified center transitions="slide-from-right">
+    <core-animated-pages on-check-token="{{ verifyToken }}" id="core_card" valueattr="hash" selected="{{ route }}" layout vertical end-justified center transitions="slide-from-right">
 
-            <section></section>
-            <section hash="SignIn" layout vertical center-center>
-                <signin-page></signin-page>
-            </section>
-            <section hash="SignUp" layout vertical center-center>
-                <login-page></login-page>
-            </section>
-            <section id="search" hash="SearchPage">
-                <search-page></search-page>
-            </section>
+      <section></section>
+      <section hash="SignIn" layout vertical center-center>
+        <signin-page></signin-page>
+      </section>
+      <section hash="SignUp" layout vertical center-center>
+        <signup-page></signup-page>
+      </section>
+      <section id="search" hash="SearchPage">
+        <search-page></search-page>
+      </section>
 
-        </core-animated-pages>  
+    </core-animated-pages> 
 
-        <paper-tabs selected="{{ route }}" selectedindex="one" valueattr="hash" id="paper_tabs" end-justified vertical layout wrap end>
-            <template repeat="{{ page in pages }}" >
-                <paper-tab id="{{ page.id }}" hash = "{{ page.hash }}">
-                    {{ page.name }} <a href='#{{ page.hash }}'></a>
-                </paper-tab>
-            </template>
-        </paper-tabs>
-    </template>  
+    <paper-tabs selected="{{ route }}" selectedindex="one" valueattr="hash" id="paper_tabs" end-justified vertical layout wrap end>
+      <template repeat="{{ page in pages }}" >
+        <paper-tab id="{{ page.id }}" hash = "{{ page.hash }}">
+          {{ page.name }} <a href='#{{ page.hash }}'></a>
+        </paper-tab>
+      </template>
+    </paper-tabs>
+  </template>  
 
-    <script>
-        Polymer({
-            ready: function () {
-                this.pages = [
-                    {name: 'Sign In', id: 'paper_tab', hash: 'SignIn'},
-                    {name: 'Sign Up', id: 'paper_tab1', hash: 'SignUp'}
-                ];
-                var that = this;
-
-                that.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
-                    if (result) {
-                        console.log(result);
-                        addEventListener("hashchange", function () {
-                            that.hashChanged();
-                        })
-                    } else {
-                        addEventListener("hashchange", function () {
-                            if (location.hash == "#SearchPage") {
-                                location.href = " ";
-                            }
-                        })
-                    }
-                })
-
-
-
-
-
-
-
-
-
-                /*addEventListener("hashchange", function () {
-                 
-                 if (that.route == "SearchPage") {
-                 location.href = " ";
-                 }else{
-                 that.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
-                 if (result) {
-                 that.hashChanged();
-                 } else {
-                 if (that.route == "SearchPage") {
-                 location.href = " ";
-                 }
-                 
-                 }
-                 })
-                 }
-                 })
-                 this.hashChanged();
-                 */
-            },
-            hashChanged: function () {
-                if (this.route == "SearchPage") {
-                    this.$.core_card.style.height = "100%";
-                } else if (this.route == "SignIn" || this.route == "SignUp") {
-                    this.$.core_card.style.height = "95%";
-
+  <script>
+    Polymer({
+      ready: function () {
+        this.pages = [
+          {name: 'Sign In', id: 'paper_tab', hash: 'SignIn'},
+          {name: 'Sign Up', id: 'paper_tab1', hash: 'SignUp'}
+        ];
+        this.verifyToken();
+        this.hashChanged();
+      },
+      hashChanged: function () {
+        if (this.route == "SearchPage") {
+          this.$.core_card.style.height = "100%";
+        } else if (this.route == "SignIn" || this.route == "SignUp") {
+          this.$.core_card.style.height = "95%";
+        }
+      },
+      verifyToken: function () {
+        var that = this;
+        addEventListener("hashchange", function () {
+          that.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
+            if (result) {
+                that.hashChanged();
+                localStorage.setItem("userName",result.name);
+                localStorage.setItem("mail",result.email);
+            } else {
+                if (location.hash == "#SearchPage") {
+                  location.href = " ";
                 }
-
             }
-        });
-    </script>
+          })
+        })
+      }
+    });
+  </script>
 </polymer-element>
