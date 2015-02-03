@@ -44,8 +44,12 @@ function sendMail(user, logId) {
       console.log(response);
   });
 }
-function decryptToken(token, res) {
-  var decode = jwt.decode(token);
+function decryptToken(token){
+    var decode = jwt.decode(token);
+    return decode;
+}
+function comprobateToken(token, res) {
+  var decode = decrypToken(token);
   daoUser.getUser(decode.userName, function (err, result) {
     if (result) {
       if (result.passwd == decode.passwd) {
@@ -62,6 +66,7 @@ function decryptToken(token, res) {
 }
 
 module.exports = {
+  comprobateToken: comprobateToken,
   decryptToken: decryptToken,
   createToken: createToken,
   sendMail: sendMail,

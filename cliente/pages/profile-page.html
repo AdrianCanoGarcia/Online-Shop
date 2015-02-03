@@ -139,18 +139,19 @@
         this.$.newMail.style.visibility == "visible" ? this.$.newMail.style.visibility = "hidden" : this.$.newMail.style.visibility = "visible"
       },
       refreshEmail: function (event, detail, sender) {
+         var that = this;
         if (this.validateEmail()) {
           this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
             var user = {
               username: localStorage.getItem('userName'),
-              email: this.$.newMail.value
+              email: that.$.newMail.value
             }
-            this.$.userModel.refresh(JSON.stringify(user));
-            localStorage.setItem("mail", this.$.newMail.value);
-            this.$.enter2.style.visibility = "hidden";
-            this.$.newMail.style.visibility = "hidden";
-            this.$.email.value = this.$.newMail.value;
-            this.$.newMail.value = "";
+            that.$.userModel.refresh(JSON.stringify(user));
+            localStorage.setItem("mail", that.$.newMail.value);
+            that.$.enter2.style.visibility = "hidden";
+            that.$.newMail.style.visibility = "hidden";
+            that.$.email.value = that.$.newMail.value;
+            that.$.newMail.value = "";
           })
         } else {
           this.$.newMail.value = "";

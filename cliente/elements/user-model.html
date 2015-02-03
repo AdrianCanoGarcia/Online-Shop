@@ -52,8 +52,8 @@
                     }, function (error) {
                     });
                 },
-                deleteUser: function (user, callback) {
-                    doAjax({type: 'DELETE', url: '/' + user}, function (result) {
+                deleteUser: function (token, callback) {
+                    doAjax({type: 'DELETE', url: '/' + token}, function (result) {
                         callback(result);
                     }, function (error) {
                         console.log("ERROR DELETE USER");

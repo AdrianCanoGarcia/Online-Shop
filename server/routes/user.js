@@ -9,7 +9,7 @@ function worker(io) {
     router.post('/token/:token', verifyToken);
     router.put('/', setUser);
     router.get('/:userName', getUser);
-    router.delete('/:userName', delUser);
+    router.delete('/:token', delUser);
     router.get('/verify/:userName/:password', verifyUser);
     router.get('/loggin/:loged', muestra);
 
@@ -78,11 +78,11 @@ function worker(io) {
         });
     }
     function delUser(req, res, next) {
-        token = verifyToken(req.params.token);
-        var userName = token.username
-        userManager.delUser(userName, function (err, result) {
+        token = userManager.decryptToken(req.params.token);
+        var username = token.userName;
+        userManager.delUser(username, function (err, result) {
             if (result === 0) {
-                next(new Error(userName + ' not exists'));
+                next(new Error(username + ' not exists'));
             } else {
                 res.json(result);
             }
@@ -99,8 +99,9 @@ function worker(io) {
             }
         });
     }
+    
     function verifyToken(req, res, next) {
-        userManager.decryptToken(req.params.token, res); 
+        userManager.comprobateToken(req.params.token, res); 
     }
     return router;
 }
