@@ -19,7 +19,7 @@
 
     </style>
     <proposal-model id="proposal"></proposal-model>
-
+    <user-model id="userModel"></user-model>
     <core-card  id="core_card" layout vertical center fit>
       <div id="advert"><p>Introduce your advert:</p>
         <textarea id="textarea"></textarea>
@@ -36,24 +36,26 @@
 
     Polymer({
       toast: function () {
+        var that = this;
         if (this.validateEmail()) {
-          
-          var date = this.getDate();
-          post = {
-            content: this.$.textarea.value,
-            mail: this.$.mail.value,
-            date: date
-          }
-          that = this;
-          this.$.proposal.publishPost(JSON.stringify(post), function (result) {
-            if (result) {
-              that.$.popup.text = "A new announcement has been published";
-              that.$.popup.show();
-            } else {
-              that.$.popupError.show();
+          this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
+            var date = this.getDate();
+            post = {
+              content: that.$.textarea.value,
+              mail: that.$.mail.value,
+              date: date,
+              username: localStorage.getItem('userName')
             }
+            that.$.proposal.publishPost(JSON.stringify(post), function (result) {
+              if (result) {
+                that.$.popup.text = "A new announcement has been published";
+                that.$.popup.show();
+              } else {
+                that.$.popupError.show();
+              }
+            });
           });
-        }else{
+        } else {
           this.$.popup.text = "Invalid e-mail";
           this.$.popup.show();
         }

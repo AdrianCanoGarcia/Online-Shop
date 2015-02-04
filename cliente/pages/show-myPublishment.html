@@ -1,4 +1,4 @@
-<polymer-element name="show-publishment">
+<polymer-element name="show-myPublishment">
   <template>
     <style>
       :host{
@@ -85,14 +85,17 @@
       }
 
     </style>
+
     <proposal-model id="proposalModel"></proposal-model>
-    <div id='button-container' layout vertical center ><div class="button" on-click="{{loadAds}}" id="button" style="visibility:hidden">There're more publications</div></div>
+    <user-model id="userModel"></user-model>
+
+    <div id='button-container' layout vertical center ><div class="button" on-click="{{loadAds}}" id="button" style="visibility:hidden">You have more publications</div></div>
     <template repeat="{{ ad in ads }}">
       <div id="container" layout vertical center>
         <div id="content">
           <core-item id="paper_item">
             <div id='name_ads'>{{ ad.username }}</div>  
-            <core-icon on-click="{{ addFavorites }}" icon="favorite" id="favorite" style="color: black;"></core-icon>
+            <core-icon on-click="{{ deletePublishment }}" icon="delete" value="{{ad._id}}" id="favorite" style="color: black;"></core-icon>
           </core-item><hr id="lineName"/> {{ ad.content }}
         </div>
         <div id="email"> Contact e-mail: {{ad.mail}} <date> {{ad.date}} </date></div>
@@ -114,18 +117,21 @@
       loadAds: function () {
         var that = this;
         this.$.button.style.visibility = "hidden";
-        this.$.proposalModel.getAll(function (result) {
-          that.ads = result;
+        this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
+          console.log(result);
+          that.$.proposalModel.getMyPublishment(result.name, function (result) {
+            that.ads = result;
+          });
         });
       },
       toast: function () {
         this.$.toast1.show();
       },
-      addFavorites: function (event, detail, sender) {
-        sender.style.color == "black" ? sender.style.color = "red" : sender.style.color = "black";
-        if (sender.style.color == red) {
-          
-        }
+      deletePublishment: function (event, detail, sender) {
+        var that = this;
+        this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
+          that.$.proposalModel().deletePublishment(result.name, function (result))
+        });
       }
 
     });

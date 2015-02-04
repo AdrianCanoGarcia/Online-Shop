@@ -4,6 +4,7 @@ var userManager = require('../manager/user');
 
 
 function worker(io) {
+  
     /* ROUTES */
     router.post('/', create);
     router.post('/token/:token', verifyToken);
@@ -11,11 +12,10 @@ function worker(io) {
     router.get('/:userName', getUser);
     router.delete('/:token', delUser);
     router.get('/verify/:userName/:password', verifyUser);
-    router.get('/loggin/:loged', muestra);
-
+    router.get('/loggin/:loged', show);
     /* ROUTES */
 
-    function muestra(req, res) {
+    function show(req, res) {
         res.json(req.url.loged);
         console.log(req.params.loged);
     }
@@ -28,7 +28,6 @@ function worker(io) {
 
         return text;
     }
-
     function create(req, res) {
         var logId = makeid();
         var user = {
@@ -95,11 +94,9 @@ function worker(io) {
                 res.json(user);
             } else {
                 next(new Error(userName + ' not exists'));
-
             }
         });
-    }
-    
+    }    
     function verifyToken(req, res, next) {
         userManager.comprobateToken(req.params.token, res); 
     }

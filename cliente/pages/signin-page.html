@@ -104,6 +104,7 @@
             that.showError();
           } else {
             window.localStorage.setItem("token", result);
+            debugger
             that.fire('check-token');
             location.href = "#SearchPage";
           }

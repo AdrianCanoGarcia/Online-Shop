@@ -36,6 +36,13 @@
           }, function (error) {
             callback();
           });
+        },
+        getMyPublishment: function (username, callback) {
+          doAjax({type: 'GET', url: "/ownPublishment/"+username}, function (result) {
+            callback(result);
+          }, function (error) {
+            callback();
+          });
         }
       });
     }());

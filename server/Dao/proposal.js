@@ -15,10 +15,19 @@ function getAll(callback){
         cursor.toArray(callback);
     });
 }
+function getMyPublishment(username, callback){
+    col.find({username: username}).sort({date: -1},function(err, cursor){
+        if(err){
+            return callback(err);
+        }
+        cursor.toArray(callback);
+    });
+}
 
 col.bind({
     create: create,
-    getAll: getAll
+    getAll: getAll,
+    getMyPublishment: getMyPublishment
 });
 
 module.exports = col;

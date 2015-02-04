@@ -6,8 +6,12 @@ function create(post, callback) {
 function getAll(callback){
   daoProposal.getAll(callback);
 }
+function getMyPublishment(username, callback){
+  daoProposal.getMyPublishment(username, callback);
+}
 
 module.exports = {
+    getMyPublishment: getMyPublishment,
     create: create,
     getAll: getAll
 };

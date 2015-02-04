@@ -49,7 +49,7 @@ function decryptToken(token){
     return decode;
 }
 function comprobateToken(token, res) {
-  var decode = decrypToken(token);
+  var decode = decryptToken(token);
   daoUser.getUser(decode.userName, function (err, result) {
     if (result) {
       if (result.passwd == decode.passwd) {
@@ -64,7 +64,6 @@ function comprobateToken(token, res) {
     }
   });
 }
-
 module.exports = {
   comprobateToken: comprobateToken,
   decryptToken: decryptToken,
