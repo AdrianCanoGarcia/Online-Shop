@@ -9,9 +9,19 @@ function worker(io) {
   router.post('/', create);
   router.get('/', getAll);
   router.get('/ownPublishment/:username', getMyPublishment);
+  router.delete('/',deletePublishment);
+  
   /* ROUTES */
-
-  function getMyPublishment(req, res) {
+  function deletePublishment( req, res, next ){
+      proposalManager.deletePublishment(req.body.name, req.body.id, function(err,result){
+          if(result){
+              res.json(result)
+          }else{
+              next(new Error(new Error('Unable to delete publishment')));
+          }
+      });
+  }
+  function getMyPublishment(req, res, next) {
     proposalManager.getMyPublishment(req.params.username, function (err, result) {
       if (result) {
         res.json(result);

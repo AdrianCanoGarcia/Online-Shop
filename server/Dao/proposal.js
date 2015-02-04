@@ -23,8 +23,14 @@ function getMyPublishment(username, callback){
         cursor.toArray(callback);
     });
 }
+function deletePublishment(username, id, callback){
+    id = toObjectID(id);
+    console.log(id+" "+username);
+    col.remove({username:username, _id:id },callback);
+}
 
 col.bind({
+    deletePublishment: deletePublishment,
     create: create,
     getAll: getAll,
     getMyPublishment: getMyPublishment

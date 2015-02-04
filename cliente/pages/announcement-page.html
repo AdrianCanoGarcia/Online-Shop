@@ -39,7 +39,7 @@
         var that = this;
         if (this.validateEmail()) {
           this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
-            var date = this.getDate();
+            var date = that.getDate();
             post = {
               content: that.$.textarea.value,
               mail: that.$.mail.value,

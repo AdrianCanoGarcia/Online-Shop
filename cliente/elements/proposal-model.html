@@ -32,13 +32,20 @@
         },
         getAll: function (callback) {
           doAjax({type: 'GET', url: "/"}, function (result) {
+            //callback(result);
+          }, function (error) {
+            //callback();
+          });
+        },
+        getMyPublishment: function (username, callback) {
+          doAjax({type: 'GET', url: "/ownPublishment/"+username}, function (result) {
             callback(result);
           }, function (error) {
             callback();
           });
         },
-        getMyPublishment: function (username, callback) {
-          doAjax({type: 'GET', url: "/ownPublishment/"+username}, function (result) {
+        deletePublishment: function(data,callback){
+            doAjax({type: 'DELETE', data : data}, function (result) {
             callback(result);
           }, function (error) {
             callback();

@@ -95,7 +95,7 @@
         <div id="content">
           <core-item id="paper_item">
             <div id='name_ads'>{{ ad.username }}</div>  
-            <core-icon on-click="{{ deletePublishment }}" icon="delete" value="{{ad._id}}" id="favorite" style="color: black;"></core-icon>
+            <core-icon on-click="{{ deletePublishment }}" icon="delete" alt="{{ad._id}}" id="favorite" style="color: black;"></core-icon>
           </core-item><hr id="lineName"/> {{ ad.content }}
         </div>
         <div id="email"> Contact e-mail: {{ad.mail}} <date> {{ad.date}} </date></div>
@@ -118,7 +118,7 @@
         var that = this;
         this.$.button.style.visibility = "hidden";
         this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
-          console.log(result);
+          
           that.$.proposalModel.getMyPublishment(result.name, function (result) {
             that.ads = result;
           });
@@ -129,8 +129,17 @@
       },
       deletePublishment: function (event, detail, sender) {
         var that = this;
+        var id= sender.alt;
         this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
-          that.$.proposalModel().deletePublishment(result.name, function (result))
+            var data={
+                id:id,
+                name:result.name
+            }
+          that.$.proposalModel.deletePublishment(JSON.stringify(data), function (result){
+              if(result){
+                  console.log("mensaje borrado corectamente");
+              }
+          })
         });
       }
 
