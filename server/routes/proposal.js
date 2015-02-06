@@ -16,6 +16,7 @@ function worker(io) {
       proposalManager.deletePublishment(req.body.name, req.body.id, function(err,result){
           if(result){
               res.json(result)
+              io.sockets.emit('AdDeleted');
           }else{
               next(new Error(new Error('Unable to delete publishment')));
           }

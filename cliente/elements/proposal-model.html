@@ -32,9 +32,9 @@
         },
         getAll: function (callback) {
           doAjax({type: 'GET', url: "/"}, function (result) {
-            //callback(result);
+            callback(result);
           }, function (error) {
-            //callback();
+            callback();
           });
         },
         getMyPublishment: function (username, callback) {
