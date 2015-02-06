@@ -112,7 +112,7 @@
 
     </style>
     <user-model id="userModel"></user-model>
-
+    <file-model id="fileModel"></file-model>
     <core-card  layout vertical center fit>
       <p on-click="{{saveUserValues}}">PROFILE</p>
       <core-input readonly  name="user" value="Default" id="name"></core-input>
@@ -124,12 +124,20 @@
         <core-icon icon="done" id ="enter2" on-click="{{refreshEmail}}" ></core-icon>
       </div>
       <img src="../img/person.jpg">
+      <form>
+      <label>Profile image: <input type="file" name="File" id="file" on-change="{{setFiles}}"></label>
+      </form>
       <core-icon icon="delete" id="delete" on-click="{{warning}}"></core-icon>
     </core-card>
 
   </template>
   <script>
     Polymer({
+      setFiles:function(e,detail,sender){
+        var formData = new FormData();
+        console.log(sender.files);
+        this.$.fileModel.uploadImage(sender.files);
+      },
       saveUserValues: function () {
         this.$.name.value = localStorage.getItem('userName');
         this.$.email.value = localStorage.getItem('mail');

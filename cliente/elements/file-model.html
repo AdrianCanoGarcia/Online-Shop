@@ -1,0 +1,36 @@
+<link rel = "import" href = "../bower_components/polymer/polymer.html" >
+<polymer-element name = "file-model">
+  <template>
+  </template>
+  <script>
+
+    (function () {
+      var base = '/user';
+      /* function defaultAjaxErrorHandler(xhr, err, desc) {
+       console.log(xhr, err, desc);
+       var errorToast = document.querySelector('#errorToast');
+       errorToast.text = '[' +xhr.status + '] ' + desc + ': ' + xhr.response;
+       errorToast.show();
+       }
+       */
+      function doAjax(options, success, error) {
+        options.type = options.type || 'GET';
+        options.url = base + (options.url || '');
+        options.dataType = options.dataType || 'json';
+        options.contentType = options.contentType || 'application/json; charset=UTF-8';
+        options.success = success;
+        options.error = (typeof error === 'function') ? error : defaultAjaxErrorHandler;
+        $.ajax(options);
+      }
+      Polymer('file-model', {
+        uploadImage: function (file, callback) {
+          doAjax({type: 'POST', url:"/file/"+file}, function (result) {
+            callback(result);
+          }, function (error) {
+            callback();
+          });
+        }
+      });
+    }());
+  </script>
+</polymer-element>
