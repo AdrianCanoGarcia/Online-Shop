@@ -51,8 +51,12 @@
             callback();
           });
         },
-        createFavourite:function(){
-            
+        createFavourite:function(id, token, callback){
+             doAjax({type: 'POST', url:"/favourite/" + id + '/' + token}, function (result) {
+              callback(result);
+          }, function (error) {
+              callback();
+          });
         }
       });
     }());

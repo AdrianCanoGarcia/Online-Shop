@@ -5,26 +5,29 @@ var col = db.bind('Users');
 
 
 function create(user, callback){
-    col.insert(user, callback);
-    
+    col.insert(user, callback);   
 }
 function setUser(name, update, callback){
     var query = {
         username: name
     };
-    col.update(query,update,callback);
+    col.update(query, update, callback);
 }
-function delUser(userName,callback){
+function delUser(userName, callback){
     this.remove({username:userName},callback);
 }
-function getUser(userName,callback){
+function getUser(userName, callback){
     this.findOne({username:userName},callback);
+}
+function createFavourite(id, callback){
+  
 }
 col.bind({
         create: create,
         setUser: setUser,
         delUser: delUser,
-        getUser: getUser
+        getUser: getUser,
+        createFavourite: createFavourite
 });
 
 module.exports = col;

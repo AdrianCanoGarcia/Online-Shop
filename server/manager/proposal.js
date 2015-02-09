@@ -12,7 +12,6 @@ function getMyPublishment(username, callback){
 function deletePublishment(username, id, callback){
     daoProposal.deletePublishment(username, id, callback);
 } 
-
 module.exports = {
     deletePublishment: deletePublishment,
     getMyPublishment: getMyPublishment,

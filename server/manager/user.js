@@ -64,6 +64,9 @@ function comprobateToken(token, res) {
     }
   });
 }
+function createFavourite(id, callback){
+  daoUser.createFavourite(id, callback);
+}
 module.exports = {
   comprobateToken: comprobateToken,
   decryptToken: decryptToken,
@@ -73,5 +76,6 @@ module.exports = {
   setUser: setUser,
   delUser: delUser,
   getUser: getUser,
-  verifyUser: verifyUser
+  verifyUser: verifyUser,
+  createFavourite: createFavourite
 };

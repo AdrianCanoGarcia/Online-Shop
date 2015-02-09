@@ -1,26 +1,28 @@
 var express = require('express');
 var router = express.Router();
 var proposalManager = require('../manager/proposal');
+var userManager = require('../manager/user');
 var url = require('url');
 
 function worker(io) {
-  
+
   /* ROUTES */
   router.post('/', create);
   router.get('/', getAll);
   router.get('/ownPublishment/:username', getMyPublishment);
-  router.delete('/',deletePublishment);
-  
+  router.delete('/', deletePublishment);
+  router.post('/favourite/:id/:token', createFavourite);
+
   /* ROUTES */
-  function deletePublishment( req, res, next ){
-      proposalManager.deletePublishment(req.body.name, req.body.id, function(err,result){
-          if(result){
-              res.json(result)
-              io.sockets.emit('AdDeleted');
-          }else{
-              next(new Error(new Error('Unable to delete publishment')));
-          }
-      });
+  function deletePublishment(req, res, next) {
+    proposalManager.deletePublishment(req.body.name, req.body.id, function (err, result) {
+      if (result) {
+        res.json(result)
+        io.sockets.emit('AdDeleted');
+      } else {
+        next(new Error(new Error('Unable to delete publishment')));
+      }
+    });
   }
   function getMyPublishment(req, res, next) {
     proposalManager.getMyPublishment(req.params.username, function (err, result) {
@@ -45,7 +47,21 @@ function worker(io) {
       res.json(result);
       io.sockets.emit('AdPublished', result);
     });
-
+  }
+  function createFavourite(req, res) {
+    userManager.comprobateToken(req.params.token, function (err, result) {
+      if (result) {
+        userManager.createFavourite(req.params.id, function (err, result) {
+          if (result) {
+            res.json(result);
+          } else {
+            next(new Error(new Error('Unable to connect')));
+          }
+        })
+      } else {
+        next(new Error(new Error('Invalid token')));
+      }
+    });
   }
   function getAll(req, res, next) {
     proposalManager.getAll(function (err, result) {
