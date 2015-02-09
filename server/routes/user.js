@@ -21,7 +21,8 @@ function worker(io) {
     console.log(req.params.loged);
   }
   function uploadFile(req, res){
-    console.log(req.params.file)
+      var file = req.params.file;
+    console.log(file[0])
   }
   function makeid() {
     var text = "";

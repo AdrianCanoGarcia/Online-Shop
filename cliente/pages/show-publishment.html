@@ -92,7 +92,7 @@
         <div id="content">
           <core-item id="paper_item">
             <div id='name_ads'>{{ ad.username }}</div>  
-            <core-icon on-click="{{ addFavorites }}" icon="favorite" id="favorite" style="color: black;"></core-icon>
+            <core-icon on-click="{{ addFavorites }}"  alt="{{ad._id}}" icon="favorite" id="favorite" style="color: black;"></core-icon>
           </core-item><hr id="lineName"/> {{ ad.content }}
         </div>
         <div id="email"> Contact e-mail: {{ad.mail}} <date> {{ad.date}} </date></div>
@@ -123,8 +123,12 @@
       },
       addFavorites: function (event, detail, sender) {
         sender.style.color == "black" ? sender.style.color = "indianred" : sender.style.color = "black";
-        if (sender.style.color == red) {
-          
+       if (sender.style.color == "rgb(205, 92, 92)") {
+          this.$.proposalModel.createFavourite(sender.alt, localStorage.getItem('token'),function(result){
+              if(!result){
+                  sender.style.color = "black";
+              }
+          });
         }
       }
 

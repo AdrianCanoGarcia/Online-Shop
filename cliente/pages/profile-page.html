@@ -1,3 +1,4 @@
+<script type="text/javascript" src="../lib/dropzone/dropzone.min.js"></script>
 <polymer-element name="profile-page">
   <template>
     <style>
@@ -123,10 +124,13 @@
         <paper-input label="New email..." id="newMail" ></paper-input>
         <core-icon icon="done" id ="enter2" on-click="{{refreshEmail}}" ></core-icon>
       </div>
-      <img src="../img/person.jpg">
-      <form>
-      <label>Profile image: <input type="file" name="File" id="file" on-change="{{setFiles}}"></label>
+      <img src="../img/person.jpg" >
+      <!--<label>Profile image: <input type="file" name="File" id="file" on-change="{{setFiles}}"></label>-->
+     <div id="dropzone" style="width: 40px; height:40px; color:red">
+      <form action="lololo" class="dropzone" id="my-dropzone">
+          
       </form>
+    </div>
       <core-icon icon="delete" id="delete" on-click="{{warning}}"></core-icon>
     </core-card>
 
