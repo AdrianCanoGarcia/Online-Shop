@@ -19,9 +19,18 @@ function delUser(userName, callback){
 function getUser(userName, callback){
     this.findOne({username:userName},callback);
 }
-function createFavourite(id, callback){
-  
+function createFavourite(username, id, callback){
+  this.findOne({username:username},function(err,result){
+      if(result){
+          if(result.favourite){
+              col.update({username:username},{$push:{"favourite":id}});
+          }
+      }
+  });
 }
+
+// db.Users.update({ "_id" : ObjectId("54d9004a1ac2371cacec61b2")},{$push: {"array":3}});
+
 col.bind({
         create: create,
         setUser: setUser,

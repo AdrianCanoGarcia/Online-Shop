@@ -49,9 +49,14 @@ function worker(io) {
     });
   }
   function createFavourite(req, res) {
-    userManager.comprobateToken(req.params.token, function (err, result) {
+    var decode;
+    userManager.decryptToken(req.params.token,function(result){
+        decode=result;
+    });
+    userManager.comprobateToken(decode, function (err, result) {
+        
       if (result) {
-        userManager.createFavourite(req.params.id, function (err, result) {
+        userManager.createFavourite(decode.userName,req.params.id, function (err, result) {
           if (result) {
             res.json(result);
           } else {
