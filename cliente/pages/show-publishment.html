@@ -113,7 +113,11 @@
       },
       loadAds: function () {
         var that = this;
+        var favourites;
         this.$.button.style.visibility = "hidden";
+        this.$.userModel.getFavourites(localStorage.getItem('token'), function (result){
+            that.favourites=result;
+        })
         this.$.proposalModel.getAll(function (result) {
           that.ads = result;
         });

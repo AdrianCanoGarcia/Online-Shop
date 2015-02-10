@@ -65,7 +65,14 @@
                     }, function (error) {
                         callback();
                     });
-                } 
+                },
+                getFavourites:function(token,callback){
+                    doAjax({type: 'GET', url: '/token/' + token}, function (result) {
+                        callback(result);
+                    }, function (error) {
+                        callback();
+                    });
+                }
             });
         }());
     </script>

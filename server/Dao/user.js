@@ -23,18 +23,16 @@ function createFavourite(username, id, callback) {
   this.findOne({username: username}, function (err, result) {
     if (result) {
       if (result.favourite) {
-        col.find({"favourite": {$elemMatch: {"idMessage": id}}}, {"username": username}, function (err, result) {
-          console.log("*****", result)
+        col.findOne({"favourite": id}, {"username": username}, function (err,result) {
           if (result) {
-            console.log("estoy entrando en unset")
-            db.Users.update({username: username}, {$unset: {"favourite": {"idMessage": id}}}, callback);
-          } else {
-            console.log("estoy entrando en push")
-            col.update({"username": username}, {$push: {"favourite": {"idMessage": id}}}, callback);
+            col.update({username: username}, {$pull: {"favourite": id }}, callback);
+          }
+          if(!result){
+            col.update({"username": username}, {$push: {"favourite": id }}, callback);
           }
         });
       } else {
-        col.update({"username": username}, {$set: {"favourite": [{"idMessage": id}]}}, callback);
+        col.update({"username": username}, {$set: {"favourite": [id]}}, callback);
       }
     }
   });

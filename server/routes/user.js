@@ -13,6 +13,7 @@ function worker(io) {
     router.get('/:userName', getUser);
     router.get('/verify/:userName/:password', verifyUser);
     router.get('/loggin/:loged', show);
+    router.get('/token/:token', getFavourites);
     router.delete('/:token', delUser);
     /* ROUTES */
 
@@ -124,6 +125,33 @@ function worker(io) {
         });
 
     }
+    function getFavourites(req,res,next){
+        var that = this;
+        var decode;
+        userManager.decryptToken(req.params.token, function (result) {
+            decode = result;
+        });
+         
+        userManager.comprobateToken(decode, function (err, result) {
+           if (result) {
+                if (result.passwd == decode.passwd) {
+                    var user = {
+                        name: result.username,
+                        email: result.email
+                    }
+                    
+                    userManager.getUser(user.name,function(err,result){
+                        console.log("********** " +result);
+                        res.json(result.favourite);
+                    });
+                } else {
+                    console.log("token result not matched with bbdd: " + err);
+                }
+            }
+        });
+        
+    }
+    
     return router;
 }
 
