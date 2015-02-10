@@ -123,15 +123,15 @@
       },
       addFavorites: function (event, detail, sender) {
         sender.style.color == "black" ? sender.style.color = "indianred" : sender.style.color = "black";
-       if (sender.style.color == "rgb(205, 92, 92)") {
-          this.$.proposalModel.createFavourite(sender.alt, localStorage.getItem('token'),function(result){
-              if(!result){
-                  sender.style.color = "black";
-              }
+        console.log(sender.alt);
+        if (sender.style.color == "rgb(205, 92, 92)" || sender.style.color == "black") {
+          this.$.proposalModel.createFavourite(sender.alt, localStorage.getItem('token'), function (result) {
+            if (!result) {
+              sender.style.color = "black";
+            }
           });
         }
       }
-
     });
   </script>
 </polymer-element>

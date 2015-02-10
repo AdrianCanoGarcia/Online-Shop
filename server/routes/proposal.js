@@ -48,7 +48,7 @@ function worker(io) {
       io.sockets.emit('AdPublished', result);
     });
   }
-  function createFavourite(req, res) {
+  function createFavourite(req, res, next) {
     var decode;
     userManager.decryptToken(req.params.token,function(result){
         decode=result;

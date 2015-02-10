@@ -103,7 +103,6 @@ function worker(io) {
         });
     }
     function verifyToken(req, res, next) {
-        /*userManager.comprobateToken(req.params.token, res);*/
         var that = this;
         var decode;
         userManager.decryptToken(req.params.token, function (result) {

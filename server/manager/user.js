@@ -49,10 +49,7 @@ function decryptToken(token, callback) {
     callback(decode);
 }
 function comprobateToken(decode, callback) {
-    //var decode = decryptToken(token);
-    console.log('***********'+decode);
     daoUser.getUser(decode.userName, callback);
-    
 }
 
 function createFavourite(username, id, callback) {

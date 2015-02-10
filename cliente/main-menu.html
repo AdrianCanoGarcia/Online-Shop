@@ -70,6 +70,7 @@
           {name: 'Sign Up', id: 'paper_tab1', hash: 'SignUp'}
         ];
         this.verifyToken();
+        this.listener();
         this.hashChanged();
       },
       hashChanged: function () {
@@ -78,21 +79,25 @@
         } else if (this.route == "SignIn" || this.route == "SignUp") {
           this.$.core_card.style.height = "95%";
         }
+      },  
+      listener: function () {
+        var that = this;
+        addEventListener("hashchange", function () {
+          that.verifyToken();
+        })
       },
       verifyToken: function () {
         var that = this;
-        addEventListener("hashchange", function () {
-          that.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
-            if (result) {
-                that.hashChanged();
-                localStorage.setItem("userName",result.name);
-                localStorage.setItem("mail",result.email);
-            } else {
-                if (location.hash == "#SearchPage") {
-                  location.href = " ";
-                }
+        this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
+          if (result) {
+            that.hashChanged();
+            localStorage.setItem("userName", result.name);
+            localStorage.setItem("mail", result.email);
+          } else {
+            if (location.hash == "#SearchPage") {
+              location.href = " ";
             }
-          })
+          }
         })
       }
     });
