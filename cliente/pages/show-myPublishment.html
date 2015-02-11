@@ -1,178 +1,179 @@
 <polymer-element name="show-myPublishment">
-  <template>
-    <style>
-      :host{
-      }
-      #container{
-        width: 100%;
-        height: 300px;
-      }
-      #content{
-        width: 95%;
-        height: 200px;
-        border: solid 1px rgba(255, 255, 255, 0.4);
-        background-color: rgba(4, 58, 96,0.4);
-        padding: 15px 20px 15px 20px;
-        margin-top: 25px;
-      }
-      #email{
-        width: 95%;
-        margin-top: 10px;
-      }
-      #notice{
-        border: solid 1px rgba(255, 255, 255, 0.4);
-        background-color: rgba(255, 255, 255, 0.5);
-        width: 100%;
-        height: 50px;
-      }
-      #line{
-        margin: 0;
-        border: 0;
-        height: 1px;
-        background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-        background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-        background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-        background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-      }
-      date{
-        margin-right: 46.5%;
-        float: right;
-      }
-      #delete:hover{
-        color: white;
-      }
-      .button {
-        border-top: 1px solid #96d1f8;
-        background: #65a9d7;
-        background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
-        background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
-        background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-        background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-        background: -o-linear-gradient(top, #3e779d, #65a9d7);
-        padding: 5px 10px;
-        -webkit-border-radius: 15px;
-        -moz-border-radius: 15px;
-        border-radius: 15px;
-        -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-        -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-        box-shadow: rgba(0,0,0,1) 0 1px 0;
-        text-shadow: rgba(0,0,0,.4) 0 1px 0;
-        color: white;
-        font-size: 14px;
-        font-family: sans-serif;
-        text-decoration: none;
-        vertical-align: middle;
-        text-align: center;
-        width: 10%;
-      }
-      .button:hover {
-        border-top-color: #28597a;
-        background: #054370;
-        color: #ccc;
-      }
-      .button:active {
-        border-top-color: #1b435e;
-        background: #023254;
-      }
-      button-container{
-        width: 95%;
-      }
-      #lineName{
-        border: 0;
-        height: 0;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-      }
-      #name_ads{
-        width: 97%;
-      }
-      #done, cancel{
-        width: 27px;
-        height: 27px;
-      }
-      #done:hover{
-        color: green;
-        width: 27px;
-        height: 27px;
-      }
-      #cancel:hover{
-        color: red;
-        width: 27px;
-        height: 27px;
-      }
-
-    </style>
-
-    <proposal-model id="proposalModel"></proposal-model>
-    <user-model id="userModel"></user-model>
-
-    <div id='button-container' layout vertical center ><div class="button" on-click="{{loadAds}}" id="button" style="visibility:hidden">You have more publications</div></div>
-    <template repeat="{{ ad in ads }}">
-      <div id="container" layout vertical center>
-        <div id="content">
-          <core-item id="paper_item">
-            <div id='name_ads'>{{ ad.username }}</div>  
-            <core-icon on-click="{{ toogle }}" icon="delete" alt="{{ ad._id }}" id="delete"></core-icon>
-          </core-item><hr id="lineName"/> {{ ad.content }}
-        </div>
-        <div id="email"> Contact e-mail: {{ ad.mail }} <date> {{ ad.date }} </date></div>
-      </div>
-      <hr id="line" />
-    </template>
-    <paper-dialog  autoCloseDisabled="true" backdrop="true" id="dialog" transition="core-transition-center">
-      Are you sure that you want to delete your comment?
-      <table layout vertical center>
-        <tr >
-          <td style="padding: 10px"><core-icon affirmative icon="done" id ="done" on-click="{{ deletePublishment }}" ></core-icon></td>
-          <td style="padding: 10px"><core-icon affirmative icon="cancel" id ="cancel"></core-icon></td>
-        </tr>
-      </table>
-    </paper-dialog>
-  </template>
-
-  <script>
-
-    Polymer({
-      ready: function () {
-        var socket = io();
-        var that = this;
-        socket.on('AdPublished', function (result) {
-          that.$.button.style.visibility = "visible";
-        });
-        socket.on('AdDeleted', function (result) {
-          that.loadAds();
-        });
-      },
-      loadAds: function () {
-        var that = this;
-        this.$.button.style.visibility = "hidden";
-        this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
-          that.$.proposalModel.getMyPublishment(result.name, function (result) {
-            that.ads = result;
-          });
-        });
-      },
-      toast: function () {
-        this.$.toast1.show();
-      },
-      toogle: function (event, detail, sender) {
-        this.$.dialog.toggle();
-        this.id = sender.alt;
-      },
-      deletePublishment: function () {
-        var that = this;
-        this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
-          var data = {
-            id: that.id,
-            name: result.name
-          }
-          that.$.proposalModel.deletePublishment(JSON.stringify(data), function (result) {
-            if (result) {
-              console.log("mensaje borrado corectamente");
+    <template>
+        <style>
+            :host{
             }
-          })
+            #container{
+                width: 100%;
+                height: 300px;
+            }
+            #content{
+                width: 95%;
+                height: 200px;
+                border: solid 1px rgba(255, 255, 255, 0.4);
+                background-color:rgba(238, 238, 238,0.6);
+                padding: 15px 20px 15px 20px;
+                margin-top: 25px;
+            }
+            #email{
+                width: 95%;
+                margin-top: 10px;
+            }
+            #notice{
+                border: solid 1px rgba(255, 255, 255, 0.4);
+                background-color: rgba(255, 255, 255, 0.5);
+                width: 100%;
+                height: 50px;
+            }
+            #line{
+                margin: 0;
+                border: 0;
+                height: 1px;
+                background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+                background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+                background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+                background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+            }
+            date{
+                margin-right: 46.5%;
+                float: right;
+            }
+            #delete:hover{
+                color: white;
+            }
+            .button {
+                border-top: 1px solid #96d1f8;
+                background: #65a9d7;
+                background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+                background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+                background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+                background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+                background: -o-linear-gradient(top, #3e779d, #65a9d7);
+                padding: 5px 10px;
+                -webkit-border-radius: 15px;
+                -moz-border-radius: 15px;
+                border-radius: 15px;
+                -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+                -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+                box-shadow: rgba(0,0,0,1) 0 1px 0;
+                text-shadow: rgba(0,0,0,.4) 0 1px 0;
+                color: white;
+                font-size: 14px;
+                font-family: sans-serif;
+                text-decoration: none;
+                vertical-align: middle;
+                text-align: center;
+                width: 10%;
+            }
+            .button:hover {
+                border-top-color: #28597a;
+                background: #054370;
+                color: #ccc;
+            }
+            .button:active {
+                border-top-color: #1b435e;
+                background: #023254;
+            }
+            button-container{
+                width: 95%;
+            }
+            #lineName{
+                border: 0;
+                height: 0;
+                border-top: 1px solid rgba(0, 0, 0, 0.1);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            }
+            #name_ads{
+                width: 97%;
+            }
+            #done, cancel{
+                width: 27px;
+                height: 27px;
+            }
+            #done:hover{
+                color: green;
+                width: 27px;
+                height: 27px;
+            }
+            #cancel:hover{
+                color: red;
+                width: 27px;
+                height: 27px;
+            }
+
+        </style>
+
+        <proposal-model id="proposalModel"></proposal-model>
+        <user-model id="userModel"></user-model>
+
+        <div id='button-container' layout vertical center ><div class="button" on-click="{{loadAds}}" id="button" style="visibility:hidden">You have more publications</div></div>
+        <template repeat="{{ ad in ads }}">
+            <div id="container" layout vertical center>
+                <div id="content">
+                    <core-item id="paper_item">
+                        <div id='name_ads'>{{ ad.username }}</div>  
+                        <core-icon on-click="{{ toogle }}" icon="delete" alt="{{ ad._id }}" id="delete"></core-icon>
+                    </core-item><hr id="lineName"/><div style="word-wrap: break-word; height: 72%; overflow: auto; padding-right:2px;"> {{ ad.content }}</div>
+                </div>
+                <div id="email"> Contact e-mail: {{ ad.mail }} <date> {{ ad.date }} </date></div>
+            </div>
+            <hr id="line" />
+        </template>
+        <paper-dialog  autoCloseDisabled="true" backdrop="true" id="dialog" transition="core-transition-center">
+            Are you sure that you want to delete your comment?
+            <table layout vertical center>
+                <tr >
+                    <td style="padding: 10px"><core-icon affirmative icon="done" id ="done" on-click="{{ deletePublishment }}" ></core-icon></td>
+                <td style="padding: 10px"><core-icon affirmative icon="cancel" id ="cancel"></core-icon></td>
+                </tr>
+            </table>
+        </paper-dialog>
+        <paper-toast id="popupDelete" text="Your comment have been deleted"></paper-toast>
+    </template>
+
+    <script>
+
+        Polymer({
+            ready: function () {
+                var socket = io();
+                var that = this;
+                socket.on('AdPublished', function (result) {
+                    that.$.button.style.visibility = "visible";
+                });
+                socket.on('AdDeleted', function (result) {
+                    that.loadAds();
+                });
+            },
+            loadAds: function () {
+                var that = this;
+                this.$.button.style.visibility = "hidden";
+                this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
+                    that.$.proposalModel.getMyPublishment(result.name, function (result) {
+                        that.ads = result;
+                    });
+                });
+            },
+            toast: function () {
+                this.$.toast1.show();
+            },
+            toogle: function (event, detail, sender) {
+                this.$.dialog.toggle();
+                this.id = sender.alt;
+            },
+            deletePublishment: function () {
+                var that = this;
+                this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
+                    var data = {
+                        id: that.id,
+                        name: result.name
+                    }
+                    that.$.proposalModel.deletePublishment(JSON.stringify(data), function (result) {
+                        if (result) {
+                            that.$.popupDelete.show();
+                        }
+                    })
+                });
+            }
         });
-      }
-    });
-  </script>
+    </script>
 </polymer-element>

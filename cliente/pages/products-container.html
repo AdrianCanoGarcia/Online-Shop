@@ -4,9 +4,9 @@
             :host {
             }
             #core_card {
+                margin-top: 15px;
                 background-color: rgba(29, 100, 155, 0.5);
                 border-radius: 5px;
-                width: 300px;
                 height: 300px;
             }
             #img{
@@ -16,12 +16,21 @@
             #imgContainer{
                 width: 100px;
                 height: 100px;
+                
+            }
+            core-input#title /deep/ #input,textarea{
+                text-align:center;
+            }
+            #title{
+                width: 100%;
             }
         </style>
         <using-api id="usingApi"></using-api>
           <template repeat="{{product in products.Item}}">  
             <core-card id="core_card" layout vertical center>
-                <core-input readonly  value="{{product.Title}}" id="text"></core-input>
+               
+                <core-input id="title" readonly  value="{{product.Title}}"></core-input>
+               
                 <div id="imgContainer">   
                     <a id="a" href="{{product.ViewItemURLForNaturalSearch}}"><img id ="img" src="{{product.GalleryURL}}" ></a>
                 </div>

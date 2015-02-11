@@ -3,6 +3,7 @@
     <style>
       :host{
       }
+      
       #container{
         width: 100%;
         height: 300px;
@@ -11,7 +12,8 @@
         width: 95%;
         height: 200px;
         border: solid 1px rgba(255, 255, 255, 0.4);
-        background-color: rgba(4, 58, 96,0.4);
+        background-color:rgba(238, 238, 238,0.6);
+
         padding: 15px 20px 15px 20px;
         margin-top: 25px;
       }
@@ -101,7 +103,7 @@
             <template if="{{ !ad.isFavourite }}">
               <core-icon on-click="{{ addFavourites }}"  alt="{{ ad._id }}" icon="favorite" id="favorite" style="color: black;"></core-icon>
             </template>
-          </core-item><hr id="lineName"/> {{ ad.content }}
+          </core-item><hr id="lineName"/><div style="word-wrap: break-word; height: 72%; overflow: auto; padding-right:2px;"> {{ ad.content }}</div>
         </div>
         <div id="email"> Contact e-mail: {{ad.mail}} <date> {{ad.date}} </date></div>
       </div>
