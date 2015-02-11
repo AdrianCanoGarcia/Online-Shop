@@ -141,7 +141,6 @@ function worker(io) {
                     }
                     
                     userManager.getUser(user.name,function(err,result){
-                        console.log("********** " +result);
                         res.json(result.favourite);
                     });
                 } else {

@@ -19,17 +19,22 @@
             }
         </style>
         <using-api id="usingApi"></using-api>
-   
+          <template repeat="{{product in products.Item}}">  
             <core-card id="core_card" layout vertical center>
+                <core-input readonly  value="{{product.Title}}" id="text"></core-input>
+                <div id="imgContainer">   
+                    <a id="a" href="{{product.ViewItemURLForNaturalSearch}}"><img id ="img" src="{{product.GalleryURL}}" ></a>
+                </div>
+            </core-card>
+            
+            <!-- <core-card id="core_card" layout vertical center>
                 <core-input readonly  value="" id="text"></core-input>
                 <div id="imgContainer">   
                     <a id="a" href=""><img id ="img" src="" ></a>
                 </div>
-            </core-card>
-      
-        <template>
-            <core-input readonly  name="user" value="JAJAJ" id="text"></core-input>
-        </template>
+            </core-card> -->
+          </template>
+        
             
     </template>
 
@@ -38,9 +43,10 @@
         Polymer({
             loadData: function (result) {
                 console.log(result);
-                this.$.text.value = result.Item[0].Title;
+                this.products=result;
+                /*this.$.text.value = result.Item[0].Title;
                 this.$.img.src = result.Item[0].GalleryURL;
-                this.$.a.href = result.Item[0].ViewItemURLForNaturalSearch;
+                this.$.a.href = result.Item[0].ViewItemURLForNaturalSearch;*/
             }
  });
     </script>

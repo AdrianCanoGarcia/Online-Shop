@@ -312,8 +312,8 @@
                 Are you sure that you want to delete your account?
                 <table layout vertical center>
                     <tr >
-                        <td style="padding: 10px"><core-icon affirmative icon="done" id ="done" on-click="{{ deleteUser }}" ></core-icon></td>
-                    <td style="padding: 10px"><core-icon affirmative icon="cancel" id ="cancel"></core-icon></td>
+                      <td style="padding: 10px"><core-icon affirmative icon="done" id ="done" on-click="{{ deleteUser }}" ></core-icon></td>
+                      <td style="padding: 10px"><core-icon affirmative icon="cancel" id ="cancel"></core-icon></td>
                     </tr>
                 </table>
             </paper-dialog>
@@ -324,6 +324,7 @@
         Polymer({
             showAds: function () {
                 this.$.showPublishment.loadAds();
+                this.$.showPublishment.loadFavourites();
                 this.$.pages.selected = 3;
             },
             showMyAds: function () {

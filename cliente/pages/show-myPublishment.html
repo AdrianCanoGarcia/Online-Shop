@@ -86,6 +86,20 @@
       #name_ads{
         width: 97%;
       }
+      #done, cancel{
+        width: 27px;
+        height: 27px;
+      }
+      #done:hover{
+        color: green;
+        width: 27px;
+        height: 27px;
+      }
+      #cancel:hover{
+        color: red;
+        width: 27px;
+        height: 27px;
+      }
 
     </style>
 
@@ -98,13 +112,22 @@
         <div id="content">
           <core-item id="paper_item">
             <div id='name_ads'>{{ ad.username }}</div>  
-            <core-icon on-click="{{ deletePublishment }}" icon="delete" alt="{{ad._id}}" id="delete"></core-icon>
+            <core-icon on-click="{{ toogle }}" icon="delete" alt="{{ ad._id }}" id="delete"></core-icon>
           </core-item><hr id="lineName"/> {{ ad.content }}
         </div>
-        <div id="email"> Contact e-mail: {{ad.mail}} <date> {{ad.date}} </date></div>
+        <div id="email"> Contact e-mail: {{ ad.mail }} <date> {{ ad.date }} </date></div>
       </div>
       <hr id="line" />
     </template>
+    <paper-dialog  autoCloseDisabled="true" backdrop="true" id="dialog" transition="core-transition-center">
+      Are you sure that you want to delete your comment?
+      <table layout vertical center>
+        <tr >
+          <td style="padding: 10px"><core-icon affirmative icon="done" id ="done" on-click="{{ deletePublishment }}" ></core-icon></td>
+          <td style="padding: 10px"><core-icon affirmative icon="cancel" id ="cancel"></core-icon></td>
+        </tr>
+      </table>
+    </paper-dialog>
   </template>
 
   <script>
@@ -119,13 +142,11 @@
         socket.on('AdDeleted', function (result) {
           that.loadAds();
         });
-        
       },
       loadAds: function () {
         var that = this;
         this.$.button.style.visibility = "hidden";
         this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
-          
           that.$.proposalModel.getMyPublishment(result.name, function (result) {
             that.ads = result;
           });
@@ -134,22 +155,24 @@
       toast: function () {
         this.$.toast1.show();
       },
-      deletePublishment: function (event, detail, sender) {
+      toogle: function (event, detail, sender) {
+        this.$.dialog.toggle();
+        this.id = sender.alt;
+      },
+      deletePublishment: function () {
         var that = this;
-        var id= sender.alt;
         this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
-            var data={
-                id:id,
-                name:result.name
+          var data = {
+            id: that.id,
+            name: result.name
+          }
+          that.$.proposalModel.deletePublishment(JSON.stringify(data), function (result) {
+            if (result) {
+              console.log("mensaje borrado corectamente");
             }
-          that.$.proposalModel.deletePublishment(JSON.stringify(data), function (result){
-              if(result){
-                  console.log("mensaje borrado corectamente");
-              }
           })
         });
       }
-
     });
   </script>
 </polymer-element>
