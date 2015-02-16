@@ -1,3 +1,4 @@
+
 <polymer-element name="products-container">
   <template>
     <style>
@@ -31,14 +32,17 @@
       #title{
         width: 100%;
         color:white;
+       
       }
       #shipping{
         width: 100%;
         color:rgba(255,255,255,0.7);
+        margin-top: 10px;
       }
       #img{
         height: 130px;
         width: 110px;
+        margin-bottom: 50px;
       }
       .fancy::shadow .core-tooltip {
         opacity: 2;
@@ -52,20 +56,26 @@
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 2px, 0);
       }
+      #logo{
+          height: 130px;
+          width: 110px;
+          margin-left: 1320px;
+          margin-top: 10px;
+      }
     </style>
     <using-api id="usingApi"></using-api>
     <template repeat="{{product in products.Item}}">  
       <core-card id="core_card" layout vertical center>
         <core-input id="title" readonly  value="{{product.Title}}"></core-input>
         <div id="imgContainer">
-          <core-tooltip label="view " position="bottom" class="fancy">
+          <core-tooltip label="View Product " position="bottom" class="fancy">
             <a id="a" href="{{product.ViewItemURLForNaturalSearch}}"><img id ="img" src="{{product.GalleryURL}}" ></a>
           </core-tooltip>
         </div>
         <core-input id="title" readonly  value="{{product.ConvertedCurrentPrice.Value}} {{product.ConvertedCurrentPrice.CurrencyID}}"></core-input>
         <core-input id="shipping" readonly  value="Shipping cost: {{product.ShippingCostSummary.ShippingServiceCost.Value}} {{product.ShippingCostSummary.ShippingServiceCost.CurrencyID}}"></core-input>
+      <img id ="logo" src="../img/EBay_logo.png" >
       </core-card>
-
       <!-- <core-card id="core_card" layout vertical center>
           <core-input readonly  value="" id="text"></core-input>
           <div id="imgContainer">   
@@ -73,9 +83,7 @@
           </div>
       </core-card> -->
     </template>
-
-
-  </template>
+ </template>
 
   <script>
 
