@@ -22,8 +22,8 @@
                 $.ajax(options);
             }
             Polymer('using-api', {
-                getObject: function (item, callback) {
-                    doAjax({type: 'GET', url: '/ebay/' + item}, function (result) {
+                getObject: function (item, numberPage, callback) {
+                    doAjax({type: 'GET', url: '/ebay/' + item +'/'+ numberPage}, function (result) {
                        callback(result);
                     }, function (error) {
                         console.log("Error Propio");

@@ -72,8 +72,8 @@
             <a id="a" href="{{ product.viewItemURL[0] }}"><img id ="img" src="{{ product.galleryURL[0] }}" ></a>
           </core-tooltip>
         </div>
-        <core-input id="title" readonly  value="{{product.ConvertedCurrentPrice.Value}} {{product.ConvertedCurrentPrice.CurrencyID}}"></core-input>
-        <core-input id="shipping" readonly  value="Shipping cost: {{ product.ShippingInfo[0].ShippingServiceCost[0].value }} {{ product.ShippingInfo[0].ShippingServiceCost[0].currencyID }}"></core-input>
+        <core-input id="title" readonly  value="{{product.sellingStatus[0].convertedCurrentPrice[0].__value__}} {{ product.sellingStatus[0].convertedCurrentPrice[0].currencyId }}"></core-input>
+        <core-input id="shipping" readonly  value="Shipping cost: {{ product.shippingInfo[0].shippingServiceCost[0].value }} {{ product.shippingInfo[0].shippingServiceCost[0].currencyID }}"></core-input>
         <img id ="logo" src="../img/EBay_logo.png" >
       </core-card>
       
@@ -85,8 +85,15 @@
 
     Polymer({
       loadData: function (result) {
+        var items=result.findItemsByKeywordsResponse[0].searchResult[0];
         console.log(result);
-        this.products = result.findItemsByKeywordsResponse[0].searchResult[0];
+        if(this.products){
+            this.products = this.products+items;
+           //NO VALE LA SUMA DEBEMOS HACER PUSH DE EL ARRAY PRODUCTS;
+        }else{
+           this.products=items;
+           console.log(this.products);
+        }
       }
     });
   </script>

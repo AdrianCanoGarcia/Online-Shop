@@ -4,12 +4,13 @@ var apiManager = require('../../manager/ebay');
 
 function worker(io) {
   /* ROUTES */
-  router.get('/:item', getApi);
+  router.get('/:item/:numberPage', getApi);
   /* ROUTES */
 
   function getApi(req, res) {
     var item = req.params.item;
-    apiManager.getApi(item, function (result) {
+    var numberPage=req.params.numberPage;
+    apiManager.getApi(item,numberPage, function (result) {
       res.json(result);
     });
 

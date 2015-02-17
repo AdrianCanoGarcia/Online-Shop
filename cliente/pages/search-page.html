@@ -324,8 +324,17 @@
     Polymer({
       test: function (event) {
         var scroller = event.detail.target;
-        if (this.$.pages.selected == 1) {
-          console.log(scroller.scrollTop);
+        var count=2;
+        var that = this;
+        var scrollNumber=2719;
+        if (this.$.pages.selected == 1 && scroller.scrollTop== scrollNumber) {
+            this.$.useApi.getObject(this.$.input.value,count, function (result) {
+                result = JSON.parse(result);
+                that.$.itemsContainer.loadData(result);
+                that.count++;
+                that.scrollNumber=that.scrollNumber+2719;
+            });
+            console.log("FIN");
         }
         //alert("WILLOW COTILLA");
       },
@@ -346,7 +355,7 @@
         var that = this;
         if (code == 13 || sender.id == "core_icon_button1") {
           this.$.pages.selected = 1;
-          this.$.useApi.getObject(this.$.input.value, function (result) {
+          this.$.useApi.getObject(this.$.input.value,1, function (result) {
             result = JSON.parse(result);
             that.$.itemsContainer.loadData(result);
           });
