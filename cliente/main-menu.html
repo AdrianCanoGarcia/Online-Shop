@@ -63,6 +63,7 @@
   </template>  
 
   <script>
+    
     Polymer({
       ready: function () {
         this.pages = [
@@ -72,6 +73,7 @@
         this.verifyToken();
         this.listener();
         this.hashChanged();
+        
       },
       hashChanged: function () {
         if (this.route == "SearchPage") {

@@ -9,7 +9,7 @@
         background-color: rgba(29, 100, 155, 0.5);
         border-radius: 5px;
         height: 300px;
-        padding: 20px;
+        padding-top: 20px;
       }
       #img{
         width: 100%;
@@ -19,7 +19,6 @@
         height: 200px;
         width: 100px;
         margin-top: 30px;
-
       }
       core-input#title /deep/ #input,textarea{
         text-align:center;
@@ -32,7 +31,7 @@
       #title{
         width: 100%;
         color:white;
-       
+
       }
       #shipping{
         width: 100%;
@@ -56,44 +55,38 @@
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 2px, 0);
       }
-      #logo{
-          height: 130px;
-          width: 110px;
-          margin-left: 1320px;
-          margin-top: 10px;
+      #logo {
+        height: 130px;
+        width: 110px;
+        margin-left: 90%;
       }
     </style>
     <using-api id="usingApi"></using-api>
-    <template repeat="{{product in products.Item}}">  
-      <core-card id="core_card" layout vertical center>
-        <core-input id="title" readonly  value="{{product.Title}}"></core-input>
+   
+     
+    <template repeat="{{ product in products.item }}">  
+      <core-card id="core_card" layout vertical center >
+        <core-input id="title" readonly  value="{{ product.title[0] }}"></core-input>
         <div id="imgContainer">
           <core-tooltip label="View Product " position="bottom" class="fancy">
-            <a id="a" href="{{product.ViewItemURLForNaturalSearch}}"><img id ="img" src="{{product.GalleryURL}}" ></a>
+            <a id="a" href="{{ product.viewItemURL[0] }}"><img id ="img" src="{{ product.galleryURL[0] }}" ></a>
           </core-tooltip>
         </div>
         <core-input id="title" readonly  value="{{product.ConvertedCurrentPrice.Value}} {{product.ConvertedCurrentPrice.CurrencyID}}"></core-input>
-        <core-input id="shipping" readonly  value="Shipping cost: {{product.ShippingCostSummary.ShippingServiceCost.Value}} {{product.ShippingCostSummary.ShippingServiceCost.CurrencyID}}"></core-input>
-      <img id ="logo" src="../img/EBay_logo.png" >
+        <core-input id="shipping" readonly  value="Shipping cost: {{ product.ShippingInfo[0].ShippingServiceCost[0].value }} {{ product.ShippingInfo[0].ShippingServiceCost[0].currencyID }}"></core-input>
+        <img id ="logo" src="../img/EBay_logo.png" >
       </core-card>
-      <!-- <core-card id="core_card" layout vertical center>
-          <core-input readonly  value="" id="text"></core-input>
-          <div id="imgContainer">   
-              <a id="a" href=""><img id ="img" src="" ></a>
-          </div>
-      </core-card> -->
+      
     </template>
- </template>
+     
+  </template>
 
   <script>
 
     Polymer({
       loadData: function (result) {
         console.log(result);
-        this.products = result;
-        /*this.$.text.value = result.Item[0].Title;
-         this.$.img.src = result.Item[0].GalleryURL;
-         this.$.a.href = result.Item[0].ViewItemURLForNaturalSearch;*/
+        this.products = result.findItemsByKeywordsResponse[0].searchResult[0];
       }
     });
   </script>
