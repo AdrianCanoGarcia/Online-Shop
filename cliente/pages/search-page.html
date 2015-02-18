@@ -26,7 +26,7 @@
         padding-top: 30px;
       }
       #ikarus {
-        font-size: 251%;
+        font-size: 200%;
         line-height: normal;
         font-family: 'Antic Didone', serif;
         margin-left: 48%;
@@ -244,13 +244,17 @@
       #itemsContainer{
         width: 90%;
       }
+      paper-spinner.blue::shadow .circle {
+        border-color: rgb(24, 87, 134);
+      }
+    </style>
 
 
     </style>
     <using-api id="useApi"></using-api>
     <user-model id="userModel"></user-model>
     <core-card id="core_card" layout vertical center fit on-dialog="{{ toggle }}">
-      <core-header-panel mode="waterfall-tall" id="core_header_panel" headermargin="128" condenses headerheight="192" on-scroll="{{test}}">
+      <core-header-panel mode="waterfall-tall" id="core_header_panel" on-scroll="{{ pagination }}">
 
         <core-toolbar id="core_toolbar" class="animate tall">
           <core-tooltip label="Products" position="bottom" class="fancy">
@@ -281,13 +285,14 @@
         </core-toolbar>
 
         <core-pages id='pages' content layout vertical center selected="0">
+
           <section id="section">
 
           </section>
+
           <section id="section" content layout vertical center>
-
             <products-container id="itemsContainer" ></products-container>
-
+            <paper-spinner id="spinner" active class="blue" alt="loading..."></paper-spinner>
           </section>
 
           <section id='section' content layout vertical center>
@@ -298,16 +303,17 @@
             <show-publishment id="showPublishment"></show-publishment>
           </section>
 
-
-
         </core-pages>
       </core-header-panel>
+
       <paper-dialog  id="profileDialog" transition="core-transition-center" layout vertical center>
         <profile-page id="profileId"></profile-page>
       </paper-dialog>
+
       <paper-dialog  id="adDialog" transition="core-transition-center" layout vertical center>
         <announcement-page id="anouncement"></announcement-page>
       </paper-dialog>
+
       <paper-dialog  autoCloseDisabled="true" backdrop="true" id="dialog" transition="core-transition-center">
         Are you sure that you want to delete your account?
         <table layout vertical center>
@@ -322,21 +328,21 @@
   </template>
   <script>
     Polymer({
-      test: function (event) {
+      pagination: function (event) {
         var scroller = event.detail.target;
-        var count=2;
+        var count = 2;
         var that = this;
-        var scrollNumber=2719;
-        if (this.$.pages.selected == 1 && scroller.scrollTop== scrollNumber) {
-            this.$.useApi.getObject(this.$.input.value,count, function (result) {
-                result = JSON.parse(result);
-                that.$.itemsContainer.loadData(result);
-                that.count++;
-                that.scrollNumber=that.scrollNumber+2719;
+        if (this.$.pages.selected == 1 && scroller.scrollTop > 0 && $(window).height() + scroller.scrollTop > this.$.itemsContainer.scrollHeight) {
+          if (scroller.scrollTop = this.$.itemsContainer.scrollHeight) {
+            this.$.useApi.getObject(this.$.input.value, count, function (result) {
+              result = JSON.parse(result);
+              that.$.itemsContainer.loadData(result);
+              that.count++;
+              that.$.spinner.active = false;
             });
             console.log("FIN");
+          }
         }
-        //alert("WILLOW COTILLA");
       },
       showAds: function () {
         this.$.showPublishment.loadAds();
@@ -355,29 +361,32 @@
         var that = this;
         if (code == 13 || sender.id == "core_icon_button1") {
           this.$.pages.selected = 1;
-          this.$.useApi.getObject(this.$.input.value,1, function (result) {
+          if (this.$.itemsContainer.data.value == 1) {
+            this.$.itemsContainer.emptyArray();
+          }
+          this.$.useApi.getObject(this.$.input.value, 1, function (result) {
             result = JSON.parse(result);
             that.$.itemsContainer.loadData(result);
+            that.$.spinner.active = false;
           });
         }
       },
       unloadSearcher: function () {
         this.$.div3.style.visibility = "hidden";
-        this.$.search_icon.style.visibility = "visible";
-        this.$.core_icon_button.style.visibility = "visible";
-        this.$.menu.style.visibility = "visible";
-        this.$.core_icon_button.style.marginLeft = "0%";
+        this.$.search_icon.style.display = "block";
+        this.$.menu.style.display = "block";
+        this.$.core_icon_button.style.display = "block";
       },
       loadSearcher: function () {
-        this.$.div3.style.visibility = "visible";
-        this.$.search_icon.style.visibility = "hidden";
-        this.$.div3.style.width = "100%";
-        this.$.div3.style.backgroundColor = "#185786";
-        this.$.div3.style.fill = "rgb(241, 241, 241)";
-        this.$.div3.style.color = "rgb(241, 241, 241)";
-        this.$.core_icon_button.style.visibility = "hidden";
-        this.$.core_icon_button.style.marginLeft = "-5%";
-        this.$.menu.style.visibility = "hidden";
+        var div3 = this.$.div3.style;
+        div3.visibility = "visible";
+        this.$.search_icon.style.display = "none";
+        this.$.menu.style.display = "none";
+        this.$.core_icon_button.style.display = "none";
+        div3.width = "100%";
+        div3.backgroundColor = "#185786";
+        div3.fill = "rgb(241, 241, 241)";
+        div3.color = "rgb(241, 241, 241)";
         this.$.input.focus();
       },
       showOptions: function () {

@@ -60,10 +60,18 @@
         width: 110px;
         margin-left: 90%;
       }
+      paper-spinner.blue::shadow .circle {
+        border-color: rgb(24, 87, 134);
+      }
+      #divSpinner {
+        width: 100%;
+        height: 60px;
+        margin-top: 10px;
+      }
+      
     </style>
     <using-api id="usingApi"></using-api>
-   
-     
+
     <template repeat="{{ product in products.item }}">  
       <core-card id="core_card" layout vertical center >
         <core-input id="title" readonly  value="{{ product.title[0] }}"></core-input>
@@ -76,24 +84,34 @@
         <core-input id="shipping" readonly  value="Shipping cost: {{ product.shippingInfo[0].shippingServiceCost[0].value }} {{ product.shippingInfo[0].shippingServiceCost[0].currencyID }}"></core-input>
         <img id ="logo" src="../img/EBay_logo.png" >
       </core-card>
-      
+
     </template>
-     
+    
+    <div id="divSpinner" layout vertical center>
+    <paper-spinner id="spinner" class="blue"></paper-spinner>
+    </div>
+  
   </template>
+
 
   <script>
 
     Polymer({
+      data: {
+        value: 0
+      },
       loadData: function (result) {
-        var items=result.findItemsByKeywordsResponse[0].searchResult[0];
-        console.log(result);
-        if(this.products){
-            this.products = this.products+items;
-           //NO VALE LA SUMA DEBEMOS HACER PUSH DE EL ARRAY PRODUCTS;
-        }else{
-           this.products=items;
-           console.log(this.products);
+        var items = result.findItemsByKeywordsResponse[0].searchResult[0];
+        this.$.spinner.active = true;
+        if (this.products) {
+          this.products.item = this.products.item.concat(items.item);
+        } else {
+          this.products = items;
+          this.data.value = 1;
         }
+      },
+      emptyArray: function () {
+        this.products.item.length = 0;
       }
     });
   </script>
