@@ -3,7 +3,7 @@
     <style>
       :host{
       }
-      
+
       #container{
         width: 100%;
         height: 300px;
@@ -13,7 +13,6 @@
         height: 200px;
         border: solid 1px rgba(255, 255, 255, 0.4);
         background-color:rgba(238, 238, 238,0.6);
-
         padding: 15px 20px 15px 20px;
         margin-top: 25px;
       }
@@ -73,18 +72,19 @@
         border-top-color: #1b435e;
         background: #023254;
       }
-      button-container{
+      button-container {
         width: 95%;
       }
-      #lineName{
+      #lineName {
         border: 0;
         height: 0;
         border-top: 1px solid rgba(0, 0, 0, 0.1);
         border-bottom: 1px solid rgba(255, 255, 255, 0.3);
       }
-      #name_ads{
+      #name_ads {
         width: 97%;
       }
+
 
     </style> 
 
@@ -109,7 +109,7 @@
       </div>
       <hr id="line" />
     </template>
-    
+
   </template>
 
   <script>
@@ -150,6 +150,7 @@
       },
       drawFavourites: function (favourites) {
         var ads = this.loadAds();
+        debugger
         for (var i = 0; i < Object.keys(favourites).length; i++) {
           for (var j = 0; j < Object.keys(ads).length; j++) {
             if (favourites[i] == ads[j]._id) {
@@ -158,13 +159,13 @@
           }
         }
         for (var j = 0; j < Object.keys(ads).length; j++) {
-         if (!ads[j].isFavourite) {
+          if (!ads[j].isFavourite) {
             ads[j].isFavourite = false;
           }
         }
         this.newAds = ads;
       }
-      
+
     });
   </script>
 </polymer-element>

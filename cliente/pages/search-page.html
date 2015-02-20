@@ -1,430 +1,430 @@
 <link href='http://fonts.googleapis.com/css?family=Antic+Didone' rel='stylesheet' type='text/css'>
 <polymer-element name="search-page">
-    <template>
-        <style>    
-            :host {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                box-sizing: border-box;
-                background: linear-gradient(to bottom, #b7dbf1 0%,#5398ce 98%);
-            }
-            #core_header_panel {
-                width: 100%;
-                height: 100%;
-            }
-            #core_toolbar {
-                color: rgb(241, 241, 241);
-                fill: rgb(241, 241, 241);
-                background-image: url("../img/textura.jpg");
-                background-repeat: none;
-                background-size: 100%;
-            }
+  <template>
+    <style>    
+      :host {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        background: linear-gradient(to bottom, #b7dbf1 0%,#5398ce 98%);
+      }
+      #core_header_panel {
+        width: 100%;
+        height: 100%;
+      }
+      #core_toolbar {
+        color: rgb(241, 241, 241);
+        fill: rgb(241, 241, 241);
+        background-image: url("../img/textura.jpg");
+        background-repeat: none;
+        background-size: 100%;
+      }
 
-            #section{
-                height: 100%;
-                padding-top: 30px;
-            }
-            #ikarus {
-                font-size: 200%;
-                line-height: normal;
-                font-family: 'Antic Didone', serif;
-                margin-left: 48%;
-                text-shadow: 6px 6px 12px #000000;
-            }
-            #div3 {
-                visibility: hidden;
-                width: 90%;
-                border-radius: 5px;
-                box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
-            }
-            #input{
-                width: 90%;
-                background-color: transparent;
-                border: none;
-                color:white;
-                height: 34px;
-            }
-            #input:focus{
-                outline: 0px;
-            }
-            input::-webkit-input-placeholder {
-                color: white;
-                font-weight: bold;
-            }
-            #core_icon_button{
-                visibility: visible;
-            }
-            #options{
-                height: 100%;
-                -moz-transition: all 0.5s;
-                -webkit-transition: opacity 0.5s;
-                -o-transition: opacity 0.5s,visibility 0.5s;
-                transition: opacity 0.5s;
-                background-color: #3f7eaa;
-                border-radius: 0 4px 4px 4px;
-                box-shadow: 2px 4px 0 rgba(0, 0, 0, 0.1);
-                padding: 0 10px 5px;
-            }
-            #paper_item{
-                width: 80%;
-                padding: 5px 15px;
-                box-shadow: none;
-                margin-top: 4px;
-                background-color: #3f7eaa;
-                border-width: 1px;
-                border-style: solid;
-                border-color: transparent;
-                border-radius: 2px;
-                font-family: Open Sans,Helvetica,Arial,sans-serif;
-                font-size: 15px;
-                color: #FFFFFF;
-                text-decoration: none;
-                margin-right: 20px;
-            }
-            #paper_item:hover {
-                width: 80%;
-                z-index: 999;
-                position: relative;
-                padding: 5px 15px;
-                border-radius: 5px;
-                box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
-                font-family: Open Sans,Helvetica,Arial,sans-serif;
-                font-weight: normal;
-                background-color: #488cbb;
-            }
-            #avatar{
-                border-radius: 5px;
-                height: 120px;
-                width: 100%;
-                box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
-                border-width: 1px;
-                border-style: solid;
-                border-color: transparent;
-                margin-top: 10px;      
-                margin-bottom: 10px;
-                border: 2px;
-                background-color: white;
-                background-image: url("../img/person.jpg");
-                background-size: 100% 100%;
-                background-repeat: no-repeat;
-            }
-            core-item#paper_item /deep/ #social{
-                width: 40px;
-                height: 25px;
-                left: 2px;
-            }
-            core-item#paper_item /deep/ #power{
-                width: 40px;
-                height: 25px;
-                left: 1px;
-            }
-            core-item#paper_item /deep/ #power:hover{
-                width: 40px;
-                height: 25px;
-                left: 1px;
-            }
-            core-item#paper_item /deep/ #messenger{
-                width: 37px;
-                height: 21px;
-                left: 16px;
-            }
-            core-item#paper_item /deep/ #ad{
-                width: 40px;
-                height: 25px;
-                left: 4px;
-            }
-            core-item#paper_item /deep/ #myads{
-                width: 30px;
-                height: 22px;
-                left: 4px;
-            }
-            @media (max-width:600px){
-                #core_icon_button1 {
-                    float:left;
-                }
-                #div3{
-                    margin-left: -10%;
-                }
-                #input {
-                    margin-top: 0.5%;
-                    height: 34px;
-                }
-            }
-            @media (max-width:480px){
-                #core_icon_button1 {
-                    float:left;
-                }
-                #div3{
-                    margin-left: -15%;
-                }
-                #input {
-                    margin-top: 0.5%;
-                    height: 34px;
-                }
-            } 
-            @media (max-width:360px){
-                #core_icon_button1 {
-                    float:left;
-                }
-                #div3{
-                    margin-left: -20%;
-                }
-                #input {
-                    width: 80%;
-                    margin-top: 0.5%;
-                    height: 34px;
+      #section{
+        height: 100%;
+        padding-top: 30px;
+      }
+      #ikarus {
+        font-size: 200%;
+        line-height: normal;
+        font-family: 'Antic Didone', serif;
+        margin-left: 48%;
+        text-shadow: 6px 6px 12px #000000;
+      }
+      #div3 {
+        visibility: hidden;
+        width: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
+      }
+      #input{
+        width: 90%;
+        background-color: transparent;
+        border: none;
+        color:white;
+        height: 34px;
+      }
+      #input:focus{
+        outline: 0px;
+      }
+      input::-webkit-input-placeholder {
+        color: white;
+        font-weight: bold;
+      }
+      #core_icon_button{
+        visibility: visible;
+      }
+      #options{
+        height: 100%;
+        -moz-transition: all 0.5s;
+        -webkit-transition: opacity 0.5s;
+        -o-transition: opacity 0.5s,visibility 0.5s;
+        transition: opacity 0.5s;
+        background-color: #3f7eaa;
+        border-radius: 0 4px 4px 4px;
+        box-shadow: 2px 4px 0 rgba(0, 0, 0, 0.1);
+        padding: 0 10px 5px;
+      }
+      #paper_item{
+        width: 80%;
+        padding: 5px 15px;
+        box-shadow: none;
+        margin-top: 4px;
+        background-color: #3f7eaa;
+        border-width: 1px;
+        border-style: solid;
+        border-color: transparent;
+        border-radius: 2px;
+        font-family: Open Sans,Helvetica,Arial,sans-serif;
+        font-size: 15px;
+        color: #FFFFFF;
+        text-decoration: none;
+        margin-right: 20px;
+      }
+      #paper_item:hover {
+        width: 80%;
+        z-index: 999;
+        position: relative;
+        padding: 5px 15px;
+        border-radius: 5px;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
+        font-family: Open Sans,Helvetica,Arial,sans-serif;
+        font-weight: normal;
+        background-color: #488cbb;
+      }
+      #avatar{
+        border-radius: 5px;
+        height: 120px;
+        width: 100%;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset, 0 0 0 1px rgba(255, 255, 255, 0.08);
+        border-width: 1px;
+        border-style: solid;
+        border-color: transparent;
+        margin-top: 10px;      
+        margin-bottom: 10px;
+        border: 2px;
+        background-color: white;
+        background-image: url("../img/person.jpg");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+      core-item#paper_item /deep/ #social{
+        width: 40px;
+        height: 25px;
+        left: 2px;
+      }
+      core-item#paper_item /deep/ #power{
+        width: 40px;
+        height: 25px;
+        left: 1px;
+      }
+      core-item#paper_item /deep/ #power:hover{
+        width: 40px;
+        height: 25px;
+        left: 1px;
+      }
+      core-item#paper_item /deep/ #messenger{
+        width: 37px;
+        height: 21px;
+        left: 16px;
+      }
+      core-item#paper_item /deep/ #ad{
+        width: 40px;
+        height: 25px;
+        left: 4px;
+      }
+      core-item#paper_item /deep/ #myads{
+        width: 30px;
+        height: 22px;
+        left: 4px;
+      }
+      @media (max-width:600px){
+        #core_icon_button1 {
+          float:left;
+        }
+        #div3{
+          margin-left: -10%;
+        }
+        #input {
+          margin-top: 0.5%;
+          height: 34px;
+        }
+      }
+      @media (max-width:480px){
+        #core_icon_button1 {
+          float:left;
+        }
+        #div3{
+          margin-left: -15%;
+        }
+        #input {
+          margin-top: 0.5%;
+          height: 34px;
+        }
+      } 
+      @media (max-width:360px){
+        #core_icon_button1 {
+          float:left;
+        }
+        #div3{
+          margin-left: -20%;
+        }
+        #input {
+          width: 80%;
+          margin-top: 0.5%;
+          height: 34px;
 
-                }
-            }
-            #done, cancel{
-                width:27px;
-                height: 27px;
-            }
-            #done:hover{
-                color: green;
-                width:27px;
-                height: 27px;
-            }
-            #cancel:hover{
-                color: red;
-                width:27px;
-                height: 27px;
-            }
-            #paperDropdown{
-                top: 54px;
-                right: 38px;
-                width: 160px;
-                height: 423px;
-            }
-            paper-dropdown#paperDropdown /deep/ #background{
-                background-color: #3f7eaa;
-            }
-            paper-dropdown#paperDropdown /deep/ #scroller{
-                overflow: hidden;
-            }
-            #profileDialog{
-                border-radius: 5px;
-                box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
-                background-color: white;
-                max-height: none;
-                max-width: none;
-            }
-            paper-dialog#profileDialog /deep/ #container{
-                width: 600px;
-                height: 600px;
-            }
-            #adDialog{
-                border-radius: 5px;
-                box-shadow: rgba(0, 0, 0, 0.08) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
-                background-color: white;
-                max-height: none;
-                max-width: none;
+        }
+      }
+      #done, cancel{
+        width:27px;
+        height: 27px;
+      }
+      #done:hover{
+        color: green;
+        width:27px;
+        height: 27px;
+      }
+      #cancel:hover{
+        color: red;
+        width:27px;
+        height: 27px;
+      }
+      #paperDropdown{
+        top: 54px;
+        right: 38px;
+        width: 160px;
+        height: 423px;
+      }
+      paper-dropdown#paperDropdown /deep/ #background{
+        background-color: #3f7eaa;
+      }
+      paper-dropdown#paperDropdown /deep/ #scroller{
+        overflow: hidden;
+      }
+      #profileDialog{
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.0980392) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
+        background-color: white;
+        max-height: none;
+        max-width: none;
+      }
+      paper-dialog#profileDialog /deep/ #container{
+        width: 600px;
+        height: 600px;
+      }
+      #adDialog{
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.08) 8px 8px 8px, rgba(0, 0, 0, 0.0980392) 2px 8px 8px;
+        background-color: white;
+        max-height: none;
+        max-width: none;
 
-            }
-            paper-dialog#adDialog /deep/ #container{
-                width: 500px;
-                height: 500px;
-            }
-            #showPublishment{
-                width: 100%;
-            }
-            .fancy::shadow .core-tooltip {
-                opacity: 2;
-                -webkit-transition: all 300ms cubic-bezier(0,1.92,.99,1.07);
-                transition: all 300ms cubic-bezier(0,1.92,.99,1.07);
-                -webkit-transform: translate3d(0px, 20px, 0);
-                transform: translate3d(0px, -20px, 0);
-            }
-            .fancy:hover::shadow .core-tooltip, .fancy:focus::shadow .core-tooltip {
-                opacity: 1;
-                -webkit-transform: translate3d(0, 0, 0);
-                transform: translate3d(0, 0, 0);
-            }
-            #itemsContainer{
-                width: 90%;
-            }
-            paper-spinner.blue::shadow .circle {
-                border-color: rgb(24, 87, 134);
-            }
-            body.noscroll
-            {
-                position: fixed; 
-                overflow-y: scroll;
-                width: 100%;
-            }
-        </style>
+      }
+      paper-dialog#adDialog /deep/ #container{
+        width: 500px;
+        height: 500px;
+      }
+      #showPublishment{
+        width: 100%;
+      }
+      .fancy::shadow .core-tooltip {
+        opacity: 2;
+        -webkit-transition: all 300ms cubic-bezier(0,1.92,.99,1.07);
+        transition: all 300ms cubic-bezier(0,1.92,.99,1.07);
+        -webkit-transform: translate3d(0px, 20px, 0);
+        transform: translate3d(0px, -20px, 0);
+      }
+      .fancy:hover::shadow .core-tooltip, .fancy:focus::shadow .core-tooltip {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      #itemsContainer{
+        width: 90%;
+      }
+      paper-spinner.blue::shadow .circle {
+        border-color: rgb(24, 87, 134);
+      }
+      body.noscroll
+      {
+        position: fixed; 
+        overflow-y: scroll;
+        width: 100%;
+      }
+    </style>
 
 
-        </style>
-        <using-api id="useApi"></using-api>
-        <user-model id="userModel"></user-model>
-        <core-card id="core_card" layout vertical center fit on-dialog="{{ toggle }}">
-            <core-header-panel mode="waterfall-tall" id="core_header_panel" on-scroll="{{ pagination }}">
+    </style>
+    <using-api id="useApi"></using-api>
+    <user-model id="userModel"></user-model>
+    <core-card id="core_card" layout vertical center fit on-dialog="{{ toggle }}">
+      <core-header-panel mode="waterfall-tall" id="core_header_panel" on-scroll="{{ pagination }}">
 
-                <core-toolbar id="core_toolbar" class="animate tall">
-                    <core-tooltip label="Products" position="bottom" class="fancy">
-                        <core-icon-button icon="arrow-back" on-tap="{{ goToProducts }}" id="core_icon_button"></core-icon-button>
-                    </core-tooltip>
+        <core-toolbar id="core_toolbar" class="animate tall">
+          <core-tooltip label="Products" position="bottom" class="fancy">
+            <core-icon-button icon="arrow-back" on-tap="{{ goToProducts }}" id="core_icon_button"></core-icon-button>
+          </core-tooltip>
 
-                    <core-icon-button icon="search" id="search_icon" style="visibility:visible" on-tap="{{ loadSearcher }}" ></core-icon-button>    
-                    <div id="ikarus" class="bottom indent">Ikarus</div>
+          <core-icon-button icon="search" id="search_icon" style="visibility:visible" on-tap="{{ loadSearcher }}" ></core-icon-button>    
+          <div id="ikarus" class="bottom indent">Ikarus</div>
 
-                    <div id="div3">
-                        <core-icon-button icon="search" id="core_icon_button1" on-tap="{{ searchObject }}"></core-icon-button>
-                        <input id="input" placeholder="Product..." is="core-input" on-blur="{{ unloadSearcher }}" on-keyup="{{ searchObject }}">
-                    </div>
+          <div id="div3">
+            <core-icon-button icon="search" id="core_icon_button1" on-tap="{{ searchObject }}"></core-icon-button>
+            <input id="input" placeholder="Product..." is="core-input" on-blur="{{ unloadSearcher }}" on-keyup="{{ searchObject }}">
+          </div>
 
-                    <core-icon-button icon="menu" id="menu" theme="core-light-theme" on-tap="{{ showOptions }}">
-                        <paper-dropdown id="paperDropdown" vertical layout right>    
-                            <div fit id="options">    
-                                <div id="avatar"></div>
-                                <core-item id="paper_item" label="Profile" on-tap="{{ showProfile }}"><core-icon icon="social:person" id="social"></core-icon></core-item>
-                                <core-item id="paper_item" label="My Ads" on-tap="{{ showMyAds }}"><core-icon icon="announcement" id="myads"></core-icon></core-item>
-                                <core-item id="paper_item" label="Publish an Ad" on-tap="{{ adToogle }}"><core-icon icon="communication:messenger" id="messenger"></core-icon></core-item>
-                                <core-item id="paper_item" label="Show Ads" on-tap="{{ showAds }}"><core-icon icon="question-answer" id="ad"></core-icon></core-item>
-                                <core-item id="paper_item" label="Sign Off" on-tap="{{ signOff }}"><core-icon icon="settings-power" id="power"></core-icon></core-item>
-                            </div>
-                        </paper-dropdown>
-                    </core-icon-button>
+          <core-icon-button icon="menu" id="menu" theme="core-light-theme" on-tap="{{ showOptions }}">
+            <paper-dropdown id="paperDropdown" vertical layout right>    
+              <div fit id="options">    
+                <div id="avatar"></div>
+                <core-item id="paper_item" label="Profile" on-tap="{{ showProfile }}"><core-icon icon="social:person" id="social"></core-icon></core-item>
+                <core-item id="paper_item" label="My Ads" on-tap="{{ showMyAds }}"><core-icon icon="announcement" id="myads"></core-icon></core-item>
+                <core-item id="paper_item" label="Publish an Ad" on-tap="{{ adToogle }}"><core-icon icon="communication:messenger" id="messenger"></core-icon></core-item>
+                <core-item id="paper_item" label="Show Ads" on-tap="{{ showAds }}"><core-icon icon="question-answer" id="ad"></core-icon></core-item>
+                <core-item id="paper_item" label="Sign Off" on-tap="{{ signOff }}"><core-icon icon="settings-power" id="power"></core-icon></core-item>
+              </div>
+            </paper-dropdown>
+          </core-icon-button>
 
-                </core-toolbar>
+        </core-toolbar>
 
-                <core-pages id='pages' content layout vertical center selected="0">
+        <core-pages id='pages' content layout vertical center selected="0">
 
-                    <section id="section">
+          <section id="section">
 
-                    </section>
+          </section>
 
-                    <section id="section" content layout vertical center>
-                        <products-container id="itemsContainer" ></products-container>
-                        <paper-spinner id="spinner" active class="blue" alt="loading..."></paper-spinner>
-                    </section>
+          <section id="section" content layout vertical center>
+            <products-container id="itemsContainer" ></products-container>
+            <paper-spinner id="spinner" active class="blue" alt="loading..."></paper-spinner>
+          </section>
 
-                    <section id='section' content layout vertical center>
-                        <show-myPublishment id="showMyPublishment" style="width: 100%"></show-myPublishment>
-                    </section>
+          <section id='section' content layout vertical center>
+            <show-myPublishment id="showMyPublishment" style="width: 100%"></show-myPublishment>
+          </section>
 
-                    <section id="section" content layout vertical center>
-                        <show-publishment id="showPublishment"></show-publishment>
-                    </section>
+          <section id="section" content layout vertical center>
+            <show-publishment id="showPublishment"></show-publishment>
+          </section>
 
-                </core-pages>
-            </core-header-panel>
+        </core-pages>
+      </core-header-panel>
 
-            <paper-dialog  id="profileDialog" transition="core-transition-center" layout vertical center>
-                <profile-page id="profileId"></profile-page>
-            </paper-dialog>
+      <paper-dialog  id="profileDialog" transition="core-transition-center" layout vertical center>
+        <profile-page id="profileId"></profile-page>
+      </paper-dialog>
 
-            <paper-dialog  id="adDialog" transition="core-transition-center" layout vertical center>
-                <announcement-page id="anouncement"></announcement-page>
-            </paper-dialog>
+      <paper-dialog  id="adDialog" transition="core-transition-center" layout vertical center>
+        <announcement-page id="anouncement"></announcement-page>
+      </paper-dialog>
 
-            <paper-dialog  autoCloseDisabled="true" backdrop="true" id="dialog" transition="core-transition-center">
-                Are you sure that you want to delete your account?
-                <table layout vertical center>
-                    <tr >
-                        <td style="padding: 10px"><core-icon affirmative icon="done" id ="done" on-click="{{ deleteUser }}" ></core-icon></td>
-                    <td style="padding: 10px"><core-icon affirmative icon="cancel" id ="cancel"></core-icon></td>
-                    </tr>
-                </table>
-            </paper-dialog>
+      <paper-dialog  autoCloseDisabled="true" backdrop="true" id="dialog" transition="core-transition-center">
+        Are you sure that you want to delete your account?
+        <table layout vertical center>
+          <tr >
+            <td style="padding: 10px"><core-icon affirmative icon="done" id ="done" on-click="{{ deleteUser }}" ></core-icon></td>
+          <td style="padding: 10px"><core-icon affirmative icon="cancel" id ="cancel"></core-icon></td>
+          </tr>
+        </table>
+      </paper-dialog>
 
-        </core-card>
-    </template>
-    <script>
-        Polymer({
-            pagination: function (event) {
-                var scroller = event.detail.target;
-                var count = 2;
-                var that = this;
+    </core-card>
+  </template>
+  <script>
+    var loading = false;
+    Polymer({
+      pagination: function (event) {
+        var scroller = event.detail.target;
+        var count = 2;
+        var that = this;
 
-                if (this.$.pages.selected == 1 && scroller.scrollTop > 0 && $(window).height() + scroller.scrollTop > this.$.itemsContainer.scrollHeight) {
-
-                    
-                    this.$.useApi.getObject(this.$.input.value, count, function (result) {
-                        result = JSON.parse(result);
-                        that.$.itemsContainer.loadData(result);
-                        that.count++;
-                        that.$.spinner.active = false;
-                        
-                    });
-                    console.log("FIN");
-                }
-
-            },
-            showAds: function () {
-                this.$.showPublishment.loadAds();
-                this.$.showPublishment.loadFavourites();
-                this.$.pages.selected = 3;
-            },
-            showMyAds: function () {
-                this.$.showMyPublishment.loadAds();
-                this.$.pages.selected = 2;
-            },
-            adToogle: function () {
-                this.$.adDialog.toggle();
-            },
-            searchObject: function (event, detail, sender) {
-                var code = event.keyCode;
-                var that = this;
-                if (code == 13 || sender.id == "core_icon_button1") {
-                    this.$.pages.selected = 1;
-                    if (this.$.itemsContainer.data.value == 1) {
-                        this.$.itemsContainer.emptyArray();
-                    }
-                    this.$.useApi.getObject(this.$.input.value, 1, function (result) {
-                        result = JSON.parse(result);
-                        that.$.itemsContainer.loadData(result);
-                        that.$.spinner.active = false;
-                    });
-                }
-            },
-            unloadSearcher: function () {
-                this.$.div3.style.visibility = "hidden";
-                this.$.search_icon.style.display = "block";
-                this.$.menu.style.display = "block";
-                this.$.core_icon_button.style.display = "block";
-            },
-            loadSearcher: function () {
-                var div3 = this.$.div3.style;
-                div3.visibility = "visible";
-                this.$.search_icon.style.display = "none";
-                this.$.menu.style.display = "none";
-                this.$.core_icon_button.style.display = "none";
-                div3.width = "100%";
-                div3.backgroundColor = "#185786";
-                div3.fill = "rgb(241, 241, 241)";
-                div3.color = "rgb(241, 241, 241)";
-                this.$.input.focus();
-            },
-            showOptions: function () {
-                this.$.paperDropdown.toggle();
-            },
-            showProfile: function () {
-                this.$.profileDialog.toggle();
-                this.$.profileId.saveUserValues();
-            },
-            signOff: function () {
-                localStorage.clear();
-                location.href = " ";
-            },
-            toggle: function () {
-                this.$.dialog.toggle();
-            },
-            deleteUser: function () {
-                this.$.userModel.deleteUser(localStorage.getItem('token'), function (result) {
-                    if (result) {
-                        localStorage.clear();
-                        location.href = " ";
-                    }
-                });
-            },
-            goToProducts: function () {
-                this.$.pages.selected = 1;
-            }
+        if (!loading) {
+          if (this.$.pages.selected == 1 && scroller.scrollTop > 0 && $(window).height() + scroller.scrollTop > this.$.itemsContainer.scrollHeight) {
+            loading = true;
+            this.$.useApi.getObject(this.$.input.value, count, function (result) {
+              result = JSON.parse(result);
+              that.$.itemsContainer.loadData(result);
+              that.count++;
+              loading = false;
+            });
+          }
+        }
+      },
+      showAds: function () {
+        this.$.showPublishment.loadAds();
+        this.$.showPublishment.loadFavourites();
+        this.$.pages.selected = 3;
+      },
+      showMyAds: function () {
+        this.$.showMyPublishment.loadAds();
+        this.$.pages.selected = 2;
+      },
+      adToogle: function () {
+        this.$.adDialog.toggle();
+      },
+      searchObject: function (event, detail, sender) {
+        var code = event.keyCode;
+        var that = this;
+        if (code == 13 || sender.id == "core_icon_button1") {
+          this.$.pages.selected = 1;
+          this.unloadSearcher();
+          if (this.$.itemsContainer.data.value == 1) {
+            this.$.itemsContainer.emptyArray();
+          }
+          this.$.useApi.getObject(this.$.input.value, 1, function (result) {
+            result = JSON.parse(result);
+            that.$.itemsContainer.loadData(result);
+            that.$.spinner.active = false;
+          });
+        }
+      },
+      unloadSearcher: function () {
+        this.$.div3.style.visibility = "hidden";
+        this.$.search_icon.style.display = "block";
+        this.$.menu.style.display = "block";
+        this.$.core_icon_button.style.display = "block";
+      },
+      loadSearcher: function () {
+        var div3 = this.$.div3.style;
+        div3.visibility = "visible";
+        this.$.search_icon.style.display = "none";
+        this.$.menu.style.display = "none";
+        this.$.core_icon_button.style.display = "none";
+        div3.width = "100%";
+        div3.backgroundColor = "#185786";
+        div3.fill = "rgb(241, 241, 241)";
+        div3.color = "rgb(241, 241, 241)";
+        this.$.input.focus();
+      },
+      showOptions: function () {
+        this.$.paperDropdown.toggle();
+      },
+      showProfile: function () {
+        this.$.profileDialog.toggle();
+        this.$.profileId.saveUserValues();
+      },
+      signOff: function () {
+        localStorage.clear();
+        location.href = " ";
+      },
+      toggle: function () {
+        this.$.dialog.toggle();
+      },
+      deleteUser: function () {
+        this.$.userModel.deleteUser(localStorage.getItem('token'), function (result) {
+          if (result) {
+            localStorage.clear();
+            location.href = " ";
+          }
         });
+      },
+      goToProducts: function () {
+        this.$.pages.selected = 1;
+      }
+    });
 
-    </script>
+  </script>
 
 </polymer-element>
