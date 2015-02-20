@@ -83,8 +83,11 @@ function worker(io) {
         });
     }
     function delUser(req, res, next) {
-        token = userManager.decryptToken(req.params.token);
-        var username = token.userName;
+        var decode;
+        userManager.decryptToken(req.params.token,function (result){
+            decode = result;
+        });
+        var username = decode.userName;
         userManager.delUser(username, function (err, result) {
             if (result === 0) {
                 next(new Error(username + ' not exists'));

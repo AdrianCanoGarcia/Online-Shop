@@ -1,77 +1,98 @@
 <polymer-element name="announcement-page">
-  <template>
-    <style>
-      :host{
-      }
-      #advert{
-        margin: 6px;
-        padding: 6px;
-      }
-      p{
-        margin-bottom: 6px;
-      }
-      textarea{
-        width: 400px;
-        height: 220px;
-        resize: none;
-      }
-
-
-    </style>
-    <proposal-model id="proposal"></proposal-model>
-    <user-model id="userModel"></user-model>
-    <core-card  id="core_card" layout vertical center fit>
-      <div id="advert"><p>Introduce your advert:</p>
-        <textarea id="textarea"></textarea>
-        <p>Introduce your contact email:</p>
-        <paper-input id="mail" placeholder="email@example.com"></paper-input>
-      </div>
-      <paper-button raised on-click="{{ toast }}">Publish Ad</paper-button>
-      <paper-toast id="popup"></paper-toast>
-      <paper-toast id="popupError" text="Unable to publish your ad"></paper-toast>
-    </core-card>
-
-  </template>
-  <script>
-
-    Polymer({
-      toast: function () {
-        var that = this;
-        if (this.validateEmail()) {
-          this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
-            var date = that.getDate();
-            post = {
-              content: that.$.textarea.value,
-              mail: that.$.mail.value,
-              date: date,
-              username: localStorage.getItem('userName')
+    <template>
+        <style>
+            :host{
             }
-            that.$.proposal.publishPost(JSON.stringify(post), function (result) {
-              if (result) {
-                that.$.popup.text = "A new announcement has been published";
-                that.$.popup.show();
-              } else {
-                that.$.popupError.show();
-              }
-            });
-          });
-        } else {
-          this.$.popup.text = "Invalid e-mail";
-          this.$.popup.show();
-        }
-      },
-      getDate: function () {
-        var f = new Date();
-        var date = (f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear() + "  " + f.getHours() + ":" + (f.getMinutes() < 10 ? '0' : '') + f.getMinutes() + ":" + f.getSeconds());
-        return date;
-      },
-      validateEmail: function () {
-        var string = this.$.mail.value;
-        return this.validateField(string, /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-      },
-      validateField: function (string, pattern) {
-        return string.match(pattern) !== null;
-      }
-    });
-  </script>
+            #advert{
+                margin: 6px;
+                padding: 6px;
+            }
+            p{
+                margin-bottom: 3px;
+            }
+            textarea{
+                width: 400px;
+                height: 200px;
+                resize: none;
+            }
+            #counter{
+                border:none;
+                float:right;
+                width: 10%;
+                color:grey;
+               
+            }
+
+
+        </style>
+        <proposal-model id="proposal"></proposal-model>
+        <user-model id="userModel"></user-model>
+        <core-card  id="core_card" layout vertical center fit>
+            <div id="advert"><p>Introduce your advert:</p>
+                <textarea id="textarea" on-keydown="{{counterCharacters}}"></textarea>
+                <div style="margin-bottom:20px">
+                    <input  readonly id="counter" value="1000" ></input>
+                </div>
+                <p>Introduce your contact email:</p>
+                <paper-input id="mail" placeholder="email@example.com"></paper-input>
+            </div>
+            <paper-button raised on-click="{{ toast }}">Publish Ad</paper-button>
+            <paper-toast id="popup"></paper-toast>
+            <paper-toast id="popupError" text="Unable to publish your ad"></paper-toast>
+        </core-card>
+
+    </template>
+    <script>
+
+        Polymer({
+            toast: function () {
+                var that = this;
+                if (this.validateEmail()) {
+                    this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
+                        var date = that.getDate();
+                        post = {
+                            content: that.$.textarea.value,
+                            mail: that.$.mail.value,
+                            date: date,
+                            username: localStorage.getItem('userName'),
+                            letters: that.$.textarea.value.length
+                        }
+                        that.$.proposal.publishPost(JSON.stringify(post), function (result) {
+                            if (result) {
+                                that.$.popup.text = "A new announcement has been published";
+                                that.$.popup.show();
+                            } else {
+                                that.$.popupError.show();
+                            }
+                        });
+                    });
+                } else {
+                    this.$.popup.text = "Invalid e-mail";
+                    this.$.popup.show();
+                }
+            },
+            getDate: function () {
+                var f = new Date();
+                var date = (f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear() + "  " + f.getHours() + ":" + (f.getMinutes() < 10 ? '0' : '') + f.getMinutes() + ":" + f.getSeconds());
+                return date;
+            },
+            validateEmail: function () {
+                var string = this.$.mail.value;
+                return this.validateField(string, /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+            },
+            validateField: function (string, pattern) {
+                return string.match(pattern) !== null;
+            },
+            counterCharacters: function(){
+                
+                var numbers =1000-this.$.textarea.value.length;
+                this.$.counter.value=numbers;
+                if(numbers<0){
+                    this.$.counter.style.color='red';
+                }else{
+                    this.$.counter.style.color='grey';
+                }
+            } 
+        });
+    </script>
 </polymer-element>

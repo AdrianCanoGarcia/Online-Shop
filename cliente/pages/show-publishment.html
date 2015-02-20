@@ -91,7 +91,7 @@
     <proposal-model id="proposalModel"></proposal-model>
     <user-model id="userModel"></user-model>
 
-    <div id='button-container' layout vertical center ><div class="button" on-click="{{ loadAds }}, {{ loadFavourites }}" id="button" style="visibility:hidden">There're more publications</div></div>
+    <div id='button-container' layout vertical center ><div class="button" on-click="{{ loadFavourites }}" id="button" style="visibility:hidden">There're more publications</div></div>
     <template repeat="{{ ad in newAds }}">
       <div id="container" layout vertical center>
         <div id="content">
@@ -124,9 +124,11 @@
       loadAds: function () {
         var that = this;
         this.$.button.style.visibility = "hidden";
-        this.$.proposalModel.getAll(function (result) {
+        
+        this.$.proposalModel.getAll(localStorage.getItem('token'),function (result) {
           that.ads = result;
         });
+        
         return that.ads;
       },
       toast: function () {
@@ -150,7 +152,6 @@
       },
       drawFavourites: function (favourites) {
         var ads = this.loadAds();
-        debugger
         for (var i = 0; i < Object.keys(favourites).length; i++) {
           for (var j = 0; j < Object.keys(ads).length; j++) {
             if (favourites[i] == ads[j]._id) {
