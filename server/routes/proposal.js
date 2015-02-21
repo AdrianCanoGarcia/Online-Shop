@@ -34,6 +34,7 @@ function worker(io) {
         });
     }
     function create(req, res, next) {
+        var error;
         var post = {
             content: req.body.content,
             mail: req.body.mail,
@@ -41,17 +42,17 @@ function worker(io) {
             username: req.body.username,
             letters: req.body.letters
         }
-        if(post.letters<=1000){
-         proposalManager.create(post, function (err, result) {
-            if (err) {
-                return next(err);
+        if (post.letters <= 1000 && post.letters !=0) {
+                proposalManager.create(post, function (err, result) {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.json(result);
+                    io.sockets.emit('AdPublished', result);
+                });
             }
-            res.json(result);
-            io.sockets.emit('AdPublished', result);
-        });
-        
-        }
-        
+
+
     }
     function createFavourite(req, res, next) {
         var decode;

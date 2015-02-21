@@ -20,7 +20,7 @@
                 float:right;
                 width: 10%;
                 color:grey;
-               
+
             }
 
 
@@ -57,19 +57,34 @@
                             username: localStorage.getItem('userName'),
                             letters: that.$.textarea.value.length
                         }
-                        that.$.proposal.publishPost(JSON.stringify(post), function (result) {
-                            if (result) {
-                                that.$.popup.text = "A new announcement has been published";
-                                that.$.popup.show();
-                            } else {
-                                that.$.popupError.show();
-                            }
-                        });
+                        var validate=that.validateTextArea();
+                        if (validate) {
+                            that.$.proposal.publishPost(JSON.stringify(post), function (result) {
+                                if (result) {
+                                    that.$.popup.text = "A new announcement has been published";
+                                    that.$.popup.show();
+                                } else {
+                                    that.$.popupError.show();
+                                }
+                            });
+                        }
                     });
                 } else {
                     this.$.popup.text = "Invalid e-mail";
                     this.$.popup.show();
                 }
+            },
+            validateTextArea: function () {
+                if (this.$.textarea.value.length > 1000) {
+                    this.$.popupError.text = "The message has exceeded the 1000 character limit";
+                    this.$.popupError.show();
+                } else if (this.$.textarea.value.length == 0) {
+                    this.$.popupError.text = "The message is empty";
+                    this.$.popupError.show();
+                } else {
+                    return true;
+                }
+
             },
             getDate: function () {
                 var f = new Date();
@@ -83,16 +98,19 @@
             validateField: function (string, pattern) {
                 return string.match(pattern) !== null;
             },
-            counterCharacters: function(){
-                
-                var numbers =1000-this.$.textarea.value.length;
-                this.$.counter.value=numbers;
-                if(numbers<0){
-                    this.$.counter.style.color='red';
-                }else{
-                    this.$.counter.style.color='grey';
+            counterCharacters: function () {
+
+                var numbers = 1000 - this.$.textarea.value.length;
+                this.$.counter.value = numbers;
+                if (numbers < 0) {
+                    this.$.counter.style.color = 'red';
+                } else {
+                    this.$.counter.style.color = 'grey';
                 }
-            } 
+            },
+            test:function(){
+                console.log("FUNCIONO BIEN");
+            }
         });
     </script>
 </polymer-element>
