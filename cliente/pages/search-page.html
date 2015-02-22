@@ -294,7 +294,7 @@
                 <core-pages id='pages' content layout vertical center selected="0">
 
                     <section id="section">
-                     </section>
+                    </section>
 
                     <section id="section" content layout vertical center>
                         <products-container id="itemsContainer" on-search-object="{{searchObject}}"></products-container>
@@ -334,7 +334,9 @@
     </template>
     <script>
         var loading = false;
+        var order = 'High';
         Polymer({
+            
             pagination: function (event) {
                 var scroller = event.detail.target;
                 var count = 2;
@@ -343,7 +345,7 @@
                 if (!loading) {
                     if (this.$.pages.selected == 1 && scroller.scrollTop > 0 && $(window).height() + scroller.scrollTop > this.$.itemsContainer.scrollHeight) {
                         loading = true;
-                        this.$.useApi.getObject(this.$.input.value, count, function (result) {
+                        this.$.useApi.getObject(order,this.$.input.value, count, function (result) {
                             result = JSON.parse(result);
                             that.$.itemsContainer.loadData(result);
                             that.count++;
@@ -367,16 +369,23 @@
             searchObject: function (event, detail, sender) {
                 var code = event.keyCode;
                 var that = this;
-                if (code == 13 || sender.id == "core_icon_button1") {
+                if(detail.order){
+                    order = detail.order;
+                }
+
+               if (code == 13 || sender.id == "core_icon_button1" || sender.id == 'itemsContainer') {
+                   this.$.itemsContainer.$.drop.style.visibility="hidden";
                     this.$.pages.selected = 1;
                     this.unloadSearcher();
                     if (this.$.itemsContainer.data.value == 1) {
                         this.$.itemsContainer.emptyArray();
                     }
-                    this.$.useApi.getObject(this.$.input.value, 1, function (result) {
+                    this.$.useApi.getObject(order, this.$.input.value, 1, function (result) {
+                        console.log("resultado en getObject: "+result);
                         result = JSON.parse(result);
                         that.$.itemsContainer.loadData(result);
                         that.$.spinner.active = false;
+                        that.$.itemsContainer.$.drop.style.visibility="visible";
                     });
                 }
             },
@@ -399,8 +408,8 @@
                 this.$.input.focus();
             },
             showOptions: function () {
-                this.$.paper.toggle();
-                //this.$.paperDropdown.toggle();
+                
+                this.$.paperDropdown.toggle();
             },
             showProfile: function () {
                 this.$.profileDialog.toggle();

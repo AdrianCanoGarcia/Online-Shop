@@ -69,48 +69,59 @@
                 height: 60px;
                 margin-top: 10px;
             }
+            #drop{
+                background-color: rgba(238, 238, 238, 0.6);
+            }
+            core-dropdown-menu#drop /deep/ core-dropdown{
+                background-color: rgb(29, 100, 155)
+            }
+            #Low,#High,#relevance{
+                color:white;
+            }
+            #Low:hover,#High:hover,#relevance:hover{
+                background-color:rgb(72, 140, 187);
+            }
 
         </style>
         <using-api id="usingApi"></using-api>
-        <core-dropdown-menu id="drop" label="Sort by:" valueattr="label">
-            
-                <paper-item label="Lowest price" id="Low" on-click="{{searchObject}}">Lowest price first</paper-item>
-                <paper-item label="Highest price" id="High" on-click="{{searchObject}}">Highest price first</paper-item>
-                
+        <core-dropdown-menu id="drop" label="Sort by:" valueattr="label" style="visibility:hidden">
+
+            <paper-item label="Lowest price" id="Low" on-click="{{searchObject}}">Lowest price first</paper-item>
+            <paper-item label="Highest price" id="High" on-click="{{searchObject}}">Highest price first</paper-item>
+            <paper-item label="Best Match" id="relevance" on-click="{{searchObject}}">Best Match</paper-item>
+
         </core-dropdown-menu>
-
-        <template repeat="{{ product in products.item }}">  
-            <core-card id="core_card" layout vertical center >
-                <div layout vertical center style="width: 60%;">
-                    <div style="width: 100%;">
-                        <core-input id="title" readonly  value="{{ product.title[0] }}"></core-input>
-                    </div>
-                    <div layout horizontal center>
-                        <div layout vertical center style="width: 100%;">
-                            <core-tooltip label="View Product " position="bottom" class="fancy">
-                                <div id="imgContainer">
-                                    <a href="{{ product.viewItemURL[0] }}"><img id ="img" src="{{ product.galleryURL[0] }}"></a>
-                                </div>
-                            </core-tooltip>
+         
+            <template repeat="{{ product in products.item }}">  
+                <core-card id="core_card" layout vertical center >
+                    <div layout vertical center style="width: 60%;">
+                        <div style="width: 100%;">
+                            <core-input id="title" readonly  value="{{ product.title[0] }}"></core-input>
                         </div>
-                        <div layout vertical center style="width: 100%; background-color: rgba(29, 100, 155, 0.5); border: 2px solid rgb(3, 55, 94); padding: 2px; margin-top: 30px;">
-                            <core-input id="title" readonly  value="{{product.sellingStatus[0].convertedCurrentPrice[0].__value__}} {{ product.sellingStatus[0].convertedCurrentPrice[0]['@currencyId'] }}"></core-input>
-                            <core-input id="shipping" readonly  value="Shipping cost: {{ product.shippingInfo[0].shippingServiceCost[0].__value__ }} {{ product.shippingInfo[0].shippingServiceCost[0]['@currencyId'] }}"></core-input>
+                        <div layout horizontal center>
+                            <div layout vertical center style="width: 100%;">
+                                <core-tooltip label="View Product " position="bottom" class="fancy">
+                                    <div id="imgContainer">
+                                        <a href="{{ product.viewItemURL[0] }}"><img id ="img" src="{{ product.galleryURL[0] }}"></a>
+                                    </div>
+                                </core-tooltip>
+                            </div>
+                            <div layout vertical center style="width: 100%; background-color: rgba(29, 100, 155, 0.5); border: 2px solid rgb(3, 55, 94); padding: 2px; margin-top: 30px;">
+                                <core-input id="title" readonly  value="{{product.sellingStatus[0].convertedCurrentPrice[0].__value__}} {{ product.sellingStatus[0].convertedCurrentPrice[0]['@currencyId'] }}"></core-input>
+                                <core-input id="shipping" readonly  value="Shipping cost: {{ product.shippingInfo[0].shippingServiceCost[0].__value__ }} {{ product.shippingInfo[0].shippingServiceCost[0]['@currencyId'] }}"></core-input>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <img id ="logo" src="../img/EBay_logo.png" >
-            </core-card>
+                    <img id ="logo" src="../img/EBay_logo.png" >
+                </core-card>
 
-        </template>
-
+            </template>
+        
+        
         <div id="divSpinner" layout vertical center>
             <paper-spinner id="spinner"  class="blue"></paper-spinner>
         </div>
-
-    </template>
-
-
+</template>
     <script>
 
         Polymer({
@@ -119,6 +130,8 @@
             },
             loadData: function (result) {
                 console.log(result);
+                var totalEntries=result.findItemsByKeywordsResponse[0].paginationOutput[0].totalEntries[0];
+                
                 var items = result.findItemsByKeywordsResponse[0].searchResult[0];
                 this.$.spinner.active = true;
                 if (this.products) {
@@ -131,9 +144,9 @@
             emptyArray: function () {
                 this.products.item.length = 0;
             },
-            searchObject:function(event,detail,sender){
-               console.log(sender.id);
-               this.fire('search-object',{order: sender.id});
+            searchObject: function (event, detail, sender) {
+                console.log(sender.id);
+                this.fire('search-object', {order: sender.id});
             }
         });
     </script>

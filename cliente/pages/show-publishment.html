@@ -1,172 +1,178 @@
 <polymer-element name="show-publishment">
-  <template>
-    <style>
-      :host{
-      }
+    <template>
+        <style>
+            :host{
+            }
 
-      #container{
-        width: 100%;
-        height: 300px;
-      }
-      #content{
-        width: 95%;
-        height: 200px;
-        border: solid 1px rgba(255, 255, 255, 0.4);
-        background-color:rgba(238, 238, 238,0.6);
-        padding: 15px 20px 15px 20px;
-        margin-top: 25px;
-      }
-      #email{
-        width: 95%;
-        margin-top: 10px;
-      }
-      #notice{
-        border: solid 1px rgba(255, 255, 255, 0.4);
-        background-color: rgba(255, 255, 255, 0.5);
-        width: 100%;
-        height: 50px;
-      }
-      #line{
-        margin: 0;
-        border: 0;
-        height: 1px;
-        background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-        background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-        background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-        background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-      }
-      date{
-        margin-right: 46.5%;
-        float: right;
-      }
-      .button {
-        border-top: 1px solid #96d1f8;
-        background: #65a9d7;
-        background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
-        background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
-        background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-        background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-        background: -o-linear-gradient(top, #3e779d, #65a9d7);
-        padding: 5px 10px;
-        -webkit-border-radius: 15px;
-        -moz-border-radius: 15px;
-        border-radius: 15px;
-        -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-        -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-        box-shadow: rgba(0,0,0,1) 0 1px 0;
-        text-shadow: rgba(0,0,0,.4) 0 1px 0;
-        color: white;
-        font-size: 14px;
-        font-family: sans-serif;
-        text-decoration: none;
-        vertical-align: middle;
-        text-align: center;
-        width: 11%;
-      }
-      .button:hover {
-        border-top-color: #28597a;
-        background: #054370;
-        color: #ccc;
-      }
-      .button:active {
-        border-top-color: #1b435e;
-        background: #023254;
-      }
-      button-container {
-        width: 95%;
-      }
-      #lineName {
-        border: 0;
-        height: 0;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-      }
-      #name_ads {
-        width: 97%;
-      }
+            #container{
+                width: 100%;
+                height: 300px;
+            }
+            #content{
+                width: 95%;
+                height: 200px;
+                border: solid 1px rgba(255, 255, 255, 0.4);
+                background-color:rgba(238, 238, 238,0.6);
+                padding: 15px 20px 15px 20px;
+                margin-top: 25px;
+            }
+            #email{
+                width: 95%;
+                margin-top: 10px;
+            }
+            #notice{
+                border: solid 1px rgba(255, 255, 255, 0.4);
+                background-color: rgba(255, 255, 255, 0.5);
+                width: 100%;
+                height: 50px;
+            }
+            #line{
+                margin: 0;
+                border: 0;
+                height: 1px;
+                background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+                background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+                background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+                background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+            }
+            date{
+                margin-right: 46.5%;
+                float: right;
+            }
+            .button {
+                border-top: 1px solid #96d1f8;
+                background: #65a9d7;
+                background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+                background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+                background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+                background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+                background: -o-linear-gradient(top, #3e779d, #65a9d7);
+                padding: 5px 10px;
+                -webkit-border-radius: 15px;
+                -moz-border-radius: 15px;
+                border-radius: 15px;
+                -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+                -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+                box-shadow: rgba(0,0,0,1) 0 1px 0;
+                text-shadow: rgba(0,0,0,.4) 0 1px 0;
+                color: white;
+                font-size: 14px;
+                font-family: sans-serif;
+                text-decoration: none;
+                vertical-align: middle;
+                text-align: center;
+                width: 15%;
+            }
+            .button:hover {
+                border-top-color: #28597a;
+                background: #054370;
+                color: #ccc;
+            }
+            .button:active {
+                border-top-color: #1b435e;
+                background: #023254;
+            }
+            button-container {
+                width: 95%;
+            }
+            #lineName {
+                border: 0;
+                height: 0;
+                border-top: 1px solid rgba(0, 0, 0, 0.1);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            }
+            #name_ads {
+                width: 97%;
+            }
 
 
-    </style> 
+        </style> 
 
-    <proposal-model id="proposalModel"></proposal-model>
-    <user-model id="userModel"></user-model>
+        <proposal-model id="proposalModel"></proposal-model>
+        <user-model id="userModel"></user-model>
 
-    <div id='button-container' layout vertical center ><div class="button" on-click="{{ loadFavourites }}" id="button" style="visibility:hidden">There're more publications</div></div>
-    <template repeat="{{ ad in newAds }}">
-      <div id="container" layout vertical center>
-        <div id="content">
-          <core-item id="paper_item">
-            <div id='name_ads'>{{ ad.username }}</div> 
-            <template if="{{ ad.isFavourite }}">
-              <core-icon on-click="{{ addFavourites }}"  alt="{{ ad._id }}" icon="favorite" id="favorite" style="color: indianred;"></core-icon>
-            </template>
-            <template if="{{ !ad.isFavourite }}">
-              <core-icon on-click="{{ addFavourites }}"  alt="{{ ad._id }}" icon="favorite" id="favorite" style="color: black;"></core-icon>
-            </template>
-          </core-item><hr id="lineName"/><div style="word-wrap: break-word; height: 72%; overflow: auto; padding-right:2px;"> {{ ad.content }}</div>
-        </div>
-        <div id="email"> Contact e-mail: {{ad.mail}} <date> {{ad.date}} </date></div>
-      </div>
-      <hr id="line" />
+        <div id='button-container' layout vertical center ><div class="button" on-click="{{ loadAds }},{{ loadFavourites }}" id="button" style="visibility:hidden">There're more publications</div></div>
+        <template repeat="{{ ad in newAds }}">
+            <div id="container" layout vertical center>
+                <div id="content">
+                    <core-item id="paper_item">
+                        <div id='name_ads'>{{ ad.username }}</div> 
+                        <template if="{{ ad.isFavourite }}">
+                            <core-icon on-click="{{ addFavourites }}"  alt="{{ ad._id }}" icon="favorite" id="favorite" style="color: indianred;"></core-icon>
+                        </template>
+                        <template if="{{ !ad.isFavourite }}">
+                            <core-icon on-click="{{ addFavourites }}"  alt="{{ ad._id }}" icon="favorite" id="favorite" style="color: black;"></core-icon>
+                        </template>
+                    </core-item><hr id="lineName"/><div style="word-wrap: break-word; height: 72%; overflow: auto; padding-right:2px;"> {{ ad.content }}</div>
+                </div>
+                <div id="email"> Contact e-mail: {{ad.mail}} <date> {{ad.date}} </date></div>
+            </div>
+            <hr id="line" />
+        </template>
+
     </template>
 
-  </template>
+    <script>
+        Polymer({
+            ready: function () {
+                var socket = io();
+                var that = this;
+                socket.on('AdPublished', function (result) {
+                    that.$.button.style.visibility = "visible";
+                });
+            },
+            loadAds: function () {
+                var that = this;
+                this.$.button.style.visibility = "hidden";
 
-  <script>
-    Polymer({
-      ready: function () {
-        var socket = io();
-        var that = this;
-        socket.on('AdPublished', function (result) {
-          that.$.button.style.visibility = "visible";
-        });
-      },
-      loadAds: function () {
-        var that = this;
-        this.$.button.style.visibility = "hidden";
-        
-        this.$.proposalModel.getAll(localStorage.getItem('token'),function (result) {
-          that.ads = result;
-        });
-        
-        return that.ads;
-      },
-      toast: function () {
-        this.$.toast1.show();
-      },
-      loadFavourites: function () {
-        var that = this;
-        this.$.userModel.getFavourites(localStorage.getItem('token'), function (result) {
-          that.drawFavourites(result);
-        })
-      },
-      addFavourites: function (event, detail, sender) {
-        sender.style.color == "black" ? sender.style.color = "indianred" : sender.style.color = "black";
-        if (sender.style.color == "rgb(205, 92, 92)" || sender.style.color == "black") {
-          this.$.proposalModel.createFavourite(sender.alt, localStorage.getItem('token'), function (result) {
-            if (!result) {
-              sender.style.color = "black";
-            }
-          });
-        }
-      },
-      drawFavourites: function (favourites) {
-        var ads = this.loadAds();
-        for (var i = 0; i < Object.keys(favourites).length; i++) {
-          for (var j = 0; j < Object.keys(ads).length; j++) {
-            if (favourites[i] == ads[j]._id) {
-              ads[j].isFavourite = true;
-            }
-          }
-        }
-        for (var j = 0; j < Object.keys(ads).length; j++) {
-          if (!ads[j].isFavourite) {
-            ads[j].isFavourite = false;
-          }
-        }
-        this.newAds = ads;
-      }
+                this.$.proposalModel.getAll(localStorage.getItem('token'), function (result) {
+                    that.ads = result;
+                });
 
-    });
-  </script>
+                return that.ads;
+            },
+            toast: function () {
+                this.$.toast1.show();
+            },
+            loadFavourites: function () {
+                var that = this;
+                this.$.userModel.getFavourites(localStorage.getItem('token'), function (result) {
+
+                    that.drawFavourites(result);
+
+                })
+            },
+            addFavourites: function (event, detail, sender) {
+                sender.style.color == "black" ? sender.style.color = "indianred" : sender.style.color = "black";
+                if (sender.style.color == "rgb(205, 92, 92)" || sender.style.color == "black") {
+                    this.$.proposalModel.createFavourite(sender.alt, localStorage.getItem('token'), function (result) {
+                        if (!result) {
+                            sender.style.color = "black";
+                        }
+                    });
+                }
+            },
+            drawFavourites: function (favourites) {
+                var ads = this.loadAds();
+                if (favourites) {
+
+
+                    for (var i = 0; i < Object.keys(favourites).length; i++) {
+                        for (var j = 0; j < Object.keys(ads).length; j++) {
+                            if (favourites[i] == ads[j]._id) {
+                                ads[j].isFavourite = true;
+                            }
+                        }
+                    }
+                    for (var j = 0; j < Object.keys(ads).length; j++) {
+                        if (!ads[j].isFavourite) {
+                            ads[j].isFavourite = false;
+                        }
+                    }
+                }
+                this.newAds = ads;
+            }
+
+        });
+    </script>
 </polymer-element>
