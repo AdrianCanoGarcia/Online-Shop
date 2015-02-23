@@ -125,7 +125,7 @@
     </style>
     <user-model id="userModel"></user-model>
     <core-card id="core_card" layout vertical center>
-      <paper-input label="User..." id="username" layout vertical  on-blur="{{ checkNameExists }}" on-keyup="{{ keypressHandler }}"></paper-input>
+      <paper-input label="User..." id="username" layout vertical on-keyup="{{ keypressHandler }}"></paper-input>
       <paper-input type="password" label="Password..." id="passwd" layout vertical on-keyup="{{ keypressHandler }}"></paper-input>
       <div id="div" layout horizontal center>
         <core-tooltip label="Show password" position="left" class="fancy">
@@ -144,15 +144,18 @@
 
     Polymer({
       handleSaveUser: function () {
-        if (!this.checkNameExists()) {
-          var user = {
-            username: this.$.username.value,
-            passwd: this.$.passwd.value,
-            email: this.$.email.value
-          };
-          var that = this;
-          this.$.userModel.saveUser(JSON.stringify(user), function (result) {
-            if (result) {
+        var user = {
+          username: this.$.username.value,
+          passwd: this.$.passwd.value,
+          email: this.$.email.value
+        };
+        var that = this;
+        this.$.userModel.saveUser(JSON.stringify(user), function (result) {
+          if (result == "exist") {
+            that.$.invalid.style.visibility = "visible";
+            that.$.invalid.value = "User already exists";
+          } else {
+            if (result == "created") {
               that.$.invalid.style.visibility = "visible";
               that.$.invalid.value = "User created successfully";
               that.resetValues();
@@ -163,23 +166,8 @@
               that.$.invalid.style.visibility = "visible";
               that.$.invalid.value = "Cannot create user";
             }
-          });
-        } else {
-          this.$.invalid.style.visibility = "visible";
-          this.$.invalid.value = "User already exists";
-        }
-      },
-      checkNameExists: function () {
-        var exists;
-        var value = this.$.username.value;
-        this.$.userModel.searchUser(value, function (result) {
-            if (result){
-              exists=true;
-            } else {
-              exists=false;
-            }
+          }
         });
-        return exists;
       },
       keypressHandler: function (event, detail, sender) {
         var invalid = this.$.invalid;
