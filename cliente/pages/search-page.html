@@ -68,7 +68,7 @@
                 padding: 0 10px 5px;
             }
             #paper_item{
-                width: 80%;
+                width: 87%;
                 padding: 5px 15px;
                 box-shadow: none;
                 margin-top: 4px;
@@ -84,7 +84,7 @@
                 margin-right: 20px;
             }
             #paper_item:hover {
-                width: 80%;
+                width: 87%;
                 z-index: 999;
                 position: relative;
                 padding: 5px 15px;
@@ -120,11 +120,7 @@
                 height: 25px;
                 left: 1px;
             }
-            core-item#paper_item /deep/ #power:hover{
-                width: 40px;
-                height: 25px;
-                left: 1px;
-            }
+            
             core-item#paper_item /deep/ #messenger{
                 width: 37px;
                 height: 21px;
@@ -151,6 +147,9 @@
                     margin-top: 0.5%;
                     height: 34px;
                 }
+                #optionsDialog{
+                   margin-left: -100px;
+                }
             }
             @media (max-width:480px){
                 #core_icon_button1 {
@@ -162,6 +161,9 @@
                 #input {
                     margin-top: 0.5%;
                     height: 34px;
+                }
+                 #optionsDialog{
+                   left: 10%;
                 }
             } 
             @media (max-width:360px){
@@ -176,6 +178,9 @@
                     margin-top: 0.5%;
                     height: 34px;
 
+                }
+                 #optionsDialog{
+                   left: 10%;
                 }
             }
             #done, cancel{
@@ -254,6 +259,28 @@
                 overflow-y: scroll;
                 width: 100%;
             }
+            #optionsDialog{
+                height: 91%;
+                left: 87%;
+                top: 8%;
+                border-radius: 5px;
+                background-color: rgba(145, 204, 232, 0.8);
+                
+                
+            }
+            #rigthCard{
+                height: 100%;
+                width: 100%;
+                float:right;
+            }
+            img{
+                border-style: solid;
+                border-color: white;
+                border-radius: 5px;
+                margin-left: 25%;
+                width: 85px;
+                height: 85px;
+            }
         </style>
 
 
@@ -310,10 +337,22 @@
                     </section>
 
                 </core-pages>
-            </core-header-panel>
 
+            </core-header-panel>
+                <paper-dialog  backdrop="true" id="optionsDialog" transition="core-transition-right">
+                    <core-card id="slideCard">
+                        <img src="{{profileImage}}"  onError="this.src = '../images/default-profile.jpg'">
+                         
+                        <core-item id="paper_item" affirmative label="Profile" on-tap="{{ showProfile }}"><core-icon icon="social:person" id="social"></core-icon></core-item>
+                        <core-item id="paper_item" affirmative label="My Ads" on-tap="{{ showMyAds }}"><core-icon icon="announcement" id="myads"></core-icon></core-item>
+                        <core-item id="paper_item" affirmative label="Publish an Ad" on-tap="{{ adToogle }}"><core-icon icon="communication:messenger" id="messenger"></core-icon></core-item>
+                        <core-item id="paper_item" affirmative label="Show Ads" on-tap="{{ showAds }}"><core-icon icon="question-answer" id="ad"></core-icon></core-item>
+                        <core-item id="paper_item" affirmative label="Sign Off" on-tap="{{ signOff }}"><core-icon icon="settings-power" id="power"></core-icon></core-item>
+                    </core-card>
+                </paper-dialog>   
+            
             <paper-dialog  id="profileDialog" transition="core-transition-center" layout vertical center>
-                <profile-page id="profileId"></profile-page>
+                <profile-page id="profileId" image="{{profileImage}}"></profile-page>
             </paper-dialog>
 
             <paper-dialog  id="adDialog" transition="core-transition-center" layout vertical center>
@@ -336,16 +375,20 @@
         var loading = false;
         var order = 'High';
         Polymer({
-            
+            ready:function(){
+                //this.$.name.value = localStorage.getItem('userName');
+            },
             pagination: function (event) {
                 var scroller = event.detail.target;
                 var count = 2;
                 var that = this;
 
                 if (!loading) {
+                    console.log($(window).height() + " " + scroller.scrollTop);
+                    console.log(this.$.itemsContainer.scrollHeight);
                     if (this.$.pages.selected == 1 && scroller.scrollTop > 0 && $(window).height() + scroller.scrollTop > this.$.itemsContainer.scrollHeight) {
                         loading = true;
-                        this.$.useApi.getObject(order,this.$.input.value, count, function (result) {
+                        this.$.useApi.getObject(order, this.$.input.value, count, function (result) {
                             result = JSON.parse(result);
                             that.$.itemsContainer.loadData(result);
                             that.count++;
@@ -369,23 +412,23 @@
             searchObject: function (event, detail, sender) {
                 var code = event.keyCode;
                 var that = this;
-                if(detail.order){
+                if (detail.order) {
                     order = detail.order;
                 }
 
-               if (code == 13 || sender.id == "core_icon_button1" || sender.id == 'itemsContainer') {
-                   this.$.itemsContainer.$.drop.style.visibility="hidden";
+                if (code == 13 || sender.id == "core_icon_button1" || sender.id == 'itemsContainer') {
+                    this.$.itemsContainer.$.drop.style.visibility = "hidden";
                     this.$.pages.selected = 1;
                     this.unloadSearcher();
                     if (this.$.itemsContainer.data.value == 1) {
                         this.$.itemsContainer.emptyArray();
                     }
                     this.$.useApi.getObject(order, this.$.input.value, 1, function (result) {
-                        console.log("resultado en getObject: "+result);
+
                         result = JSON.parse(result);
                         that.$.itemsContainer.loadData(result);
                         that.$.spinner.active = false;
-                        that.$.itemsContainer.$.drop.style.visibility="visible";
+                        that.$.itemsContainer.$.drop.style.visibility = "visible";
                     });
                 }
             },
@@ -408,8 +451,9 @@
                 this.$.input.focus();
             },
             showOptions: function () {
-                
-                this.$.paperDropdown.toggle();
+                this.profileImage = "../images/"+localStorage.getItem('userName')+"-profile.jpg";
+                this.$.optionsDialog.toggle();
+                //this.$.paperDropdown.toggle();
             },
             showProfile: function () {
                 this.$.profileDialog.toggle();

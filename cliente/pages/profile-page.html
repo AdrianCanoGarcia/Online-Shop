@@ -1,180 +1,197 @@
 <script type="text/javascript" src="../lib/dropzone/dropzone.min.js"></script>
-<polymer-element name="profile-page">
-  <template>
-    <style>
-      :host{
-      }
-      #name{
-        height:15px;
-        font-family: sans-seri; 
-        text-shadow:  0.1em 0.1em #333;
-        color:#2d6e9a;
-        font-size: 130%;
-        margin-top: 20px;
-        font-weight: bold;
-      }
-      core-input#name /deep/ input{
-        text-align:center;
-      }
-      #emailFixed{
-        height:15px;
-        font-family: sans-seri; 
-        text-shadow:  0.1em 0.1em #333;
-        color:#2d6e9a;
-        font-size: 120%;
-        margin-top: 22px;
-        font-weight: bold;
+<polymer-element name="profile-page" attributes="image">
+    <template>
+        <style>
+            :host{
+            }
+            #name{
+                height:15px;
+                font-family: sans-seri; 
+                text-shadow:  0.1em 0.1em #333;
+                color:#2d6e9a;
+                font-size: 130%;
+                margin-top: 20px;
+                font-weight: bold;
+            }
+            core-input#name /deep/ input{
+                text-align:center;
+            }
+            #emailFixed{
+                height:15px;
+                font-family: sans-seri; 
+                text-shadow:  0.1em 0.1em #333;
+                color:#2d6e9a;
+                font-size: 120%;
+                margin-top: 22px;
+                font-weight: bold;
 
-      }
-      core-input#emailFixed /deep/ input{
-        text-align:center;
-      }
-      #email{
-        height:15px;
-        font-family: sans-seri; 
-        text-shadow:  0.1em 0.1em #333;
-        color:#2d6e9a;
-        font-size: 120%;
-        margin-top: 15px;
-        font-weight: bold;
-      }
-      core-input#email /deep/ input{
-        text-align:center;
-      }
-      img{
-        margin-top: 10px;
-        width: 40%;
-        height: 50%;
-      }
-      #enter{
-        margin-top: 15px;
-        height: 30px;
-        color:#2d6e9a;
-        width: 50%;
-        text-transform: none;
-        font-size:17px;
+            }
+            core-input#emailFixed /deep/ input{
+                text-align:center;
+            }
+            #email{
+                height:15px;
+                font-family: sans-seri; 
+                text-shadow:  0.1em 0.1em #333;
+                color:#2d6e9a;
+                font-size: 120%;
+                margin-top: 15px;
+                font-weight: bold;
+            }
+            core-input#email /deep/ input{
+                text-align:center;
+            }
+            img{
+                margin-top: 10px;
+                width: 40%;
+                height: 50%;
+            }
+            #enter{
+                margin-top: 15px;
+                height: 30px;
+                color:#2d6e9a;
+                width: 50%;
+                text-transform: none;
+                font-size:17px;
 
-      }
-      :host{
-        box-sizing: none;
-      }
-      paper-button#enter /deep/ #ink{
-        color: #4db0cf;
-      }
-      #newMail{
-        height: 50px;
-        width: 200px;
-        visibility:hidden;
+            }
+            :host{
+                box-sizing: none;
+            }
+            paper-button#enter /deep/ #ink{
+                color: #4db0cf;
+            }
+            #newMail{
+                height: 50px;
+                width: 200px;
+                visibility:hidden;
 
-      }
-      #enter2{
-        visibility:hidden; 
-        height: 30px;
-        color:#2d6e9a;
-        width: 20%;
-        text-transform: none;
-        font-size:17px;
-      }
-      p1{
-        color:blue;
-        margin-left:245px;
-      }
+            }
+            #enter2{
+                visibility:hidden; 
+                height: 30px;
+                color:#2d6e9a;
+                width: 20%;
+                text-transform: none;
+                font-size:17px;
+            }
+            p1{
+                color:blue;
+                margin-left:245px;
+            }
 
-      #delete{
-        margin-left: 80%;
-        width: 40px;
-        height: 40px;
-      }
-      #delete:hover{
-        color: #3f7eaa;
-      }
-      #done{
-        width:25px;
-        height: 25px;
-      }
-      #cancel{
-        width: 25px;
-        height: 25px;
+            #delete{
+                margin-left: 80%;
+                width: 40px;
+                height: 40px;
+            }
+            #delete:hover{
+                color: #3f7eaa;
+            }
+            #done{
+                width:25px;
+                height: 25px;
+            }
+            #cancel{
+                width: 25px;
+                height: 25px;
 
-      }
-      #done:hover{
-        color: green;
-        width: 26px;
-        height: 26px;
-      }
-      #cancel:hover{
-        color: red;
-        width: 26px;
-        height: 26px;
-      }
+            }
+            #done:hover{
+                color: green;
+                width: 26px;
+                height: 26px;
+            }
+            #cancel:hover{
+                color: red;
+                width: 26px;
+                height: 26px;
+            }
+            #imageName{
+                left:41%;
+                margin-bottom: 7px;
+            }
 
 
 
 
-    </style>
-    <user-model id="userModel"></user-model>
-    <file-model id="fileModel"></file-model>
-    <core-card  layout vertical center fit>
-      <p on-click="{{saveUserValues}}">PROFILE</p>
-      <core-input readonly  name="user" value="Default" id="name"></core-input>
-      <core-input readonly  name="user" value="E-MAIL: " id="emailFixed"></core-input>
-      <core-input readonly  name="user" value="default@default.com" id="email"></core-input>
-      <core-icon  id ="enter" icon="mail" on-click="{{ keypressHandler }}" ></core-icon>
-      <div layout horizontal center>
-        <paper-input label="New email..." id="newMail" ></paper-input>
-        <core-icon icon="done" id ="enter2" on-click="{{refreshEmail}}" ></core-icon>
-      </div>
-      <img src="../img/person.jpg" >
-      <core-icon icon="delete" id="delete" on-click="{{warning}}"></core-icon>
-    </core-card>
+        </style>
+        <user-model id="userModel"></user-model>
+        <file-model id="fileModel"></file-model>
+        <core-card  layout vertical center fit>
+            <p on-click="{{saveUserValues}}">PROFILE</p>
+            <core-input readonly  name="user" value="Default" id="name"></core-input>
+            <core-input readonly  name="user" value="E-MAIL: " id="emailFixed"></core-input>
+            <core-input readonly  name="user" value="default@default.com" id="email"></core-input>
+            <core-icon  id ="enter" icon="mail" on-click="{{ keypressHandler }}" ></core-icon>
+            <div layout horizontal center>
+                <paper-input label="New email..." id="newMail" ></paper-input>
+                <core-icon icon="done" id ="enter2" on-click="{{refreshEmail}}" ></core-icon>
+            </div>
+            <img id="img1" src="{{image}}" on-click="{{changeTest}}" onError="this.src = '../images/default-profile.jpg'">
+            <form id ="form" enctype="multipart/form-data" action="/user/upload/" 
+                  method="post" class="putImages">
+                <input id="chooseFile" name="file" on-change="{{changeImage}}" style="visibility:hidden" type="file" multiple/>
+                <core-input readonly  name="imageName" value="Without image" alt="" id="imageName"></core-input><br>
+                <input class="button" style="margin-left:45%" type="submit" alt="Upload" value="Upload" />
+            </form>
+            
+            <core-icon icon="delete" id="delete" on-click="{{warning}}"></core-icon>
+        </core-card>
 
-  </template>
-  <script>
-    Polymer({
-      setFiles:function(e,detail,sender){
-        var formData = new FormData();
-        console.log(sender.files);
-        this.$.fileModel.uploadImage(sender.files);
-      },
-      saveUserValues: function () {
+    </template>
+    <script>
+Polymer({
+    changeTest:function(){
+        this.$.chooseFile.click();
+    },
+    changeImage:function(){
+        this.$.form.action="/user/upload/"+localStorage.getItem('userName');
+        console.log(this.$.form.action);
+        var extension=this.$.chooseFile.value.split("\\");
+        this.$.imageName.value=extension[extension.length-1];
+        this.$.imageName.alt=localStorage.getItem('userName');
+        
+    },
+    saveUserValues: function () {
         this.$.name.value = localStorage.getItem('userName');
         this.$.email.value = localStorage.getItem('mail');
-      },
-      keypressHandler: function () {
+    },
+    keypressHandler: function () {
         this.$.enter2.style.visibility == "visible" ? this.$.enter2.style.visibility = "hidden" : this.$.enter2.style.visibility = "visible"
         this.$.newMail.style.visibility == "visible" ? this.$.newMail.style.visibility = "hidden" : this.$.newMail.style.visibility = "visible"
-      },
-      refreshEmail: function (event, detail, sender) {
-         var that = this;
+    },
+    refreshEmail: function (event, detail, sender) {
+        var that = this;
         if (this.validateEmail()) {
-          this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
-            var user = {
-              username: localStorage.getItem('userName'),
-              email: that.$.newMail.value
-            }
-            that.$.userModel.refresh(JSON.stringify(user));
-            localStorage.setItem("mail", that.$.newMail.value);
-            that.$.enter2.style.visibility = "hidden";
-            that.$.newMail.style.visibility = "hidden";
-            that.$.email.value = that.$.newMail.value;
-            that.$.newMail.value = "";
-          })
+            this.$.userModel.verifyToken(localStorage.getItem('token'), function (result) {
+                var user = {
+                    username: localStorage.getItem('userName'),
+                    email: that.$.newMail.value
+                }
+                that.$.userModel.refresh(JSON.stringify(user));
+                localStorage.setItem("mail", that.$.newMail.value);
+                that.$.enter2.style.visibility = "hidden";
+                that.$.newMail.style.visibility = "hidden";
+                that.$.email.value = that.$.newMail.value;
+                that.$.newMail.value = "";
+            })
         } else {
-          this.$.newMail.value = "";
-          this.$.newMail.label = "Invalid e-mail";
+            this.$.newMail.value = "";
+            this.$.newMail.label = "Invalid e-mail";
         }
 
-      },
-      validateEmail: function () {
+    },
+    validateEmail: function () {
         var string = this.$.newMail.value;
         return this.validateField(string, /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-      },
-      validateField: function (string, pattern) {
+    },
+    validateField: function (string, pattern) {
         return string.match(pattern) !== null;
-      },
-      warning: function () {
+    },
+    warning: function () {
         this.fire('dialog');
-      }
-    });
-  </script>
+    }
+});
+    </script>
 </polymer-element>

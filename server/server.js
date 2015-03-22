@@ -7,12 +7,14 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var url = require('url');
 
+
 var app = express();
 var http = require('http').Server(app);
 /*var io = require('./util/socket.io')(http);*/
 var io = require('socket.io')(http);
 
 app.use(favicon(__dirname + '/../cliente/favicon.png'));
+app.use(bodyParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, '/../cliente')));

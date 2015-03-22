@@ -33,6 +33,7 @@
     "node-mandrill": "~1.0.1",
     "request": "~2.51.0",
     "jsonwebtoken": "~3.2.2",
-    "mongodb": "~1.4.28"
+    "mongodb": "~1.4.28",
+    "connect-multiparty": "~1.2.5"
   }
 }

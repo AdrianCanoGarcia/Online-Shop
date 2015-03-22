@@ -1,14 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var userManager = require('../manager/user');
-
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
+var fs = require('fs');
 
 function worker(io) {
 
     /* ROUTES */
     router.post('/', create);
     router.post('/token/:token', verifyToken);
-    router.post('/file/:file', uploadFile);
+    router.post('/upload/:name', multipartMiddleware, uploadFile);
     router.put('/', setUser);
     router.get('/:userName', getUser);
     router.get('/verify/:userName/:password', verifyUser);
@@ -22,8 +24,23 @@ function worker(io) {
         console.log(req.params.loged);
     }
     function uploadFile(req, res) {
-        var file = req.params.file;
-        console.log(file[0])
+        console.log(req.body);
+        
+        var tmp_path = req.files.file.path;
+        var target_path = __dirname + '/../../cliente/images/' +req.params.name+"-profile.jpg";
+
+
+        fs.rename(tmp_path, target_path, function (err) {
+            if (err) {
+                console.log("*****" + err);
+            }
+
+            fs.unlink(tmp_path, function () {
+                if (err)
+                    throw err;
+                res.redirect("/#SearchPage");
+            });
+        });
     }
     function makeid() {
         var text = "";
@@ -84,7 +101,7 @@ function worker(io) {
     }
     function delUser(req, res, next) {
         var decode;
-        userManager.decryptToken(req.params.token,function (result){
+        userManager.decryptToken(req.params.token, function (result) {
             decode = result;
         });
         var username = decode.userName;
@@ -112,9 +129,9 @@ function worker(io) {
         userManager.decryptToken(req.params.token, function (result) {
             decode = result;
         });
-         
+
         userManager.comprobateToken(decode, function (err, result) {
-           if (result) {
+            if (result) {
                 if (result.passwd == decode.passwd) {
                     var user = {
                         name: result.username,
@@ -128,22 +145,22 @@ function worker(io) {
         });
 
     }
-    function getFavourites(req,res,next){
+    function getFavourites(req, res, next) {
         var that = this;
         var decode;
         userManager.decryptToken(req.params.token, function (result) {
             decode = result;
         });
-         
+
         userManager.comprobateToken(decode, function (err, result) {
-           if (result) {
+            if (result) {
                 if (result.passwd == decode.passwd) {
                     var user = {
                         name: result.username,
                         email: result.email
                     }
-                    
-                    userManager.getUser(user.name,function(err,result){
+
+                    userManager.getUser(user.name, function (err, result) {
                         res.json(result.favourite);
                     });
                 } else {
@@ -151,9 +168,9 @@ function worker(io) {
                 }
             }
         });
-        
+
     }
-    
+
     return router;
 }
 

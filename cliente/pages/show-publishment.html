@@ -84,6 +84,12 @@
             #name_ads {
                 width: 97%;
             }
+            #img1{
+                height: 45px;
+                width: 45px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
 
 
         </style> 
@@ -96,6 +102,7 @@
             <div id="container" layout vertical center>
                 <div id="content">
                     <core-item id="paper_item">
+                        <img id="img1" src="../images/{{ ad.username }}-profile.jpg" onError="this.src = '../images/default-profile.jpg'">
                         <div id='name_ads'>{{ ad.username }}</div> 
                         <template if="{{ ad.isFavourite }}">
                             <core-icon on-click="{{ addFavourites }}"  alt="{{ ad._id }}" icon="favorite" id="favorite" style="color: indianred;"></core-icon>
