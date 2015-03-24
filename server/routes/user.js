@@ -24,23 +24,26 @@ function worker(io) {
         console.log(req.params.loged);
     }
     function uploadFile(req, res) {
-        console.log(req.body);
-        
-        var tmp_path = req.files.file.path;
-        var target_path = __dirname + '/../../cliente/images/' +req.params.name+"-profile.jpg";
+        console.log(req.files.file.type);
 
+        if (req.files.file.type == "image/jpeg" || req.files.file.type == "image/png") {
+            var tmp_path = req.files.file.path;
+            var target_path = __dirname + '/../../cliente/images/' + req.params.name + "-profile.jpg";
+            fs.rename(tmp_path, target_path, function (err) {
+                if (err) {
+                    console.log("*****" + err);
+                }
 
-        fs.rename(tmp_path, target_path, function (err) {
-            if (err) {
-                console.log("*****" + err);
-            }
-
-            fs.unlink(tmp_path, function () {
-                if (err)
-                    throw err;
-                res.redirect("/#SearchPage");
+                fs.unlink(tmp_path, function () {
+                    if (err)
+                        throw err;
+                    res.redirect("/#SearchPage");
+                });
             });
-        });
+        }else{
+            res.redirect("/#SearchPage");
+        }
+
     }
     function makeid() {
         var text = "";

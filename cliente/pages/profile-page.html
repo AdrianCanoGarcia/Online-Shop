@@ -133,7 +133,7 @@
                   method="post" class="putImages">
                 <input id="chooseFile" name="file" on-change="{{changeImage}}" style="visibility:hidden" type="file" multiple/>
                 <core-input readonly  name="imageName" value="Without image" alt="" id="imageName"></core-input><br>
-                <input class="button" style="margin-left:45%" type="submit" alt="Upload" value="Upload" />
+                <input class="button" id="button" style="margin-left:45%" type="submit" alt="Upload" disabled value="Upload" />
             </form>
             
             <core-icon icon="delete" id="delete" on-click="{{warning}}"></core-icon>
@@ -147,11 +147,28 @@ Polymer({
     },
     changeImage:function(){
         this.$.form.action="/user/upload/"+localStorage.getItem('userName');
-        console.log(this.$.form.action);
-        var extension=this.$.chooseFile.value.split("\\");
-        this.$.imageName.value=extension[extension.length-1];
+        var ruta=this.$.chooseFile.value.split("\\");
+        console.log(ruta);
+        var imgName=ruta[ruta.length-1]
+        this.$.imageName.value=imgName;
         this.$.imageName.alt=localStorage.getItem('userName');
+        if(this.validateImage(imgName)){
+            this.$.button.disabled=false;
+        }else{
+            this.$.button.disabled=true;
+        }
         
+    },
+    validateImage:function(imgName){
+        var imageNameParts=imgName.split('.');
+        
+        if(imageNameParts.slice(-1)[0]=='jpg'||imageNameParts.slice(-1)[0]=='jpeg'||imageNameParts.slice(-1)[0]=='png'){
+            
+            return true;
+        }else{
+             
+            return false
+        }
     },
     saveUserValues: function () {
         this.$.name.value = localStorage.getItem('userName');
