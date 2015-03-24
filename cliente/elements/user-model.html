@@ -31,15 +31,6 @@
                         callback();
                     });
                 },
-                searchUser: function (username, callback) {
-                    doAjax({type: 'GET', url: '/' + username}, function (result) {
-
-                        callback(result);
-                    }, function (error) {
-
-                        callback();
-                    });
-                },
                 verifyUser: function (user, callback) {
                     doAjax({type: 'GET', url: '/verify/' + user.username + '/' + user.passwd}, function (result, token) {
                         callback(result, token);
